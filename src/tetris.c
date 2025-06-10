@@ -98,6 +98,17 @@ void gestionEvenement(EvenementGfx evenement)
                     break;
                 case FIN:
                     // q pour quitter le jeu
+					switch (caractereClavier()) {
+						case 'q':
+						case 'Q':
+							// quitter
+							break;
+
+						//espace pour recommencer
+						case 32:
+							demarrer_jeu();
+							break;
+					}
                     break;
             }
 
