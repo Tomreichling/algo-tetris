@@ -31,3 +31,8 @@ Tétrominos CreerTetrominos(char rotation, char figure, int couleur) {
 void TournerTetrominos(Tétrominos* piece) {
     // tourner la pièce
 }
+
+// Créer un Tétrominos aléatoirement (tu utiliseras la fonction Creer Tetrominos)
+Tétrominos NouveauTetrominos() {
+
+}
