@@ -33,8 +33,9 @@ void gestionEvenement(EvenementGfx evenement)
             jeu.grille[i][j] = 0;
         }
     }
-
 	// ATTENTION PENSER A FREE LORSQUE L'ON QUITTE.
+
+
 	static DonneesImageRGB *image = NULL;
 
 	
@@ -43,6 +44,7 @@ void gestionEvenement(EvenementGfx evenement)
 		case Initialisation:
 			// Configure le systeme pour generer un message Temporisation
 			// toutes les 20 millisecondes
+            image = lisBMPRGB("../assets/titre-tetrisen.bmp");
 			demandeTemporisation(20);
 			break;
 		
@@ -51,7 +53,6 @@ void gestionEvenement(EvenementGfx evenement)
             {
                 case MENU:
 
-				image = lisBMPRGB("../assets/titre-tetrisen.bmp");
 				afficheMenu(image);
                     break;
                 case JEU:
@@ -67,7 +68,8 @@ void gestionEvenement(EvenementGfx evenement)
             switch (jeu.etat)
             {
                 case MENU:
-					afficheMenu();
+					image = lisBMPRGB("../assets/titre-tetrisen.bmp");
+					afficheMenu(image);
                     break;
                 case JEU:
                     break;
