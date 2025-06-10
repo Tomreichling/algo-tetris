@@ -4,6 +4,7 @@
 #include "../gfx/GfxLib.h" // Seul cet include est necessaire pour faire du graphique
 #include "../gfx/BmpLib.h" // Cet include permet de manipuler des fichiers BMP
 #include "../gfx/ESLib.h" // Pour utiliser valeurAleatoire()
+#include "./tetris.h"
 
 // Largeur et hauteur par defaut d'une image correspondant a nos criteres
 #define LargeurFenetre 800
@@ -34,7 +35,11 @@ void gestionEvenement(EvenementGfx evenement)
 {
 
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
-    int etat = MENU; // Etat du jeu
+	Jeu jeu = {0};
+	jeu.grille = (char*)calloc (COLONNES * LIGNES , sizeof(char));
+	// ATTENTION PENSER A FREE LORSQUE L'ON QUITTE.
+
+	
 	
 	switch (evenement)
 	{
