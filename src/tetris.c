@@ -136,7 +136,7 @@ void gestionEvenement(EvenementGfx evenement)
 				case 32 :
 					jeu.etat = JEU;
 					printf("Lancement du jeu\n");
-					printf("%d", jeu.etat);
+					printf("%d \n", jeu.etat);
 					break;
 			}
 			break;
