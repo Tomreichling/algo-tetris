@@ -1,30 +1,34 @@
+#ifndef TETRIS_H
+#define TETRIS_H
 
 // ecran
-#DEFINE LARGEUR 1200
-#DEFINE LONGUEUR 800
+#define LARGEUR 1200
+#define LONGUEUR 800
 
 // Tableau
-#DEFINE COLONNES 10
-#DEFINE LIGNES 20
+#define COLONNES 10
+#define LIGNES 20
 
-typedef struct {
+typedef struct tetrominos{
+    int x;
+    int y;
+    char rotation;
+    char grille[4][4];
+    
+}Tétrominos;
+
+enum ETAT_JEU { MENU, JEU, FIN };
+typedef struct jeu{
     int temps; 
     int score;
     int etat;
-    char grille [COLONNES][LIGNES];
+    char grille[COLONNES][LIGNES];
     // actuelle
     Tétrominos piece;
     // next
     Tétrominos prochaine_piece;
-    
-}Jeu;
+} Jeu;
 
-typedef struct {
-    int x;
-    int y;
-    char rotation;
-    char grille [4][4];
+extern Jeu jeu;
 
-}Tétrominos;
- 
-
+#endif
