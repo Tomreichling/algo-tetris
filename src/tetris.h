@@ -26,3 +26,5 @@ typedef struct {
     char grille [4][4];
 
 }Tétrominos;
+ 
+
