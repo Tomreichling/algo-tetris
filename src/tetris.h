@@ -14,7 +14,6 @@ typedef struct tetrominos{
     int y;
     char rotation;
     char grille[4][4];
-    
 }Tétrominos;
 
 enum ETAT_JEU { MENU, JEU, FIN };
