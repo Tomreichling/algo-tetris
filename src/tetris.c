@@ -75,11 +75,19 @@ void gestionEvenement(EvenementGfx evenement)
                 case JEU:
 					affichageJeu();
 					afficherCarreau(0, 0, 1);
-					afficherCarreau(0, 19, 2);
-					afficherCarreau(9, 19, 3);
+					// afficherCarreau(0, 19, 2);
+					// afficherCarreau(9, 19, 3);
 					afficherCarreau(9, 0, 4);
 					afficherCarreau(4, 9, 1);
 					afficherTitre(16, 3);
+					// afficherProchainePiece(Tétrominos piece);
+					afficherAides();
+					afficherScore();
+					afficherPrevisualisation(0, 0, 1);
+					// afficherPrevisualisation(0, 19, 2);
+					// afficherPrevisualisation(9, 19, 3);
+					afficherPrevisualisation(9, 0, 4);
+					afficherPrevisualisation(4, 9, 4);
                     break;
                 case FIN:
                     break;

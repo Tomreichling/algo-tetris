@@ -4,6 +4,8 @@
 ///////////////
 // Affichage //
 ///////////////
+
+
 void affichageJeu();
 
 // affiche un carreau d'une couleur donnée
@@ -18,7 +20,7 @@ void afficherAides();
 void afficherScore();
 
 // on utilise la variable globale jeu
-void afficherPrevisualisation();
+void afficherPrevisualisation(int x, int y, char couleur);
 
 ///////////////////
 // Temporisation //
