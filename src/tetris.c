@@ -67,10 +67,10 @@ void gestionEvenement(EvenementGfx evenement)
 			// sous le texte voulu, avec un léger décalage
 			couleurCourante(210, 210, 210);
 			epaisseurDeTrait(3);
-			afficheChaine("L'algo c'est rigolo", 20, 77, 13);
+			afficheChaine("L'algo c'est pas rigolo", 20, 77, 13);
 			couleurCourante(0, 128, 0);
 			epaisseurDeTrait(2);
-			afficheChaine("L'algo c'est rigolo", 20, 75, 15);
+			afficheChaine("L'algo c'est pas rigolo", 20, 75, 15);
 
 			couleurCourante(255, 0, 0);
 			break;
