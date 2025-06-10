@@ -19,29 +19,18 @@ Jeu jeu = {0};
 void gestionEvenement(EvenementGfx evenement)
 {
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
-    for(int i = 0; i < COLONNES; i++) {
-        for(int j = 0; j < LIGNES; j++) {
-            jeu.grille[i][j] = 0;
-        }
-    }
-
-    jeu.etat = MENU;
 	static DonneesImageRGB *image = NULL;
 	
 	switch (evenement)
 	{
 		case Initialisation:
             image = lisBMPRGB("./assets/titre-tetris.bmp");
-
-			demandeTemporisation(1000);
-			jeu.etat = JEU;
+			demandeTemporisation(-1);
+			jeu.etat = MENU;
 			break;
-		
 		case Temporisation:
             switch (jeu.etat)
             {
-                case MENU:
-                    break;
                 case JEU:
                     // - Vérifier si on peut descendre la pièce actuelle
                     // - Descendre la pièce actuelle si possible
@@ -49,13 +38,12 @@ void gestionEvenement(EvenementGfx evenement)
                     // - et prendre la suivante
                     // - vérifier si des lignes peuvent se supprimer
                     break;
-                case FIN:
-				    break;
+                default:
+                    break;
             }
 			
 			rafraichisFenetre();
 			break;
-			
 		case Affichage:
             switch (jeu.etat)
             {
@@ -94,10 +82,7 @@ void gestionEvenement(EvenementGfx evenement)
                             // quitter
                             break;
                         case 32:
-                            jeu.etat = JEU;
-                            printf("Lancement du jeu\n");
-                            demandeTemporisation(1000);
-                            rafraichisFenetre();
+                            demarrer_jeu();
                             break;
                     }
                     // espace pour démarrer le jeu 
@@ -135,6 +120,8 @@ void gestionEvenement(EvenementGfx evenement)
 			printf("Largeur : %d\t", largeurFenetre());
 			printf("Hauteur : %d\n", hauteurFenetre());
 			break;
+        default:
+            break;
 	}
 }
 
