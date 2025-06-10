@@ -9,11 +9,11 @@ void afficheMenu(DonneesImageRGB *image) {
     couleurCourante(0, 0, 0);
     epaisseurDeTrait(10);
    
-    for (int i=0; i <  largeurFenetre(); i+=45){
+    for (int i=0; i <  largeurFenetre(); i+=hauteurFenetre()/20){
         ligne(i, 0, i, hauteurFenetre());
     }
     
-   for (int j=0; j < hauteurFenetre() ; j+=45){
+   for (int j=0; j < hauteurFenetre() ; j+= hauteurFenetre()/20){
         ligne(0, j, largeurFenetre() , j);
     }
 
