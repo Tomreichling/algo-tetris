@@ -18,7 +18,7 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
     switch (figure)
     {
         case 'o':
-        
+        case 0: 
             piece.grille[1][1] = couleur;
             piece.grille[2][1] = couleur;
             piece.grille[1][2] = couleur;
@@ -26,7 +26,7 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
             break;
         
             case 't':
-            
+            case 1: 
             piece.grille[1][0] = couleur;
             piece.grille[1][1] = couleur;
             piece.grille[1][2] = couleur;
@@ -34,7 +34,7 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
             break;
         
         case 'l':
-            
+        case 2:     
             piece.grille[0][0] = couleur;
             piece.grille[0][1] = couleur;
             piece.grille[0][2] = couleur;
@@ -43,7 +43,7 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
 
                
         case 'i':
-
+        case 3: 
             piece.grille[0][0] = couleur;
             piece.grille[0][1] = couleur;
             piece.grille[0][2] = couleur;
@@ -51,7 +51,7 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
             break;
 
         case 'j':
-
+        case 4: 
                piece.grille[1][0] = couleur;
                piece.grille[1][1] = couleur;
                piece.grille[1][2] = couleur;
@@ -59,7 +59,7 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
             break;
 
         case 's':
-
+        case 5: 
             piece.grille[1][1] = couleur;
             piece.grille[1][2] = couleur;
             piece.grille[2][0] = couleur;
@@ -67,7 +67,7 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
             break;
 
         case 'z':
-
+        case 6: 
             piece.grille[1][0] = couleur;
             piece.grille[1][1] = couleur;
             piece.grille[2][1] = couleur;
@@ -116,5 +116,10 @@ void afficher (Tétrominos* piece){
 
 // Créer un Tétrominos aléatoirement (tu utiliseras la fonction Creer Tetrominos)
 Tétrominos NouveauTetrominos() {
-
+    // 6 couleurs
+    int couleur = rand % 7;
+    // 7 formes 
+    char figure = rand % 7; 
+    return CreerTetrominos(figure + 1, couleur + 1);
 }
+
