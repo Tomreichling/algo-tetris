@@ -114,3 +114,7 @@ void afficher (Tétrominos* piece){
     printf("\n");
 }
 
+// Créer un Tétrominos aléatoirement (tu utiliseras la fonction Creer Tetrominos)
+Tétrominos NouveauTetrominos() {
+
+}
