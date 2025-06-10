@@ -36,6 +36,7 @@ void gestionEvenement(EvenementGfx evenement)
 
 	// ATTENTION PENSER A FREE LORSQUE L'ON QUITTE.
 	static DonneesImageRGB *image = NULL;
+
 	
 	switch (evenement)
 	{
@@ -49,8 +50,9 @@ void gestionEvenement(EvenementGfx evenement)
             switch (jeu.etat)
             {
                 case MENU:
-                    image = lisBMPRGB("../assets/titre-tetrisen.bmp");
-                    afficheMenu();
+
+				image = lisBMPRGB("../assets/titre-tetrisen.bmp");
+				afficheMenu(image);
                     break;
                 case JEU:
                     break;
