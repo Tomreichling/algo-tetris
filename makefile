@@ -1,10 +1,10 @@
 UNAME := $(shell uname)
 
-exemple: exemple.o ./gfx/libisentlib.a
+tetris: tetris.o ./gfx/libisentlib.a
 ifeq ($(UNAME), Darwin)
-	gcc -Wall exemple.o -o exemple gfx/libisentlib.a -lm -framework OpenGL -framework GLUT
+	gcc -Wall tetris.o -o tetris gfx/libisentlib.a -lm -framework OpenGL -framework GLUT
 else
-	gcc -Wall exemple.o -o exemple gfx/libisentlib.a -lm -lglut -lGL -lX11
+	gcc -Wall tetris.o -o tetris gfx/libisentlib.a -lm -lglut -lGL -lX11
 endif
 
 gfx/libisentlib.a:
