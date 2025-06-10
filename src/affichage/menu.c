@@ -23,7 +23,7 @@ void afficheMenu(DonneesImageRGB *image) {
 
     if (image != NULL) 
 			{
-			    ecrisImage(0, 0, image->largeurImage, image->hauteurImage, image->donneesRGB);
+			    ecrisImage(largeurFenetre()/2-125, hauteurFenetre()/2-25, image->largeurImage, image->hauteurImage, image->donneesRGB);
 			}
 
 

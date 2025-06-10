@@ -44,7 +44,7 @@ void gestionEvenement(EvenementGfx evenement)
 		case Initialisation:
 			// Configure le systeme pour generer un message Temporisation
 			// toutes les 20 millisecondes
-            image = lisBMPRGB("../assets/titre-tetrisen.bmp");
+            image = lisBMPRGB("./assets/titre-tetris.bmp");
 			demandeTemporisation(20);
 			break;
 		
