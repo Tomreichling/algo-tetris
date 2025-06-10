@@ -44,6 +44,7 @@ void gestionEvenement(EvenementGfx evenement)
 			// Configure le systeme pour generer un message Temporisation
 			// toutes les 20 millisecondes
 			demandeTemporisation(20);
+			jeu.etat = JEU;
 			break;
 		
 		case Temporisation:
@@ -51,53 +52,60 @@ void gestionEvenement(EvenementGfx evenement)
             {
                 case MENU:
 
-				image = lisBMPRGB("../assets/titre-tetrisen.bmp");
-				afficheMenu(image);
+					// image = lisBMPRGB("../assets/titre-tetrisen.bmp");
+					// afficheMenu(image);
                     break;
                 case JEU:
-                    break;
+				
                 case FIN:
-                    break;
+				break;
             }
 			
 			rafraichisFenetre();
 			break;
 			
-		case Affichage:
+			case Affichage:
             switch (jeu.etat)
             {
-                case MENU:
-					afficheMenu();
-                    break;
+				case MENU:
+					// afficheMenu();
+					break;
                 case JEU:
+					affichageJeu();
+					afficherCarreau(0, 0, 1);
+					afficherCarreau(0, 19, 2);
+					afficherCarreau(9, 19, 3);
+					afficherCarreau(9, 0, 4);
+					afficherCarreau(4, 9, 1);
+					afficherTitre(16, 3);
                     break;
                 case FIN:
                     break;
             }
 			
-			// On part d'un fond d'ecran blanc
-			effaceFenetre (0, 0, 0);
+			// // On part d'un fond d'ecran blanc
+			// effaceFenetre (0, 0, 0);
 			
-			// Affichage d'une ligne bleue
-			couleurCourante(0, 0, 255);
-			epaisseurDeTrait(10);
-			ligne(0, 0, (largeurFenetre()-600)/2, (hauteurFenetre()-400)/2);
+			// // Affichage d'une ligne bleue
+			// couleurCourante(0, 0, 255);
+			// epaisseurDeTrait(10);
+			// ligne(0, 0, (largeurFenetre()-600)/2, (hauteurFenetre()-400)/2);
 
-			// Affichage d'un rectangle "saumon"
-			couleurCourante(255, 128, 128);
-			rectangle((largeurFenetre()-600)/2, (hauteurFenetre()-400)/2, (largeurFenetre()-600)/2+600, (hauteurFenetre()-400)/2+400);
+			// // Affichage d'un rectangle "saumon"
+			// couleurCourante(255, 128, 128);
+			// rectangle((largeurFenetre()-600)/2, (hauteurFenetre()-400)/2, (largeurFenetre()-600)/2+600, (hauteurFenetre()-400)/2+400);
 
-			// Affichage d'un texte vert sombre avec ombrage en police de taille 20
-			// L'effet d'ombrage vient tout simplement du dessin du texte en gris clair
-			// sous le texte voulu, avec un léger décalage
-			couleurCourante(210, 210, 210);
-			epaisseurDeTrait(3);
-			afficheChaine("L'algo c'est rigolo", 20, 77, 13);
-			couleurCourante(0, 128, 0);
-			epaisseurDeTrait(2);
-			afficheChaine("L'algo c'est rigolo", 20, 75, 15);
+			// // Affichage d'un texte vert sombre avec ombrage en police de taille 20
+			// // L'effet d'ombrage vient tout simplement du dessin du texte en gris clair
+			// // sous le texte voulu, avec un léger décalage
+			// couleurCourante(210, 210, 210);
+			// epaisseurDeTrait(3);
+			// afficheChaine("L'algo c'est rigolo", 20, 77, 13);
+			// couleurCourante(0, 128, 0);
+			// epaisseurDeTrait(2);
+			// afficheChaine("L'algo c'est rigolo", 20, 75, 15);
 
-			couleurCourante(255, 0, 0);
+			// couleurCourante(255, 0, 0);
 			break;
 			
 		case Clavier:
