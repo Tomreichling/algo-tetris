@@ -1,6 +1,14 @@
 #ifndef TETRIS_H
 #define TETRIS_H
 
+// ecran
+#define LARGEUR 1200
+#define LONGUEUR 800
+
+// Tableau
+#define COLONNES 10
+#define LIGNES 20
+
 #include <stdlib.h> // Pour pouvoir utiliser exit()
 #include <stdio.h> // Pour pouvoir utiliser printf()
 #include <math.h> // Pour pouvoir utiliser sin() et cos()
@@ -16,14 +24,6 @@
 #include "../include/fin.h" // Fonctions affichage/tempo/entrees dans le mode "fin"
 #include "../include/menu.h" // Fonctions affichage/tempo/entrees dans le mode "menu"
 #include "../include/jeu.h" // Fonctions affichage/tempo/entrees dans le mode "jeu"
-
-// ecran
-#define LARGEUR 1200
-#define LONGUEUR 800
-
-// Tableau
-#define COLONNES 10
-#define LIGNES 20
 
 enum ETAT_JEU { MENU, JEU, FIN };
 typedef struct jeu{
