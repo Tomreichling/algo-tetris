@@ -22,12 +22,12 @@ int main(int argc, char **argv)
 	return 0;
 }
 
+Jeu jeu = {0};
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
 des qu'une evenement survient */
 void gestionEvenement(EvenementGfx evenement)
 {
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
-	Jeu jeu = {0};
     for(int i = 0; i < COLONNES; i++) {
         for(int j = 0; j < LIGNES; j++) {
             jeu.grille[i][j] = 0;
