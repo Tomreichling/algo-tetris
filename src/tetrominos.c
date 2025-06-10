@@ -120,9 +120,9 @@ void TournerTetrominos(Tétrominos* piece) {
 // Créer un Tétrominos aléatoirement (tu utiliseras la fonction Creer Tetrominos)
 Tétrominos NouveauTetrominos() {
     // 6 couleurs
-    int couleur = rand % 7;
+    int couleur = rand() % 7;
     // 7 formes 
-    char figure = rand % 7; 
+    char figure = rand() % 7; 
     return CreerTetrominos(figure + 1, couleur + 1);
 }
 
