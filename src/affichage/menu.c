@@ -9,17 +9,17 @@ void afficheMenu(DonneesImageRGB *image) {
     
     couleurCourante(0, 0, 0);
     epaisseurDeTrait(10);
-    //grille jusqu'à 15 (on modifiera si besoin)
-    for (int i=0; i < hauteurFenetre() ; i+=20){
-    ligne(i, 0, largeurFenetre(), 0);
+   
+    for (int i=0; i <  largeurFenetre(); i+=50){
+    ligne(i, 0, i, hauteurFenetre());
     }
-   for (int j=0; j < largeurFenetre() ; j+=20){
-    ligne(0, j, 0, hauteurFenetre());
+   for (int j=0; j < hauteurFenetre() ; j+=50){
+    ligne(0, j, largeurFenetre() , j);
     }
 
     couleurCourante(0, 0, 0);
     epaisseurDeTrait(5);
-    afficheChaine("Tetris", 25, hauteurFenetre()/2, largeurFenetre()/2);
+    afficheChaine("Tetris", 25, largeurFenetre()/2,hauteurFenetre()/2 );
 
     if (image != NULL) 
 			{
