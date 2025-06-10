@@ -75,30 +75,30 @@ void gestionEvenement(EvenementGfx evenement)
                     break;
             }
 			
-			// // On part d'un fond d'ecran blanc
-			// effaceFenetre (255, 255, 255);
+			// On part d'un fond d'ecran blanc
+			effaceFenetre (0, 0, 0);
 			
-			// // Affichage d'une ligne bleue
-			// couleurCourante(0, 0, 255);
-			// epaisseurDeTrait(10);
-			// ligne(0, 0, (largeurFenetre()-600)/2, (hauteurFenetre()-400)/2);
+			// Affichage d'une ligne bleue
+			couleurCourante(0, 0, 255);
+			epaisseurDeTrait(10);
+			ligne(0, 0, (largeurFenetre()-600)/2, (hauteurFenetre()-400)/2);
 
-			// // Affichage d'un rectangle "saumon"
-			// couleurCourante(255, 128, 128);
-			// rectangle((largeurFenetre()-600)/2, (hauteurFenetre()-400)/2, (largeurFenetre()-600)/2+600, (hauteurFenetre()-400)/2+400);
+			// Affichage d'un rectangle "saumon"
+			couleurCourante(255, 128, 128);
+			rectangle((largeurFenetre()-600)/2, (hauteurFenetre()-400)/2, (largeurFenetre()-600)/2+600, (hauteurFenetre()-400)/2+400);
 
-			// // Affichage d'un texte vert sombre avec ombrage en police de taille 20
-			// // L'effet d'ombrage vient tout simplement du dessin du texte en gris clair
-			// // sous le texte voulu, avec un léger décalage
-			// couleurCourante(210, 210, 210);
-			// epaisseurDeTrait(3);
-			// afficheChaine("L'algo c'est rigolo", 20, 77, 13);
-			// couleurCourante(0, 128, 0);
-			// epaisseurDeTrait(2);
-			// afficheChaine("L'algo c'est rigolo", 20, 75, 15);
+			// Affichage d'un texte vert sombre avec ombrage en police de taille 20
+			// L'effet d'ombrage vient tout simplement du dessin du texte en gris clair
+			// sous le texte voulu, avec un léger décalage
+			couleurCourante(210, 210, 210);
+			epaisseurDeTrait(3);
+			afficheChaine("L'algo c'est rigolo", 20, 77, 13);
+			couleurCourante(0, 128, 0);
+			epaisseurDeTrait(2);
+			afficheChaine("L'algo c'est rigolo", 20, 75, 15);
 
-			// couleurCourante(255, 0, 0);
-			// break;
+			couleurCourante(255, 0, 0);
+			break;
 			
 		case Clavier:
 			switch (caractereClavier())
