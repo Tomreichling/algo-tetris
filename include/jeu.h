@@ -35,7 +35,7 @@ int trouver_indices_lignes_completes(char *grille[LIGNES][COLONNES], int *indice
 
 // utiliser la variable global jeu pour monter la pièce
 // renvoie 1 si ça fonctionne et 0 ça fonctionne pas.
-int monter_piece();
+void descendre_piece();
 
 /////////////
 // Entrées //
@@ -59,8 +59,5 @@ void bouger_piece_droite();
 
 // bouge la pièce dans la variable globale jeu vers la gauche si possible
 void bouger_piece_gauche();
-
-// accelerer la temporisation si la touche est enfoncée
-void accelerer();
 
 #endif
