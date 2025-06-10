@@ -1,8 +1,6 @@
 UNAME := $(shell uname)
 
-BUILDDIR := ./src/build
-
-
+BUILDDIR := ./build
 SRC := ./src
 SRCFILES := tetris.c initialisation.c tetrominos.c \
 	affichage/jeu.c affichage/menu.c affichage/fin.c \
@@ -10,20 +8,27 @@ SRCFILES := tetris.c initialisation.c tetrominos.c \
 	entrees/jeu.c entrees/menu.c entrees/fin.c
 OBJFILES := $(patsubst %.c, $(BUILDDIR)/%.o, $(SRCFILES))
 
-all: $(BUILDDIR) gfx/libisentlib.a tetris
+all: $(BUILDDIR) $(BUILDDIR)/affichage $(BUILDDIR)/entrees $(BUILDDIR)/temporisation \
+	gfx/libisentlib.a tetris
 
 tetris: $(OBJFILES) gfx/libisentlib.a 
 ifeq ($(UNAME), Darwin)
-	gcc -Wall $@ $^ gfx/libisentlib.a -lm -framework OpenGL -framework GLUT
+	gcc -Wall -o $@ $^ -lm -framework OpenGL -framework GLUT
 else
-	gcc -Wall $@ $^ gfx/libisentlib.a -lm -lglut -lGL -lX11
+	gcc -Wall -o $@ $^ -lm -lglut -lGL -lX11
 endif
 
 $(BUILDDIR):
 	mkdir $(BUILDDIR)
+$(BUILDDIR)/affichage:
+	mkdir $(BUILDDIR)/affichage
+$(BUILDDIR)/entrees:
+	mkdir $(BUILDDIR)/entrees
+$(BUILDDIR)/temporisation:
+	mkdir $(BUILDDIR)/temporisation
 
 $(BUILDDIR)/%.o: $(SRC)/%.c
-	gcc -Wall -o $(BUILDDIR)/%.o -c $< -Wno-unused-result
+	gcc -Wall -o $@ -c $< -Wno-unused-result
 
 # GFXLIB
 gfx/libisentlib.a:
@@ -31,7 +36,6 @@ gfx/libisentlib.a:
 	@cd gfx && make && cd ..
 
 clean:
-	make clean gfx/
-	rm -f $(BUILDDIR)/*.o
-	rm -fr $(BUILDDIR)
+	cd gfx && make clean && cd ..
+	rm -rf $(BUILDDIR)
 	rm -f tetris
