@@ -2,7 +2,7 @@ UNAME := $(shell uname)
 
 BUILDDIR := ./build
 SRC := ./src
-SRCFILES := tetris.c initialisation.c tetrominos.c \
+SRCFILES := tetris.c initialisation.c tetrominos.c outils.c \
 	affichage/jeu.c affichage/menu.c affichage/fin.c \
 	temporisation/jeu.c temporisation/menu.c temporisation/fin.c \
 	entrees/jeu.c entrees/menu.c entrees/fin.c
