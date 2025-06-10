@@ -52,8 +52,6 @@ void gestionEvenement(EvenementGfx evenement)
             switch (jeu.etat)
             {
                 case MENU:
-
-				afficheMenu(image);
                     break;
                 case JEU:
                     break;
@@ -68,7 +66,6 @@ void gestionEvenement(EvenementGfx evenement)
             switch (jeu.etat)
             {
                 case MENU:
-					image = lisBMPRGB("../assets/titre-tetrisen.bmp");
 					afficheMenu(image);
                     break;
                 case JEU:

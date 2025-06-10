@@ -19,7 +19,7 @@ void afficheMenu(DonneesImageRGB *image) {
 
     couleurCourante(0, 0, 0);
     epaisseurDeTrait(5);
-    afficheChaine("Tetris", 25, 50, 50);
+    afficheChaine("Tetris", 25, hauteurFenetre()/2, largeurFenetre()/2);
 
     if (image != NULL) 
 			{
