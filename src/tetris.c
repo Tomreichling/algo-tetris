@@ -1,9 +1,3 @@
-#include <stdlib.h> // Pour pouvoir utiliser exit()
-#include <stdio.h> // Pour pouvoir utiliser printf()
-#include <math.h> // Pour pouvoir utiliser sin() et cos()
-#include "../gfx/GfxLib.h" // Seul cet include est necessaire pour faire du graphique
-#include "../gfx/BmpLib.h" // Cet include permet de manipuler des fichiers BMP
-#include "../gfx/ESLib.h" // Pour utiliser valeurAleatoire()
 #include "./tetris.h"
 
 // Largeur et hauteur par defaut d'une image correspondant a nos criteres
@@ -16,6 +10,7 @@ void gestionEvenement(EvenementGfx evenement);
 
 int main(int argc, char **argv)
 {
+    srand(time(NULL));
 	initialiseGfx(argc, argv);
 	
 	prepareFenetreGraphique("OpenGL", LargeurFenetre, HauteurFenetre);
