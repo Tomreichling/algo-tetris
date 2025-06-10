@@ -142,7 +142,7 @@ void afficherPrevisualisation(int x, int y, char couleur) {
     int posYA = (LIGNES - 19 - 1) * taille_carreau;
 
     epaisseurDeTrait(3);
-    switch (couleur) {
+    switch (couleur) { //revoir les couleurs parce que bofbof
         case 1:
             couleurCourante(0, 230, 230);
             break;
