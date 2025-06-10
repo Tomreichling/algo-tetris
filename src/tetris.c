@@ -35,7 +35,7 @@ void gestionEvenement(EvenementGfx evenement)
     }
 	// ATTENTION PENSER A FREE LORSQUE L'ON QUITTE.
 
-
+    jeu.etat = MENU;
 	static DonneesImageRGB *image = NULL;
 
 	
@@ -132,6 +132,11 @@ void gestionEvenement(EvenementGfx evenement)
 				case 's':
 					// Configure le systeme pour ne plus generer de message Temporisation
 					demandeTemporisation(-1);
+					break;
+				case 32 :
+					jeu.etat = JEU;
+					printf("Lancement du jeu\n");
+					printf("%d", jeu.etat);
 					break;
 			}
 			break;
