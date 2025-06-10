@@ -79,7 +79,8 @@ void gestionEvenement(EvenementGfx evenement)
                     switch (caractereClavier()){
                         case 'q':
                         case 'Q':
-                            // quitter
+                            libereDonneesImageRGB(&image);
+							termineBoucleEvenements();
                             break;
                         case 32:
                             demarrer_jeu();
@@ -101,7 +102,8 @@ void gestionEvenement(EvenementGfx evenement)
 					switch (caractereClavier()) {
 						case 'q':
 						case 'Q':
-							// quitter
+							libereDonneesImageRGB(&image);
+							termineBoucleEvenements();
 							break;
 
 						//espace pour recommencer
