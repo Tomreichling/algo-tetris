@@ -101,6 +101,7 @@ void gestionEvenement(EvenementGfx evenement)
                     break;
             }
 
+
 		case ClavierSpecial:
             switch(jeu.etat) {
                 case JEU:
