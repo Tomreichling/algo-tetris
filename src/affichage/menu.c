@@ -3,7 +3,6 @@
 #define LargeurFenetre 800
 #define HauteurFenetre 600
 
-
 void afficheMenu(DonneesImageRGB *image) {
     effaceFenetre(255, 255, 255);
     
