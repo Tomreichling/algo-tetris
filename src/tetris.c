@@ -7,8 +7,8 @@
 #include "./tetris.h"
 
 // Largeur et hauteur par defaut d'une image correspondant a nos criteres
-#define LargeurFenetre 800
-#define HauteurFenetre 600
+#define LargeurFenetre 1200
+#define HauteurFenetre 800
 
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
 des qu'une evenement survient */
