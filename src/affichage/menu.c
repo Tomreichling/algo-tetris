@@ -8,25 +8,25 @@ void afficheMenu(DonneesImageRGB *image) {
     
     couleurCourante(0, 0, 0);
     epaisseurDeTrait(10);
-    //grille jusqu'à 15 (on modifiera si besoin)
-    for (int i=0; i < hauteurFenetre() ; i+=20){
-    ligne(i, 0, largeurFenetre(), 0);
+   
+    for (int i=0; i <  largeurFenetre(); i+=50){
+    ligne(i, 0, i, hauteurFenetre());
     }
-   for (int j=0; j < largeurFenetre() ; j+=20){
-    ligne(0, j, 0, hauteurFenetre());
+   for (int j=0; j < hauteurFenetre() ; j+=50){
+    ligne(0, j, largeurFenetre() , j);
     }
 
     couleurCourante(0, 0, 0);
     epaisseurDeTrait(5);
-    afficheChaine("Tetris", 25, 50, 50);
+    afficheChaine("Tetris", 25, largeurFenetre()/2,hauteurFenetre()/2 );
 
     if (image != NULL) 
 			{
-			    ecrisImage(0, 0, image->largeurImage, image->hauteurImage, image->donneesRGB);
+			    ecrisImage(largeurFenetre()/2-125, hauteurFenetre()/2-25, image->largeurImage, image->hauteurImage, image->donneesRGB);
 			}
 
 
     couleurCourante(0, 0, 128);
     epaisseurDeTrait(2);
-    afficheChaine("Appuyez sur Espace pour Jouer", 20, 50, 15);
+    afficheChaine("Appuyez sur Espace pour Jouer", 20, 100, 55);
 }

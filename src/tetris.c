@@ -35,7 +35,7 @@ void gestionEvenement(EvenementGfx evenement)
     }
 	// ATTENTION PENSER A FREE LORSQUE L'ON QUITTE.
 
-
+    jeu.etat = MENU;
 	static DonneesImageRGB *image = NULL;
 
 	
@@ -44,7 +44,7 @@ void gestionEvenement(EvenementGfx evenement)
 		case Initialisation:
 			// Configure le systeme pour generer un message Temporisation
 			// toutes les 20 millisecondes
-            image = lisBMPRGB("../assets/titre-tetrisen.bmp");
+            image = lisBMPRGB("./assets/titre-tetris.bmp");
 			demandeTemporisation(20);
 			jeu.etat = JEU;
 			break;
@@ -53,7 +53,6 @@ void gestionEvenement(EvenementGfx evenement)
             switch (jeu.etat)
             {
                 case MENU:
-
                     break;
                 case JEU:
 				
@@ -143,6 +142,11 @@ void gestionEvenement(EvenementGfx evenement)
 				case 's':
 					// Configure le systeme pour ne plus generer de message Temporisation
 					demandeTemporisation(-1);
+					break;
+				case 32 :
+					jeu.etat = JEU;
+					printf("Lancement du jeu\n");
+					printf("%d \n", jeu.etat);
 					break;
 			}
 			break;
