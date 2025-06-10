@@ -14,8 +14,6 @@
 des qu'une evenement survient */
 void gestionEvenement(EvenementGfx evenement);
 
-enum ETAT_JEU { MENU, JEU, FIN };
-
 int main(int argc, char **argv)
 {
 	initialiseGfx(argc, argv);
@@ -36,10 +34,13 @@ void gestionEvenement(EvenementGfx evenement)
 
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
 	Jeu jeu = {0};
-	jeu.grille = (char*)calloc (COLONNES * LIGNES , sizeof(char));
-	// ATTENTION PENSER A FREE LORSQUE L'ON QUITTE.
+    for(int i = 0; i < COLONNES; i++) {
+        for(int j = 0; j < LIGNES; j++) {
+            jeu.grille[i][j] = 0;
+        }
+    }
 
-	
+	// ATTENTION PENSER A FREE LORSQUE L'ON QUITTE.
 	
 	switch (evenement)
 	{
@@ -50,7 +51,7 @@ void gestionEvenement(EvenementGfx evenement)
 			break;
 		
 		case Temporisation:
-            switch (etat)
+            switch (jeu.etat)
             {
                 case MENU:
                     break;
@@ -64,7 +65,7 @@ void gestionEvenement(EvenementGfx evenement)
 			break;
 			
 		case Affichage:
-            switch (etat)
+            switch (jeu.etat)
             {
                 case MENU:
                     break;
