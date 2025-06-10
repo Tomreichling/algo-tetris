@@ -21,16 +21,7 @@ void descendre_piece() {
     if(deplacement_possible) {
         jeu.piece.y++;
     } else {
-        for(int i = 0; i < 4; i++) {
-            for(int j = 0; j < 4; j++) {
-                if(jeu.piece.grille[i][j] == 0) {
-                    continue;
-                }
-                int x = jeu.piece.x + i;
-                int y = jeu.piece.y + j;
-                jeu.grille[x][y] = jeu.piece.grille[i][j];
-            }
-        }
+        copier_tableau44(jeu.piece.grille, jeu.grille, jeu.piece.x, jeu.piece.y);
         jeu.piece = jeu.prochaine_piece;
         jeu.prochaine_piece = NouveauTetrominos();
     }

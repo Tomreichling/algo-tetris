@@ -26,10 +26,11 @@
 #include "../include/jeu.h" // Fonctions affichage/tempo/entrees dans le mode "jeu"
 
 enum ETAT_JEU { MENU, JEU, FIN };
+
 typedef struct jeu{
-    int temps; 
+    int t_demarrage; // temps auquel la partie a commencé (secondes)
     int score;
-    int etat;
+    int etat; // enum ETAT_JEU
     char grille[COLONNES][LIGNES];
     // actuelle
     Tétrominos piece;
