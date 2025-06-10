@@ -8,4 +8,7 @@ void afficheMenu(DonneesImageRGB *image);
 
 // entrees
 
+// si on appuit sur entrée et que le mode est bien MENU, on démarre le mode JEU.
+void demarrer_avec_espace();
+
 #endif
