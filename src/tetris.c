@@ -144,9 +144,17 @@ void gestionEvenement(EvenementGfx evenement)
 					demandeTemporisation(-1);
 					break;
 				case 32 :
+					if (jeu.etat == MENU) {
 					jeu.etat = JEU;
-					printf("Lancement du jeu\n");
 					printf("%d \n", jeu.etat);
+					}
+					else if (jeu.etat == JEU) {
+						printf("vous etes en jeu\n");
+					}
+					else {
+						jeu.etat = MENU;
+						printf("%d \n", jeu.etat);
+					}
 					break;
 			}
 			break;
