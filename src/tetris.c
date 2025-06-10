@@ -46,36 +46,47 @@ void gestionEvenement(EvenementGfx evenement)
 			// toutes les 20 millisecondes
             image = lisBMPRGB("../assets/titre-tetrisen.bmp");
 			demandeTemporisation(20);
+			jeu.etat = JEU;
 			break;
 		
 		case Temporisation:
             switch (jeu.etat)
             {
                 case MENU:
+
                     break;
                 case JEU:
-                    break;
+				
                 case FIN:
-                    break;
+				break;
             }
 			
 			rafraichisFenetre();
 			break;
 			
-		case Affichage:
+			case Affichage:
             switch (jeu.etat)
             {
+
                 case MENU:
 					afficheMenu(image);
                     break;
+                
                 case JEU:
+					affichageJeu();
+					afficherCarreau(0, 0, 1);
+					afficherCarreau(0, 19, 2);
+					afficherCarreau(9, 19, 3);
+					afficherCarreau(9, 0, 4);
+					afficherCarreau(4, 9, 1);
+					afficherTitre(16, 3);
                     break;
                 case FIN:
                     break;
             }
 			
 			// // On part d'un fond d'ecran blanc
-			// effaceFenetre (255, 255, 255);
+			// effaceFenetre (0, 0, 0);
 			
 			// // Affichage d'une ligne bleue
 			// couleurCourante(0, 0, 255);
@@ -97,7 +108,7 @@ void gestionEvenement(EvenementGfx evenement)
 			// afficheChaine("L'algo c'est rigolo", 20, 75, 15);
 
 			// couleurCourante(255, 0, 0);
-			// break;
+			break;
 			
 		case Clavier:
 			switch (caractereClavier())
