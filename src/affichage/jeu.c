@@ -4,8 +4,8 @@
 void affichageJeu() {
     couleurCourante(0, 0, 0);
     epaisseurDeTrait(2);
-    int largeur = largeurFenetre();
-    int hauteur = hauterFenetre();
+    
+    int hauteur = hauteurFenetre();
     int taille_carreau = hauteur / LIGNES;
 
     ligne(0 ,0, taille_carreau * COLONNES, 0);
