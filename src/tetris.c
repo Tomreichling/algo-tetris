@@ -26,7 +26,6 @@ int main(int argc, char **argv)
 des qu'une evenement survient */
 void gestionEvenement(EvenementGfx evenement)
 {
-
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
 	Jeu jeu = {0};
     for(int i = 0; i < COLONNES; i++) {
@@ -35,8 +34,6 @@ void gestionEvenement(EvenementGfx evenement)
         }
     }
 
-	// ATTENTION PENSER A FREE LORSQUE L'ON QUITTE.
-	
 	switch (evenement)
 	{
 		case Initialisation:

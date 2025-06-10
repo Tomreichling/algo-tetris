@@ -11,7 +11,6 @@
 #include "../gfx/ESLib.h" // Pour utiliser valeurAleatoire()
 
 #include "../include/tetrominos.h" // Fonctions tetrominos
-#include "../include/initialisation.h" // Fonctions initialisation
 #include "../include/outils.h" // Fonctions utilitaires
 
 #include "../include/fin.h" // Fonctions affichage/tempo/entrees dans le mode "fin"
@@ -25,13 +24,6 @@
 // Tableau
 #define COLONNES 10
 #define LIGNES 20
-
-typedef struct tetrominos{
-    int x;
-    int y;
-    char rotation;
-    char grille[4][4];
-}Tétrominos;
 
 enum ETAT_JEU { MENU, JEU, FIN };
 typedef struct jeu{
