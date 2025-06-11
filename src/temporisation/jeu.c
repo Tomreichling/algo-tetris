@@ -35,6 +35,7 @@ void descendre_piece() {
         jeu.piece = jeu.prochaine_piece;
         jeu.prochaine_piece = NouveauTetrominos();
     }
+    rafraichisFenetre();
 }
 
 int trouver_indices_lignes_completes(char grille[LIGNES][COLONNES], int *indices){

@@ -78,6 +78,7 @@ void bouger_piece_droite() {
     if (deplacement_valide == 1){
         jeu.piece.x++;
     }
+    rafraichisFenetre();
 }
 // en fonction de -x
 void bouger_piece_gauche(){
@@ -97,6 +98,7 @@ void bouger_piece_gauche(){
     if (deplacement_valide == 1){
         jeu.piece.x--;
     }
+    rafraichisFenetre();
 }
 
 

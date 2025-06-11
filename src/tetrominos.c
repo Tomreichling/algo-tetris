@@ -116,6 +116,7 @@ void TournerTetrominos(Tétrominos* piece) {
             piece->grille[j][SIZE - 1 - i] = copie[i][j];
         }
     }
+    rafraichisFenetre();
 }
 
 // Créer un Tétrominos aléatoirement (tu utiliseras la fonction Creer Tetrominos)
