@@ -55,6 +55,7 @@ void gestionEvenement(EvenementGfx evenement)
                     for(int i = 0; i < lignes; i++) {
                         // retire_ligne(indices[i], jeu.grille);
                     }
+                    free(indices);
                     break;
                 default:
                     break;
