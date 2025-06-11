@@ -117,15 +117,22 @@ void gestionEvenement(EvenementGfx evenement)
                     // e ou r pour tourner la pièce
                     // espace pour sauter
                     break;
-                case FIN:
-                    // q pour quitter le jeu
+                                case FIN:
+				        	switch (caractereClavier()) {
+					        	case 'q':
+					        	case 'Q':
+						        	libereDonneesImageRGB(&image);
+						        	termineBoucleEvenements();
+						        	break;
+
+						//espace pour recommencer
+						case 32:
+							demarrer_jeu();
+							break;
+					}
                     break;
             }
-                    break;
-            }
-  
 		case ClavierSpecial:
-            printf("ASCII %d\n", toucheClavier());
             switch(jeu.etat) {
                 case JEU:
                     // Flèche gauche -> aller à gauche
@@ -134,12 +141,12 @@ void gestionEvenement(EvenementGfx evenement)
                     // Flèche du haut -> tourner la pièce
                     break;
                 default:
+                    printf("ASCII %d\n", toucheClavier());
                     break;
             }
 			break;
 		
-		case Redimensionnement: // La taille de la fenetre a ete modifie ou on est passe en plein ecran
-			// Donc le systeme nous en informe
+		case Redimensionnement: 
 			printf("Largeur : %d\t", largeurFenetre());
 			printf("Hauteur : %d\n", hauteurFenetre());
 			break;
@@ -147,5 +154,3 @@ void gestionEvenement(EvenementGfx evenement)
             break;
 	}
 }
-
- 
