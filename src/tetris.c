@@ -79,9 +79,8 @@ void gestionEvenement(EvenementGfx evenement)
                     switch (caractereClavier()){
                         case 'q':
                         case 'Q':
-
-                            libereDonneesImageRGB(&image);
-							              termineBoucleEvenements();
+                            	libereDonneesImageRGB(&image);
+					            termineBoucleEvenements();
                             break;
                         case 32:
                             demarrer_jeu();
@@ -99,24 +98,9 @@ void gestionEvenement(EvenementGfx evenement)
                     // espace pour sauter
                     break;
                 case FIN:
-				        	switch (caractereClavier()) {
-					        	case 'q':
-					        	case 'Q':
-						        	libereDonneesImageRGB(&image);
-						        	termineBoucleEvenements();
-						        	break;
-
-						//espace pour recommencer
-						case 32:
-							demarrer_jeu();
-							break;
-					}
+                    // q pour quitter le jeu
                     break;
             }
-
-                    break;
-            }
-
 
 		case ClavierSpecial:
             switch(jeu.etat) {
