@@ -1,6 +1,5 @@
 #include "../tetris.h"
 
-
 void affichageJeu() {
     int marge = 40;
     effaceFenetre (255, 255, 255);
@@ -10,13 +9,9 @@ void affichageJeu() {
     int hauteur = hauteurFenetre() - 80;
     int taille_carreau = hauteur / LIGNES;
 
-    // ligne(marge , marge, taille_carreau * COLONNES, 0);
-    // ligne(marge, marge, marge, hauteur);
-
     for (int i = 0; i <= LIGNES; i++) {
         ligne(marge, marge + (i * taille_carreau), marge + (taille_carreau * COLONNES), marge + (i * taille_carreau));
     }
-
     for (int j = 0; j <= COLONNES; j++) {
         ligne(marge + (j * taille_carreau), marge, marge + (j * taille_carreau), marge + (taille_carreau * LIGNES));
     }
@@ -75,13 +70,40 @@ void afficherTitre(int y, int x) {
     afficheChaine("TETRISEN", 89, Dcarreau_droite + (taille_droite / 3), hauteur - (hauteur / 5));
 }
 
-// void afficherProchainePiece(Tétrominos piece) {
-//     int hauteur = hauteurFenetre();
-//     int taille_carreau = hauteur / LIGNES;
-//     int taille_droite = largeurFenetre() - (taille_carreau * COLONNES);
-//     int Dcarreau_droite = largeurFenetre() - taille_droite;
+void afficherProchainePiece(Tétrominos piece) {
+    int hauteur = hauteurFenetre();
+    int taille_carreau = hauteur / LIGNES;
+    int taille_droite = largeurFenetre() - (taille_carreau * COLONNES);
+    int Dcarreau_droite = largeurFenetre() - taille_droite; 
+    int posXD, posYD, posXA, posYA, x = 0, y = 0;
+    static char couleur = 0;
 
-// }
+    couleurCourante(0, 0, 0);
+    epaisseurDeTrait(2);
+    for (int i = 0; i <= 4; i++) {
+        ligne(Dcarreau_droite + (taille_droite / 5), (hauteur / 2.5) + (i * taille_carreau), Dcarreau_droite + (taille_droite / 5) + (taille_carreau * 4), (hauteur / 2.5) + (i * taille_carreau));
+    }
+    for (int j = 0; j <= 4; j++) {
+        ligne(Dcarreau_droite + (taille_droite / 5) + (j * taille_carreau), hauteur / 2.5, Dcarreau_droite + (taille_droite / 5) + (j * taille_carreau), (hauteur / 2.5) + (4 * taille_carreau));
+    }
+
+    couleurCourante(255, 0, 0);
+    for (int ki = 0; ki < 4; ki++) {
+        for (int kj = 0; kj < 4; kj++) {
+            if (piece.grille[ki][kj] != 0) {
+                x = ki;
+                y = kj;
+                posXD = Dcarreau_droite + (taille_droite / 5) + x * taille_carreau;
+                posYD = (hauteur / 2.5) + y * taille_carreau;
+                posXA = Dcarreau_droite + (taille_droite / 5) + (x + 1) * taille_carreau;
+                posYA = (hauteur / 2.5) + (y + 1) * taille_carreau;
+                couleur = piece.grille[ki][kj];
+                rectangle(posXD + 1, posYD + 1, posXA - 1, posYA - 1);
+            }
+        }
+    } 
+}
+
 
 // affiche une aide pour les touches
 void afficherAides() {
@@ -117,14 +139,16 @@ void afficherAides() {
 }
 
 // affiche le score du joueur, le temps écoulé (utiliser)
-void afficherScore() { // rendre reactif la fonction
+void afficherScore() {
     int hauteur = hauteurFenetre();
     int taille_carreau = hauteur / LIGNES;
     int taille_droite = largeurFenetre() - (taille_carreau * COLONNES);
     int Dcarreau_droite = largeurFenetre() - taille_droite;
+    char score[100];
+    sprintf(score, "Score : %d", jeu.score);
 
     couleurCourante(0, 0, 0);
-    afficheChaine("SCORE : 1000000", 30, Dcarreau_droite + (taille_droite / 10), hauteur / 7);
+    afficheChaine(score, 30, Dcarreau_droite + (taille_droite / 10), hauteur / 7);
     afficheChaine("7:07", 30, Dcarreau_droite + taille_droite - (taille_droite / 6), hauteur / 7); //j'ai mis le temps de jeu dans le score
 
     couleurCourante(150, 150, 150);
