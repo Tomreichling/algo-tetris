@@ -36,3 +36,18 @@ void descendre_piece() {
         jeu.prochaine_piece = NouveauTetrominos();
     }
 }
+
+int trouver_indices_lignes_completes(char grille[LIGNES][COLONNES], int *indices) {
+    // a remplir
+    return 0;
+}
+
+void assigner_score(int nb_indices) {
+    // a remplir
+    return;
+}
+
+void retire_ligne(int i, char grille[LIGNES][COLONNES]) {
+    // a remplir
+    return;
+}
