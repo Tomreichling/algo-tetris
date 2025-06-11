@@ -43,10 +43,11 @@ int trouver_indices_lignes_completes(char grille[LIGNES][COLONNES], int *indices
     indices =(int*)  malloc(  nombre_lignes_completes * sizeof(int));
     int n=0;
 
-    for (int i = 0 ; i> LIGNES; i++) {
+    for (int i = 0 ; i< COLONNES; i++) {
         n=0;
-        for (int j =0; j> COLONNES; j++) {
+        for (int j =0; j< LIGNES; j++) {
             if (grille[i][j] != 0) {
+    
             n++;
             }
             else if (grille [i][j] ==0){
@@ -54,7 +55,8 @@ int trouver_indices_lignes_completes(char grille[LIGNES][COLONNES], int *indices
             }
             
         }
-        if (n == COLONNES-1) {
+        printf("ligne %d : %d\n", i, n);
+        if (n == COLONNES) {
                 printf("ligne %d complete\n", i);
                 nombre_lignes_completes++;
                 indices = (int*) realloc(indices, nombre_lignes_completes * sizeof(int));
