@@ -120,7 +120,6 @@ void gestionEvenement(EvenementGfx evenement)
 					        termineBoucleEvenements();
                             break;
                         case 32:
-                            // espace pour démarrer le jeu 
                             demarrer_jeu();
                             break;
                     }
