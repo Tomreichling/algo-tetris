@@ -184,34 +184,12 @@ void afficherPrevisualisation(int x, int y, char couleur) { //refaire la fonctio
     int taille_carreau = hauteur / LIGNES;
 
     int posXD = x * taille_carreau;
-    int posYD = (LIGNES - 19) * taille_carreau;
+    int posYD = (LIGNES - y) * taille_carreau;
     int posXA = (x+1) * taille_carreau;
-    int posYA = (LIGNES - 19 - 1) * taille_carreau;
+    int posYA = (LIGNES - y - 1) * taille_carreau;
 
     epaisseurDeTrait(3);
-    switch (couleur) { //revoir les couleurs parce que bofbof
-        case 1:
-            couleurCourante(0, 230, 230);
-            break;
-        case 2:
-            couleurCourante(220, 140, 0);
-            break;
-        case 3:
-            couleurCourante(0, 0, 220);
-            break;
-        case 4:
-            couleurCourante(220, 220, 0);
-            break;
-        case 5:
-            couleurCourante(140, 0, 220);
-            break;
-        case 6:
-            couleurCourante(0, 220, 0);
-            break;
-        case 7:
-            couleurCourante(220, 0, 0);
-            break;
-    }
+    couleurCourante(100, 100, 100);
+           
     rectangle(marge + posXD + 1, marge + posYD - 1, marge + posXA - 1, marge + posYA + 1);
-
 }

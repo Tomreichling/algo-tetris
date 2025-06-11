@@ -16,8 +16,7 @@ int main(int argc, char **argv)
 // Variable globale accessible dans tous le programme.
 Jeu jeu = {0};
 
-void gestionEvenement(EvenementGfx evenement)
-{
+void gestionEvenement(EvenementGfx evenement){
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
 	static bool pause = false;
 	static DonneesImageRGB *image = NULL;
@@ -73,6 +72,24 @@ void gestionEvenement(EvenementGfx evenement)
 					afficherProchainePiece(jeu.prochaine_piece);
 					afficherAides();
 					afficherScore();
+
+                    int y_previ, y_base = jeu.piece.y;
+                    while (descente_possible(&jeu.piece)) {   
+                            jeu.piece.y++;
+                    }    
+                    y_previ = jeu.piece.y;
+                    jeu.piece.y = y_base;
+                        
+                    
+
+                    for (int i = 0; i < 4; i++) {
+                        for (int j = 0; j < 4; j++) {
+                            if (jeu.piece.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherPrevisualisation(jeu.piece.x + i, y_previ + j, jeu.piece.grille[i][j]);
+                        }
+                    }
 
                     for(int i = 0; i < COLONNES; i++) {
                         for(int j = 0; j < LIGNES; j++) {
