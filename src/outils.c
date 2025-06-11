@@ -6,7 +6,7 @@ void copier_tableau44(char entree[4][4], char sortie[COLONNES][LIGNES], int xi, 
             if(entree[i][j] == 0) {
                 continue;
             }
-            sortie[xi + i][yi + i] = entree[i][j];
+            sortie[xi + i][yi + j] = entree[i][j];
         }
     }
 }

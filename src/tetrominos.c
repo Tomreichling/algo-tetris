@@ -6,6 +6,7 @@
 
 Tétrominos CreerTetrominos(char figure, int couleur) {
     Tétrominos piece = {0};
+    piece.x = COLONNES / 2 - 2;
     
     // On initialise à 0
     for(int i = 0; i < SIZE; i++) {

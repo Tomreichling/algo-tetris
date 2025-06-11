@@ -47,7 +47,7 @@ void gestionEvenement(EvenementGfx evenement)
                     assigner_score(lignes);
                     // On supprime les lignes complètes en partant du haut de la grille
                     for(int i = 0; i < lignes; i++) {
-                        retire_ligne(indices[i], jeu.grille);
+                        // retire_ligne(indices[i], jeu.grille);
                     }
                     break;
                 default:
@@ -64,20 +64,28 @@ void gestionEvenement(EvenementGfx evenement)
                     break;
                 case JEU:
 					affichageJeu();
-					afficherCarreau(0, 0, 1);
-					// afficherCarreau(0, 19, 2);
-					// afficherCarreau(9, 19, 3);
-					afficherCarreau(9, 0, 4);
-					afficherCarreau(4, 9, 1);
 					afficherTitre(16, 3);
 					afficherProchainePiece(jeu.prochaine_piece);
 					afficherAides();
 					afficherScore();
-					afficherPrevisualisation(0, 0, 1);
-					// afficherPrevisualisation(0, 19, 2);
-					// afficherPrevisualisation(9, 19, 3);
-					afficherPrevisualisation(9, 0, 4);
-					afficherPrevisualisation(4, 9, 4);
+
+                    for(int i = 0; i < COLONNES; i++) {
+                        for(int j = 0; j < LIGNES; j++) {
+                            if(jeu.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherCarreau(i, j, jeu.grille[i][j]);
+                        }
+                    }
+
+                    for(int i = 0; i < 4; i++) {
+                        for(int j = 0; j < 4; j++) {
+                            if(jeu.piece.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherCarreau(jeu.piece.x + i, jeu.piece.y + j, jeu.piece.grille[i][j]);
+                        }
+                    }
                     break;
                 case FIN:
                     // Afficher le jeu + Gameover + score

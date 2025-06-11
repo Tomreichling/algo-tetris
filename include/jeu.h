@@ -9,7 +9,7 @@
 void affichageJeu();
 
 // affiche un carreau d'une couleur donnée
-void afficherCarreau(int y, int x, char couleur);
+void afficherCarreau(int x, int y, char couleur);
 // affiche Tetris en haut à droite à gauche de l'écran
 void afficherTitre(int y, int x);
 // affiche prochaine pièce
