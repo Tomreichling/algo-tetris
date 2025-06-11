@@ -31,7 +31,7 @@ void gestion_rapidite();
 
 // trouve les indices de toutes les lignes completes
 // retourne le nombre d'indices et on remplit les indices dans le tableau passé en paramètres
-int trouver_indices_lignes_completes(char *grille[LIGNES][COLONNES], int *indices);
+int trouver_indices_lignes_completes(char grille[LIGNES][COLONNES], int *indices);
 
 // utiliser la variable global jeu pour monter la pièce
 // renvoie 1 si ça fonctionne et 0 ça fonctionne pas.
