@@ -70,7 +70,7 @@ void gestionEvenement(EvenementGfx evenement)
 					afficherCarreau(9, 0, 4);
 					afficherCarreau(4, 9, 1);
 					afficherTitre(16, 3);
-					// afficherProchainePiece(Tétrominos piece);
+					afficherProchainePiece(jeu.prochaine_piece);
 					afficherAides();
 					afficherScore();
 					afficherPrevisualisation(0, 0, 1);

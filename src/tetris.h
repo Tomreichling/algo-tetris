@@ -13,6 +13,7 @@
 #include <stdio.h> // Pour pouvoir utiliser printf()
 #include <math.h> // Pour pouvoir utiliser sin() et cos()
 #include <time.h> // Pour pouvoir utiliser sin() et cos()
+#include <string.h>
 
 #include "../gfx/GfxLib.h" // Seul cet include est necessaire pour faire du graphique
 #include "../gfx/BmpLib.h" // Cet include permet de manipuler des fichiers BMP
