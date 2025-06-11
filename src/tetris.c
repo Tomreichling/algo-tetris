@@ -44,11 +44,9 @@ void gestionEvenement(EvenementGfx evenement){
                     // On trouve les lignes complètes
                     int indices[4]; 
                     int lignes = trouver_indices_lignes_completes(jeu.grille, indices);
-                    printf("%d lignes completes\n", lignes);
 
                     // On assigne un score en conséquent
                     assigner_score(lignes);
-                    printf("score: %d\n", jeu.score);
                     // On supprime les lignes complètes en partant du haut de la grille
                     for(int i = 0; i < lignes; i++) {
                         retire_ligne(indices[i], jeu.grille);

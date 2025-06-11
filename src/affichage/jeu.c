@@ -168,6 +168,8 @@ void afficherScore() {
     int taille_droite = largeurFenetre() - (taille_carreau * COLONNES);
     int Dcarreau_droite = largeurFenetre() - taille_droite;
     char score[100];
+    float xbarre = Dcarreau_droite + taille_droite - (taille_droite / 10);
+    float proportion_score = jeu.score /100.0;
     sprintf(score, "Score : %d", jeu.score);
 
     couleurCourante(0, 0, 0);
@@ -175,7 +177,14 @@ void afficherScore() {
     afficheChaine("7:07", 30, Dcarreau_droite + taille_droite - (taille_droite / 6), hauteur / 7); //j'ai mis le temps de jeu dans le score
 
     couleurCourante(150, 150, 150);
-    rectangle(Dcarreau_droite + (taille_droite / 10), hauteur / 8, Dcarreau_droite + taille_droite - (taille_droite / 10), hauteur / 12);
+    rectangle(Dcarreau_droite + (taille_droite / 10), hauteur / 8, xbarre, hauteur / 12);
+
+    if (proportion_score > 1) {
+        proportion_score = 1;
+    }
+    couleurCourante(95, 0, 60);
+    rectangle(Dcarreau_droite + (taille_droite / 10)+2, hauteur / 8-2, (Dcarreau_droite + (taille_droite / 10)+2)-(((Dcarreau_droite + (taille_droite / 10)+2)-xbarre) * proportion_score), (hauteur / 12)+2);
+    
 }
 
 void afficherPrevisualisation(int x, int y, char couleur) { //refaire la fonctions pour les differents tetrominos
