@@ -39,7 +39,7 @@ void descendre_piece() {
 
 int trouver_indices_lignes_completes(char grille[LIGNES][COLONNES], int *indices){
     int nombre_lignes_completes = 0;
-    *indices =(int*)  malloc(  nombre_lignes_completes * sizeof(int));
+    indices = (int*) malloc(nombre_lignes_completes * sizeof(int));
     int n=0;
 
     for (int i = 0 ; i> LIGNES; i++) {
@@ -55,7 +55,7 @@ int trouver_indices_lignes_completes(char grille[LIGNES][COLONNES], int *indices
         }
         if (n == COLONNES) {
                 nombre_lignes_completes++;
-                *indices = (int*) realloc(*indices, nombre_lignes_completes * sizeof(int));
+                indices = (int*) realloc(indices, nombre_lignes_completes * sizeof(int));
                 indices[nombre_lignes_completes-1] = i;
                
             }
@@ -67,7 +67,7 @@ int trouver_indices_lignes_completes(char grille[LIGNES][COLONNES], int *indices
     } 
 
 void assigner_score(int nb_indices) {
-    switch (int nb_indices) {
+    switch (nb_indices) {
         case 1:
             jeu.score += 40;
             break;

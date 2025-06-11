@@ -121,8 +121,8 @@ void TournerTetrominos(Tétrominos* piece) {
 Tétrominos NouveauTetrominos() {
     // 6 couleurs
     int couleur = rand() % 7;
-    // 7 formes 
+    // 7 formes
     char figure = rand() % 7; 
-    return CreerTetrominos(figure + 1, couleur + 1);
+    return CreerTetrominos(figure, couleur + 1);
 }
 
