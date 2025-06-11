@@ -26,3 +26,32 @@ void descendre_piece() {
         jeu.prochaine_piece = NouveauTetrominos();
     }
 }
+
+int trouver_indices_lignes_completes(char grille[LIGNES][COLONNES], int *indices){
+    int nombre_lignes_completes = 0;
+    int *indices =(int*)  malloc(  nombre_lignes_completes * sizeof(int));
+    int n=0;
+
+    for (int i = 0 ; i> LIGNES; i++) {
+        n=0;
+        for (int j =0; j> COLONNES; j++) {
+            if (grille[i][j] != 0) {
+            n++;
+            }
+            else if (grille [i][j] !=0){
+                break;
+            }
+            
+        }
+        if (n == COLONNES) {
+                nombre_lignes_completes++;
+                *indices = (int*) realloc(*indices, nombre_lignes_completes * sizeof(int));
+                indices[nombre_lignes_completes-1] = i;
+               
+            }
+        }
+    
+                
+        return nombre_lignes_completes;
+
+    } 
