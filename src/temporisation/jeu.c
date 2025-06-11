@@ -49,12 +49,13 @@ int trouver_indices_lignes_completes(char grille[LIGNES][COLONNES], int *indices
             if (grille[i][j] != 0) {
             n++;
             }
-            else if (grille [i][j] !=0){
+            else if (grille [i][j] ==0){
                 break;
             }
             
         }
-        if (n == COLONNES) {
+        if (n == COLONNES-1) {
+                printf("ligne %d complete\n", i);
                 nombre_lignes_completes++;
                 indices = (int*) realloc(indices, nombre_lignes_completes * sizeof(int));
                 indices = (int*) realloc(indices, nombre_lignes_completes * sizeof(int));
@@ -91,9 +92,11 @@ void retire_ligne(int i, char grille[LIGNES][COLONNES]) {
     for (; i>-1; i--) {
         for (int j = COLONNES; j >0; j--) {
             if (i== 0 ) {
+                printf("modif derniure ");
                 grille[i][j] = 0;
             }
             else {
+                printf("je modif la ligne");
                 grille [i][j] = grille[i-1][j];
             }
             
