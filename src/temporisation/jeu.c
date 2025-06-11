@@ -88,7 +88,18 @@ void assigner_score(int nb_indices) {
 }
 
 void retire_ligne(int i, char grille[LIGNES][COLONNES]) {
-    // a remplir
+    for (; i>-1; i--) {
+        for (int j = COLONNES; j >0; j--) {
+            if (i== 0 ) {
+                grille[i][j] = 0;
+            }
+            else {
+                grille [i][j] = grille[i-1][j];
+            }
+            
+        }
+    }
+
     return;
 }
 
