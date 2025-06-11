@@ -27,3 +27,11 @@ void demarrer_jeu() {
     rafraichisFenetre();
     jeu.etat = JEU;
 }
+
+void gameover() {
+    jeu.etat = FIN;
+    rafraichisFenetre();
+    
+    // on arrête les tics
+    demandeTemporisation(-1);
+}
