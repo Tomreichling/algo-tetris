@@ -170,7 +170,23 @@ void afficherScore() {
     char score[100];
     float xbarre = Dcarreau_droite + taille_droite - (taille_droite / 10);
     float proportion_score = jeu.score /100.0;
-    sprintf(score, "Score : %d", jeu.score);
+
+    if (jeu.score < 500) {
+        proportion_score = jeu.score / 500.0;
+        sprintf(score, "Score : %d / 500", jeu.score);    
+    } 
+    else if (jeu.score < 2000) {
+        proportion_score = jeu.score / 2000.0;
+        sprintf(score, "Score : %d / 2000", jeu.score);
+    } 
+    else if (jeu.score < 5000) {
+        proportion_score = jeu.score / 5000.0;
+        sprintf(score, "Score : %d / 5000", jeu.score);
+    } 
+    else {
+        proportion_score = jeu.score / 10000.0;
+        sprintf(score, "Score : %d / 10000", jeu.score);
+    }
 
     couleurCourante(0, 0, 0);
     afficheChaine(score, 30, Dcarreau_droite + (taille_droite / 10), hauteur / 7);
@@ -182,9 +198,13 @@ void afficherScore() {
     if (proportion_score > 1) {
         proportion_score = 1;
     }
+    
     couleurCourante(95, 0, 60);
     rectangle(Dcarreau_droite + (taille_droite / 10)+2, hauteur / 8-2, (Dcarreau_droite + (taille_droite / 10)+2)-(((Dcarreau_droite + (taille_droite / 10)+2)-xbarre) * proportion_score), (hauteur / 12)+2);
+
     
+
+
 }
 
 void afficherPrevisualisation(int x, int y, char couleur) { //refaire la fonctions pour les differents tetrominos
