@@ -26,4 +26,5 @@ void afficheMenu(DonneesImageRGB *image) {
     couleurCourante(0, 0, 128);
     epaisseurDeTrait(2);
     afficheChaine("Appuyez sur Espace pour Jouer", 20, largeurFenetre()/2-150,  hauteurFenetre()/3-80);
+    putchar('\a');
 }
