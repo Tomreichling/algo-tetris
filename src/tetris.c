@@ -32,11 +32,23 @@ void gestionEvenement(EvenementGfx evenement)
             switch (jeu.etat)
             {
                 case JEU:
-                    // - Vérifier si on peut descendre la pièce actuelle
-                    // - Descendre la pièce actuelle si possible
-                    // - sinon placer la pièce dans la grille
-                    // - et prendre la suivante
-                    // - vérifier si des lignes peuvent se supprimer
+                    // On vérifie si on peut descendre la pièce
+                    // on la descends ou la place sur grille
+                    descendre_piece();
+                    
+                    // On trouve les lignes complètes
+                    int *indices = NULL; 
+                    int lignes = trouver_indices_lignes_completes(jeu.grille, indices);
+                    if(indices == NULL) {
+                        break;
+                    }
+
+                    // On assigne un score en conséquent
+                    assigner_score(lignes);
+                    // On supprime les lignes complètes en partant du haut de la grille
+                    for(int i = 0; i < lignes; i++) {
+                        retire_ligne(indices[i], jeu.grille);
+                    }
                     break;
                 default:
                     break;
@@ -53,11 +65,19 @@ void gestionEvenement(EvenementGfx evenement)
                 case JEU:
 					affichageJeu();
 					afficherCarreau(0, 0, 1);
-					afficherCarreau(0, 19, 2);
-					afficherCarreau(9, 19, 3);
+					// afficherCarreau(0, 19, 2);
+					// afficherCarreau(9, 19, 3);
 					afficherCarreau(9, 0, 4);
 					afficherCarreau(4, 9, 1);
 					afficherTitre(16, 3);
+					// afficherProchainePiece(Tétrominos piece);
+					afficherAides();
+					afficherScore();
+					afficherPrevisualisation(0, 0, 1);
+					// afficherPrevisualisation(0, 19, 2);
+					// afficherPrevisualisation(9, 19, 3);
+					afficherPrevisualisation(9, 0, 4);
+					afficherPrevisualisation(4, 9, 4);
                     break;
                 case FIN:
                     // Afficher le jeu + Gameover + score
@@ -79,15 +99,15 @@ void gestionEvenement(EvenementGfx evenement)
                     switch (caractereClavier()){
                         case 'q':
                         case 'Q':
-                            	libereDonneesImageRGB(&image);
-					            termineBoucleEvenements();
+
+                           libereDonneesImageRGB(&image);
+					                 termineBoucleEvenements();
                             break;
                         case 32:
+                            // espace pour démarrer le jeu 
                             demarrer_jeu();
                             break;
                     }
-                    // espace pour démarrer le jeu 
-                    // q pour quitter le jeu
                     break;
                 case JEU:
                     // p pour mettre le jeu en pause
@@ -101,8 +121,11 @@ void gestionEvenement(EvenementGfx evenement)
                     // q pour quitter le jeu
                     break;
             }
-
+                    break;
+            }
+  
 		case ClavierSpecial:
+            printf("ASCII %d\n", toucheClavier());
             switch(jeu.etat) {
                 case JEU:
                     // Flèche gauche -> aller à gauche
@@ -111,7 +134,6 @@ void gestionEvenement(EvenementGfx evenement)
                     // Flèche du haut -> tourner la pièce
                     break;
                 default:
-                    printf("ASCII %d\n", toucheClavier());
                     break;
             }
 			break;

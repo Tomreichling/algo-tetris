@@ -10,4 +10,9 @@ void copier_tableau44(char tableau[4][4], char grille[COLONNES][LIGNES], int xi,
 //  - passe le mode à JEU
 void demarrer_jeu();
 
+// Passe du mode JEU au mode FIN
+//  - Change la temporisation
+//  - rafraichis l'affichage
+void gameover();
+
 #endif
