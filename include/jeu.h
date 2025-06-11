@@ -26,6 +26,10 @@ void afficherPrevisualisation(int x, int y, char couleur);
 // Temporisation //
 ///////////////////
 
+
+// Alla 
+
+
 // chaque 30s, la temporisation s'accélère.
 // trouve le temps depuis le démarrage de la partie 
 // (avec jeu.temps, tempsCPU() et demandeTemporisation(...))
