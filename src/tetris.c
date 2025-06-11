@@ -50,6 +50,7 @@ void gestionEvenement(EvenementGfx evenement)
 
                     // On assigne un score en conséquent
                     assigner_score(lignes);
+                    printf("score: %d\n", jeu.score);
                     // On supprime les lignes complètes en partant du haut de la grille
                     for(int i = 0; i < lignes; i++) {
                         // retire_ligne(indices[i], jeu.grille);
@@ -128,14 +129,13 @@ void gestionEvenement(EvenementGfx evenement)
                 case JEU:
                     entrees_jeu();
                     break;
-                                case FIN:
-				        	switch (caractereClavier()) {
-					        	case 'q':
-					        	case 'Q':
-						        	libereDonneesImageRGB(&image);
-						        	termineBoucleEvenements();
-						        	break;
-
+                case FIN:
+				    switch (caractereClavier()) {
+				    	case 'q':
+				    	case 'Q':
+				        	libereDonneesImageRGB(&image);
+				        	termineBoucleEvenements();
+				        	break;
 						//espace pour recommencer
 						case 32:
 							demarrer_jeu();
@@ -152,7 +152,6 @@ void gestionEvenement(EvenementGfx evenement)
                     break;
             }
 			break;
-		
 		case Redimensionnement: 
 			printf("Largeur : %d\t", largeurFenetre());
 			printf("Hauteur : %d\n", hauteurFenetre());

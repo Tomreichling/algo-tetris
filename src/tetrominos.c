@@ -103,17 +103,31 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
 
 void TournerTetrominos(Tétrominos* piece) {
     // tourner la pièce
+    int rotation_possible = 1;
     int copie[SIZE][SIZE];
 
-   for(int i = 0; i < SIZE; i++) {
+    for(int i = 0; i < SIZE; i++) {
         for(int j = 0; j < SIZE; j++) {
-            copie[i][j] =  piece->grille[i][j];
+            int x = piece->x + i;
+            int y = piece->y + j;
+            if(
+                (x < 0 || x >= COLONNES) ||
+                (y < 0 || y >= LIGNES) ||
+                (jeu.grille[x][y] != 0)
+            ) {
+                rotation_possible = 0;
+                break;
+            }
+            copie[i][j] = piece->grille[j][SIZE - 1 - i];
         }
+    }
+    if(rotation_possible == 0) {
+        return;
     }
 
     for(int i = 0; i < SIZE; i++) {
         for(int j = 0; j < SIZE; j++) {
-            piece->grille[j][SIZE - 1 - i] = copie[i][j];
+            piece->grille[i][j] = copie[i][j];
         }
     }
     rafraichisFenetre();
