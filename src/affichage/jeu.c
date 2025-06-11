@@ -117,7 +117,7 @@ void afficherAides() {
 }
 
 // affiche le score du joueur, le temps écoulé (utiliser)
-void afficherScore() {
+void afficherScore() { // rendre reactif la fonction
     int hauteur = hauteurFenetre();
     int taille_carreau = hauteur / LIGNES;
     int taille_droite = largeurFenetre() - (taille_carreau * COLONNES);
@@ -131,7 +131,7 @@ void afficherScore() {
     rectangle(Dcarreau_droite + (taille_droite / 10), hauteur / 8, Dcarreau_droite + taille_droite - (taille_droite / 10), hauteur / 12);
 }
 
-void afficherPrevisualisation(int x, int y, char couleur) {
+void afficherPrevisualisation(int x, int y, char couleur) { //refaire la fonctions pour les differents tetrominos
     int marge = 40;
     int hauteur = hauteurFenetre() - 80;
     int taille_carreau = hauteur / LIGNES;
