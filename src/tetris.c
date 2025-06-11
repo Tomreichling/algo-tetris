@@ -20,13 +20,18 @@ void gestionEvenement(EvenementGfx evenement)
 {
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
 	static DonneesImageRGB *image = NULL;
+    static DonneesImageRGB *image2 = NULL;
+    static DonneesImageRGB *image3 = NULL;
 	
 	switch (evenement)
 	{
 		case Initialisation:
-            image = lisBMPRGB("./assets/titre-tetris.bmp");
+            image = lisBMPRGB("./assets/Group_1.bmp");
+            image2 = lisBMPRGB("./assets/Group_2.bmp");
+            image3 = lisBMPRGB("./assets/Group_3.bmp");
 			demandeTemporisation(-1);
 			jeu.etat = MENU;
+
 			break;
 		case Temporisation:
             switch (jeu.etat)
@@ -60,7 +65,7 @@ void gestionEvenement(EvenementGfx evenement)
             switch (jeu.etat)
             {
                 case MENU:
-					afficheMenu(image);
+					afficheMenu(image, image2, image3);
                     break;
                 case JEU:
 					affichageJeu();
@@ -108,8 +113,11 @@ void gestionEvenement(EvenementGfx evenement)
                         case 'q':
                         case 'Q':
 
-                           libereDonneesImageRGB(&image);
-					                 termineBoucleEvenements();
+                            libereDonneesImageRGB(&image);
+                            libereDonneesImageRGB(&image2);
+                            libereDonneesImageRGB(&image3);
+
+					        termineBoucleEvenements();
                             break;
                         case 32:
                             // espace pour démarrer le jeu 
