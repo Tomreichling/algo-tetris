@@ -67,8 +67,22 @@ int trouver_indices_lignes_completes(char grille[LIGNES][COLONNES], int *indices
     } 
 
 void assigner_score(int nb_indices) {
-    // a remplir
-    return;
+    switch (int nb_indices) {
+        case 1:
+            jeu.score += 40;
+            break;
+        case 2:
+            jeu.score += 100;
+            break;
+        case 3:
+            jeu.score += 300;
+            break;
+        case 4:
+            jeu.score += 1200;
+            break;
+        default:
+            break;
+    }
 }
 
 void retire_ligne(int i, char grille[LIGNES][COLONNES]) {
