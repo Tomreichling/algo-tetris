@@ -37,7 +37,7 @@ void gestion_rapidite();
 
 // trouve les indices de toutes les lignes completes
 // retourne le nombre d'indices et on remplit les indices dans le tableau passé en paramètres
-int trouver_indices_lignes_completes(char grille[LIGNES][COLONNES], int *indices);
+int trouver_indices_lignes_completes(char grille[COLONNES][LIGNES], int indices[4]);
 
 // Assigne un certain score en fonction d'un nombre de lignes detruites
 // ex: 2 lignes detruites => + 200pts (utilise jeu.score)
@@ -45,7 +45,7 @@ void assigner_score(int nb_indices);
 
 // supprime la ligne d'indice i et descends le reste du tableau d'une ligne 
 // (seulement les lignes haut-dessus)
-void retire_ligne(int i, char grille[LIGNES][COLONNES]);
+void retire_ligne(int i, char grille[COLONNES][LIGNES]);
 
 // Renvoie 1 si on peut descendre la pièce de y + 1 sinon 0
 int descente_possible(Tétrominos *piece);

@@ -38,38 +38,28 @@ void descendre_piece() {
     rafraichisFenetre();
 }
 
-int trouver_indices_lignes_completes(char grille[LIGNES][COLONNES], int *indices){
+int trouver_indices_lignes_completes(char grille[COLONNES][LIGNES], int indices[4]){
     int nombre_lignes_completes = 0;
-    indices =(int*)  malloc(  nombre_lignes_completes * sizeof(int));
-    int n=0;
+    int n = 0;
 
-    for (int i = 0 ; i< COLONNES; i++) {
-        n=0;
-        for (int j =0; j< LIGNES; j++) {
+    for (int j = 0; j < LIGNES; j++) {
+        n = 0;
+        for (int i = 0; i < COLONNES; i++) {
             if (grille[i][j] != 0) {
-    
-            n++;
+                n++;
             }
-            else if (grille [i][j] ==0){
+            else if (grille[i][j] ==0){
                 break;
             }
             
         }
-        printf("ligne %d : %d\n", i, n);
         if (n == COLONNES) {
-                printf("ligne %d complete\n", i);
-                nombre_lignes_completes++;
-                indices = (int*) realloc(indices, nombre_lignes_completes * sizeof(int));
-                indices = (int*) realloc(indices, nombre_lignes_completes * sizeof(int));
-                indices[nombre_lignes_completes-1] = i;
-               
-            }
+            nombre_lignes_completes++;
+            indices[nombre_lignes_completes - 1] = j;
         }
-    
-                
-        return nombre_lignes_completes;
-
-    } 
+    }
+    return nombre_lignes_completes;
+} 
 
 void assigner_score(int nb_indices) {
     switch (nb_indices) {
@@ -90,21 +80,15 @@ void assigner_score(int nb_indices) {
     }
 }
 
-void retire_ligne(int i, char grille[LIGNES][COLONNES]) {
-    for (; i>-1; i--) {
-        for (int j = COLONNES; j >0; j--) {
-            if (i== 0 ) {
-                printf("modif derniure ");
-                grille[i][j] = 0;
+void retire_ligne(int i, char grille[COLONNES][LIGNES]) {
+    for (; i > -1; i--) {
+        for (int j = 0; j < COLONNES; j++) {
+            if (i == 0) {
+                grille[j][i] = 0;
+            } else {
+                grille[j][i] = grille[j][i - 1];
             }
-            else {
-                printf("je modif la ligne");
-                grille [i][j] = grille[i-1][j];
-            }
-            
         }
     }
-
-    return;
 }
 

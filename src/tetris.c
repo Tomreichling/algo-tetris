@@ -19,6 +19,7 @@ Jeu jeu = {0};
 void gestionEvenement(EvenementGfx evenement)
 {
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
+	static bool pause = false;
 	static DonneesImageRGB *image = NULL;
     static DonneesImageRGB *image2 = NULL;
     static DonneesImageRGB *image3 = NULL;
@@ -42,20 +43,17 @@ void gestionEvenement(EvenementGfx evenement)
                     descendre_piece();
                     
                     // On trouve les lignes complètes
-                    int *indices = NULL; 
+                    int indices[4]; 
                     int lignes = trouver_indices_lignes_completes(jeu.grille, indices);
-                    if(indices == NULL) {
-                        break;
-                    }
+                    printf("%d lignes completes\n", lignes);
 
                     // On assigne un score en conséquent
                     assigner_score(lignes);
                     printf("score: %d\n", jeu.score);
                     // On supprime les lignes complètes en partant du haut de la grille
                     for(int i = 0; i < lignes; i++) {
-                        // retire_ligne(indices[i], jeu.grille);
+                        retire_ligne(indices[i], jeu.grille);
                     }
-                    free(indices);
                     break;
                 default:
                     break;
@@ -99,19 +97,32 @@ void gestionEvenement(EvenementGfx evenement)
                     break;
             }
 			break;
-		case Clavier:
-            if(caractereClavier() == 'f') {
+		case Clavier: {
+
+            char caractere = caractereClavier();
+            
+            if(caractere == 'f') {
                 pleinEcran = !pleinEcran;
                 if (pleinEcran)
                     modePleinEcran();
                 else
                     redimensionneFenetre(LARGEUR, LONGUEUR);
                 break;
+            } else if(caractere == 'p') {
+                pause = !pause;
+                if(pause) {
+                    demandeTemporisation(-1);
+                } else {
+                    demandeTemporisation(1000);
+                }
+            }
+            if(pause) {
+                break;
             }
             switch(jeu.etat) {
                 // *caractereClavier() donne la touche*
                 case MENU:
-                    switch (caractereClavier()){
+                    switch (caractere){
                         case 'q':
                         case 'Q':
 
@@ -130,7 +141,7 @@ void gestionEvenement(EvenementGfx evenement)
                     entrees_jeu();
                     break;
                 case FIN:
-				    switch (caractereClavier()) {
+				    switch (caractere) {
 				    	case 'q':
 				    	case 'Q':
 				        	libereDonneesImageRGB(&image);
@@ -143,7 +154,9 @@ void gestionEvenement(EvenementGfx evenement)
 					}
                     break;
             }
+        }
 		case ClavierSpecial:
+            if(pause) break;
             switch(jeu.etat) {
                 case JEU:
                     entrees_speciales_jeu();

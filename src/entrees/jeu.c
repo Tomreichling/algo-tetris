@@ -24,7 +24,6 @@ void entrees_jeu() {
         case 'E':
             TournerTetrominos(&jeu.piece);
             break;
-
         // case 32: {
         //    sauter  la piece 
         // }
@@ -69,7 +68,8 @@ void bouger_piece_droite() {
                 continue; 
             }
             int x = jeu.piece.x + i;
-            if (jeu.grille[x + 1][j] != 0 || x + 1 >= COLONNES){
+            int y = jeu.piece.y + j;
+            if (jeu.grille[x + 1][y] != 0 || x + 1 >= COLONNES){
                 deplacement_valide = 0;
                 break;
             }
@@ -89,7 +89,8 @@ void bouger_piece_gauche(){
                 continue; 
             }
             int x = jeu.piece.x + i;
-            if (x <= 0 || jeu.grille[x - 1][j] != 0){
+            int y = jeu.piece.y + j;
+            if (x <= 0 || jeu.grille[x - 1][y] != 0){
                 deplacement_valide = 0;
                 break;
             }
