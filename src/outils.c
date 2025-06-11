@@ -31,7 +31,6 @@ void demarrer_jeu() {
 void gameover() {
     jeu.etat = FIN;
     rafraichisFenetre();
-    
     // on arrête les tics
     demandeTemporisation(-1);
 }

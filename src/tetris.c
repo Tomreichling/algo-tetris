@@ -126,12 +126,7 @@ void gestionEvenement(EvenementGfx evenement)
                     }
                     break;
                 case JEU:
-                    // p pour mettre le jeu en pause
-                    // q pour aller à gauche
-                    // d pour aller à droite
-                    // s pour aller en bas
-                    // e ou r pour tourner la pièce
-                    // espace pour sauter
+                    entrees_jeu();
                     break;
                                 case FIN:
 				        	switch (caractereClavier()) {
@@ -151,13 +146,9 @@ void gestionEvenement(EvenementGfx evenement)
 		case ClavierSpecial:
             switch(jeu.etat) {
                 case JEU:
-                    // Flèche gauche -> aller à gauche
-                    // Flèche droite -> aller à droite
-                    // Flèche du bas -> aller en bas
-                    // Flèche du haut -> tourner la pièce
+                    entrees_speciales_jeu();
                     break;
                 default:
-                    printf("ASCII %d\n", toucheClavier());
                     break;
             }
 			break;

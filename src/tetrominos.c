@@ -44,8 +44,8 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
         case 2:     
             // 0 1 0 0
             // 0 1 0 0
-            // 0 1 0 0
-            // 0 1 0 0
+            // 0 1 1 0
+            // 0 0 0 0
             piece.grille[0][0] = couleur;
             piece.grille[0][1] = couleur;
             piece.grille[0][2] = couleur;
@@ -66,7 +66,7 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
         case 4: 
             // 0 1 0 0
             // 0 1 0 0
-            // 0 1 1 0
+            // 1 1 0 0
             // 0 0 0 0
             piece.grille[1][0] = couleur;
             piece.grille[1][1] = couleur;
@@ -120,7 +120,7 @@ void TournerTetrominos(Tétrominos* piece) {
 
 // Créer un Tétrominos aléatoirement (tu utiliseras la fonction Creer Tetrominos)
 Tétrominos NouveauTetrominos() {
-    // 6 couleurs
+    // 7 couleurs
     int couleur = rand() % 7;
     // 7 formes
     char figure = rand() % 7; 

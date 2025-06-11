@@ -51,7 +51,6 @@ void retire_ligne(int i, char grille[LIGNES][COLONNES]);
 int descente_possible(Tétrominos *piece);
 
 // utiliser la variable global jeu pour monter la pièce
-// renvoie 1 si ça fonctionne et 0 ça fonctionne pas.
 void descendre_piece();
 
 /////////////

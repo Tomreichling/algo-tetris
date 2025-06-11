@@ -1,10 +1,62 @@
 #include "../tetris.h"
-#include <stdbool.h>
 
 // Entrées
+// gères toutes les entrées de l'utilisateur
+// - Q -> bouger la pièce à Gauche
+// - D -> bouger la pièce à Droite
+// - S -> accélerer la pièce
+// - Espace -> Faire sauter la pièce
+void entrees_jeu() {
+    switch (caractereClavier()){
+        case 'q': 
+        case 'Q': 
+           bouger_piece_gauche();
+           break;
+        case 'd':
+        case 'D':
+            bouger_piece_droite();
+            break;
+        case 'S':
+        case 's':
+            descendre_piece();
+            break;
+        case 'e':
+        case 'E':
+            TournerTetrominos(&jeu.piece);
+            break;
 
-void entreesJeu(){
-
+        // case 32: {
+        //    sauter  la piece 
+        // }
+        // default:
+        // {
+        //     printf("%d -> %c\n", caractereClavier(), caractereClavier());
+        // }
+    }
+}
+// gères toutes les entrées spéciales de l'utilisateur
+// - Flèche de gauche pour aller à gauche -> bouger la pièce à Gauche
+// - Flèche de droite pour aller à droite -> bouger la pièce à Droite
+// - Flèche du haut pour accélerer -> accélérer la piècer
+void entrees_speciales_jeu() {
+    switch(toucheClavier()) {
+        // fleche droite 
+        case 16: 
+            bouger_piece_droite();
+            break;
+        // gauche
+        case 15: 
+            bouger_piece_gauche();
+            break;
+        // fleche haut <=> rotation
+        case 13:
+            TournerTetrominos(&jeu.piece);
+            break;
+        // bas
+        case 14: 
+            descendre_piece();
+            break;
+    }
 }
 
 
@@ -46,3 +98,8 @@ void bouger_piece_gauche(){
         jeu.piece.x--;
     }
 }
+
+
+// void sauter_piece (){
+
+// }
