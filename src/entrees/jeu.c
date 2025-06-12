@@ -24,13 +24,11 @@ void entrees_jeu() {
         case 'E':
             TournerTetrominos(&jeu.piece);
             break;
-        // case 32: {
-        //    sauter  la piece 
-        // }
-        // default:
-        // {
-        //     printf("%d -> %c\n", caractereClavier(), caractereClavier());
-        // }
+        case 32:
+            sauter_piece();
+            break;
+        default:
+            break;
     }
 }
 // gères toutes les entrées spéciales de l'utilisateur
@@ -54,6 +52,8 @@ void entrees_speciales_jeu() {
         // bas
         case 14: 
             descendre_piece();
+            break;
+        default:
             break;
     }
 }
@@ -103,7 +103,7 @@ void bouger_piece_gauche(){
 }
 
 
-void sauter_piece (){
+void sauter_piece() {
     int numero_piece = jeu.nb_piece;
     while (numero_piece != jeu.nb_piece){
         descendre_piece();
