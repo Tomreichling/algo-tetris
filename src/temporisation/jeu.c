@@ -1,7 +1,7 @@
 #include "../tetris.h"
 
-int descente_possible(Tétrominos *piece) {
-    int deplacement_possible = 1;
+bool descente_possible(Tétrominos *piece) {
+    bool deplacement_possible = true;
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
             if(piece->grille[i][j] == 0) {
@@ -11,7 +11,7 @@ int descente_possible(Tétrominos *piece) {
             int x = piece->x + i;
             int y = piece->y + j;
             if(jeu.grille[x][y + 1] != 0 || y + 1 == LIGNES) {
-                deplacement_possible = 0;
+                deplacement_possible = false;
                 break;
             } 
         }

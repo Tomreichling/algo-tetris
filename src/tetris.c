@@ -42,7 +42,7 @@ void gestionEvenement(EvenementGfx evenement){
                     descendre_piece();
                     
                     // On trouve les lignes complètes
-                    int indices[4]; 
+                    int static indices[4]; 
                     int lignes = trouver_indices_lignes_completes(jeu.grille, indices);
                     
                     // On assigne un score en conséquent
@@ -112,7 +112,6 @@ void gestionEvenement(EvenementGfx evenement){
             }
 			break;
 		case Clavier: {
-
             char caractere = caractereClavier();
             
             if(caractere == 'f') {
@@ -130,9 +129,7 @@ void gestionEvenement(EvenementGfx evenement){
                     demandeTemporisation(1000);
                 }
             }
-            if(pause) {
-                break;
-            }
+            if(pause) break;
             switch(jeu.etat) {
                 // *caractereClavier() donne la touche*
                 case MENU:

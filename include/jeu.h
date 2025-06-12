@@ -47,8 +47,8 @@ void assigner_score(int nb_indices);
 // (seulement les lignes haut-dessus)
 void retire_ligne(int i);
 
-// Renvoie 1 si on peut descendre la pièce de y + 1 sinon 0
-int descente_possible(Tétrominos *piece);
+// Renvoie si on peut descendre la pièce de 1
+bool descente_possible(Tétrominos *piece);
 
 // utiliser la variable global jeu pour monter la pièce
 void descendre_piece();
