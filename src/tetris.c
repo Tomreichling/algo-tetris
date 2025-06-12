@@ -150,7 +150,7 @@ void gestionEvenement(EvenementGfx evenement){
                         case 32:
                             system("killall aplay");
                             demarrer_jeu();
-                            playsound("aplay /home/tom/Documents/Algorithmes/algo-tetris/src/tetrisic.wav");
+                            playsound("aplay $(pwd)/src/tetrisic.wav");
                             break;
                     }
                     break;
@@ -169,7 +169,7 @@ void gestionEvenement(EvenementGfx evenement){
 						case 32:
                             system("killall aplay");
                             demarrer_jeu();
-                            playsound("aplay /home/tom/Documents/Algorithmes/algo-tetris/src/tetrisic.wav");
+                            playsound("aplay $(pwd)/src/tetrisic.wav");
 							break;
 					}
                     break;
