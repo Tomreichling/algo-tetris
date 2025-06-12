@@ -1,4 +1,4 @@
-#include "./tetris.h"
+#include "tetris.h"
 
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
 des qu'une evenement survient */

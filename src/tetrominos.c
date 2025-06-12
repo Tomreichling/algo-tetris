@@ -145,4 +145,3 @@ Tétrominos NouveauTetrominos() {
     char figure = rand() % 7; 
     return CreerTetrominos(figure);
 }
-

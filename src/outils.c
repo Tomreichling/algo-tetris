@@ -1,4 +1,4 @@
-#include "./tetris.h"
+#include "tetris.h"
 
 void copier_tableau44(char entree[4][4], char sortie[COLONNES][LIGNES], int xi, int yi) {
     for(int i = 0; i < 4; i++) {
@@ -34,4 +34,11 @@ void gameover() {
     rafraichisFenetre();
     // on arrête les tics
     demandeTemporisation(-1);
+}
+
+bool dansGrille(int x, int y) {
+    return (
+        x >= 0 && x < COLONNES &&
+        y >= 0 && y < LIGNES
+    );
 }

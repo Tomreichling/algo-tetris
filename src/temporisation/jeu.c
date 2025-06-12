@@ -10,7 +10,7 @@ bool descente_possible(Tétrominos *piece) {
 
             int x = piece->x + i;
             int y = piece->y + j;
-            if(jeu.grille[x][y + 1] != 0 || y + 1 == LIGNES) {
+            if(jeu.grille[x][y + 1] != 0 || !dansGrille(x, y + 1)) {
                 deplacement_possible = false;
                 break;
             } 

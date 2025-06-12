@@ -1,6 +1,7 @@
 #ifndef JEU_H
 #define JEU_H
 #include "../src/tetris.h"
+
 ///////////////
 // Affichage //
 ///////////////
@@ -26,9 +27,7 @@ void afficherPrevisualisation(int x, int y, char couleur);
 // Temporisation //
 ///////////////////
 
-
 // Alla 
-
 
 // chaque 30s, la temporisation s'accélère.
 // trouve le temps depuis le démarrage de la partie 
@@ -58,16 +57,9 @@ void descendre_piece();
 /////////////
 
 // gères toutes les entrées de l'utilisateur
-// - Q -> bouger la pièce à Gauche
-// - D -> bouger la pièce à Droite
-// - Z -> accélerer la pièce
-// - Espace -> Faire sauter la pièce
 void entrees_jeu();
 
 // gères toutes les entrées spéciales de l'utilisateur
-// - Flèche de gauche pour aller à gauche -> bouger la pièce à Gauche
-// - Flèche de droite pour aller à droite -> bouger la pièce à Droite
-// - Flèche du haut pour accélerer -> accélérer la piècer
 void entrees_speciales_jeu();
 
 // bouge la pièce dans la variable globale jeu vers la droite si possible

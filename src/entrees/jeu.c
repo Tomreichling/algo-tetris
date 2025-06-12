@@ -1,11 +1,6 @@
 #include "../tetris.h"
 
 // Entrées
-// gères toutes les entrées de l'utilisateur
-// - Q -> bouger la pièce à Gauche
-// - D -> bouger la pièce à Droite
-// - S -> accélerer la pièce
-// - Espace -> Faire sauter la pièce
 void entrees_jeu() {
     switch (caractereClavier()){
         case 'q': 
@@ -20,11 +15,11 @@ void entrees_jeu() {
         case 's':
             descendre_piece();
             break;
-        case 'e':
-        case 'E':
+        case 'z':
+        case 'Z':
             TournerTetrominos(&jeu.piece);
             break;
-        case 32:
+        case 32: // Barre espace
             sauter_piece();
             break;
         default:
@@ -32,25 +27,18 @@ void entrees_jeu() {
     }
 }
 // gères toutes les entrées spéciales de l'utilisateur
-// - Flèche de gauche pour aller à gauche -> bouger la pièce à Gauche
-// - Flèche de droite pour aller à droite -> bouger la pièce à Droite
-// - Flèche du haut pour accélerer -> accélérer la piècer
 void entrees_speciales_jeu() {
     switch(toucheClavier()) {
-        // fleche droite 
-        case 16: 
+        case 16: // fleche droite 
             bouger_piece_droite();
             break;
-        // gauche
-        case 15: 
+        case 15: // flèche gauche
             bouger_piece_gauche();
             break;
-        // fleche haut <=> rotation
-        case 13:
+        case 13: // flèche du haut
             TournerTetrominos(&jeu.piece);
             break;
-        // bas
-        case 14: 
+        case 14:  // flèche du bas
             descendre_piece();
             break;
         default:
@@ -58,10 +46,9 @@ void entrees_speciales_jeu() {
     }
 }
 
-
 // en fonction de x 
 void bouger_piece_droite() {
-    int deplacement_valide = 1;
+    bool deplacement_valide = true;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++){
             if (jeu.piece.grille[i][j] == 0){
@@ -69,20 +56,20 @@ void bouger_piece_droite() {
             }
             int x = jeu.piece.x + i;
             int y = jeu.piece.y + j;
-            if (jeu.grille[x + 1][y] != 0 || x + 1 >= COLONNES){
-                deplacement_valide = 0;
+            if (jeu.grille[x + 1][y] != 0 || !dansGrille(x + 1, y)){
+                deplacement_valide = false;
                 break;
             }
         }
     }
-    if (deplacement_valide == 1){
+    if (deplacement_valide){
         jeu.piece.x++;
         rafraichisFenetre();
     }
 }
 // en fonction de -x
 void bouger_piece_gauche(){
-    int deplacement_valide = 1;
+    bool deplacement_valide = true;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++){
             if (jeu.piece.grille[i][j] == 0){
@@ -90,13 +77,13 @@ void bouger_piece_gauche(){
             }
             int x = jeu.piece.x + i;
             int y = jeu.piece.y + j;
-            if (x <= 0 || jeu.grille[x - 1][y] != 0){
-                deplacement_valide = 0;
+            if (!dansGrille(x - 1, y)|| jeu.grille[x - 1][y] != 0){
+                deplacement_valide = false;
                 break;
             }
         }
     }
-    if (deplacement_valide == 1){
+    if (deplacement_valide){
         jeu.piece.x--;
         rafraichisFenetre();
     }
