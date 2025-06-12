@@ -45,7 +45,7 @@ void assigner_score(int nb_indices);
 
 // supprime la ligne d'indice i et descends le reste du tableau d'une ligne 
 // (seulement les lignes haut-dessus)
-void retire_ligne(int i, char grille[COLONNES][LIGNES]);
+void retire_ligne(int i);
 
 // Renvoie 1 si on peut descendre la pièce de y + 1 sinon 0
 int descente_possible(Tétrominos *piece);

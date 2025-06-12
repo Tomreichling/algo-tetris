@@ -17,6 +17,7 @@ void demarrer_jeu() {
             jeu.grille[i][j] = 0;
         }
     }
+    jeu.nb_piece = 0;
     jeu.t_demarrage = tempsCPU();
     jeu.piece = NouveauTetrominos();
     jeu.prochaine_piece = NouveauTetrominos();

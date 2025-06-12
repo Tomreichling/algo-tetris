@@ -81,13 +81,13 @@ void assigner_score(int nb_indices) {
     }
 }
 
-void retire_ligne(int i, char grille[COLONNES][LIGNES]) {
+void retire_ligne(int i) {
     for (; i > -1; i--) {
         for (int j = 0; j < COLONNES; j++) {
             if (i == 0) {
-                grille[j][i] = 0;
+                jeu.grille[j][i] = 0;
             } else {
-                grille[j][i] = grille[j][i - 1];
+                jeu.grille[j][i] = jeu.grille[j][i - 1];
             }
         }
     }

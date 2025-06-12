@@ -101,25 +101,25 @@ void afficherProchainePiece(Tétrominos piece) {
                 couleur = piece.grille[ki][kj];
                 switch (couleur) {
                     case 1:
-                        couleurCourante(0, 240, 240);
+                        couleurCourante(240, 240, 0); //jaune
                         break;
                     case 2:
-                        couleurCourante(240, 160, 0);
+                        couleurCourante(160, 0, 240); //violet
                         break;
                     case 3:
-                        couleurCourante(0, 0, 240);
+                        couleurCourante(240, 160, 0); //orange
                         break;
                     case 4:
-                        couleurCourante(240, 240, 0);
+                        couleurCourante(0, 240, 240); //turquoise
                         break;
                     case 5:
-                        couleurCourante(160, 0, 240);
+                        couleurCourante(0, 0, 240); //bleu
                         break;
                     case 6:
-                        couleurCourante(0, 240, 0);
+                        couleurCourante(0, 240, 0); //vert
                         break;
                     case 7:
-                        couleurCourante(240, 0, 0);
+                        couleurCourante(240, 0, 0);//rouge
                         break;
                 }
                 rectangle(posXD + 1, posYD + 1, posXA - 1, posYA - 1);

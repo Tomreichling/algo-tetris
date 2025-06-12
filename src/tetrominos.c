@@ -90,7 +90,7 @@ Tétrominos CreerTetrominos(char figure) {
             piece.grille[2][1] = 6;
             break;
         case 'z':
-        case 7: 
+        case 0: 
             // 0 1 0 0
             // 0 1 1 0
             // 0 0 1 0

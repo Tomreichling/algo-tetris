@@ -36,7 +36,7 @@ void gestionEvenement(EvenementGfx evenement){
 		case Temporisation:
             switch (jeu.etat)
             {
-                case JEU:
+                case JEU: {
                     // On vérifie si on peut descendre la pièce
                     // on la descends ou la place sur grille
                     descendre_piece();
@@ -44,14 +44,15 @@ void gestionEvenement(EvenementGfx evenement){
                     // On trouve les lignes complètes
                     int indices[4]; 
                     int lignes = trouver_indices_lignes_completes(jeu.grille, indices);
-
+                    
                     // On assigne un score en conséquent
                     assigner_score(lignes);
                     // On supprime les lignes complètes en partant du haut de la grille
                     for(int i = 0; i < lignes; i++) {
-                        retire_ligne(indices[i], jeu.grille);
+                        retire_ligne(indices[i]);
                     }
                     break;
+                }
                 default:
                     break;
             }
@@ -77,8 +78,6 @@ void gestionEvenement(EvenementGfx evenement){
                     }    
                     y_previ = jeu.piece.y;
                     jeu.piece.y = y_base;
-                        
-                    
 
                     for (int i = 0; i < 4; i++) {
                         for (int j = 0; j < 4; j++) {
