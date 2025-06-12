@@ -4,9 +4,10 @@
 
 #define SIZE 4 
 
-Tétrominos CreerTetrominos(char figure, int couleur) {
+Tétrominos CreerTetrominos(char figure) {
     Tétrominos piece = {0};
     piece.x = COLONNES / 2 - 2;
+    int couleur;
     
     // On initialise à 0
     for(int i = 0; i < SIZE; i++) {
@@ -24,6 +25,10 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
             // 0 1 1 0
             // 0 1 1 0
             // 0 0 0 0
+            piece.couleur_piece[0] = 240;
+            piece.couleur_piece[1] = 240;
+            piece.couleur_piece[2] = 240;
+            couleur = 0;
             piece.grille[1][1] = couleur;
             piece.grille[1][2] = couleur;
             piece.grille[2][1] = couleur;
@@ -35,6 +40,10 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
             // 0 1 1 0
             // 0 1 0 0
             // 0 0 0 0
+            piece.couleur_piece[0] = 240;
+            piece.couleur_piece[1] = 240;
+            piece.couleur_piece[2] = 240;
+            couleur = 1;
             piece.grille[1][0] = couleur;
             piece.grille[1][1] = couleur;
             piece.grille[1][2] = couleur;
@@ -46,6 +55,10 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
             // 0 1 0 0
             // 0 1 1 0
             // 0 0 0 0
+            piece.couleur_piece[0] = 240;
+            piece.couleur_piece[1] = 240;
+            piece.couleur_piece[2] = 240;
+            couleur = 2;
             piece.grille[0][0] = couleur;
             piece.grille[0][1] = couleur;
             piece.grille[0][2] = couleur;
@@ -57,6 +70,10 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
             // 0 1 0 0
             // 0 1 0 0
             // 0 1 0 0
+            piece.couleur_piece[0] = 240;
+            piece.couleur_piece[1] = 240;
+            piece.couleur_piece[2] = 240;
+            couleur = 3;
             piece.grille[1][0] = couleur;
             piece.grille[1][1] = couleur;
             piece.grille[1][2] = couleur;
@@ -68,6 +85,10 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
             // 0 1 0 0
             // 1 1 0 0
             // 0 0 0 0
+            piece.couleur_piece[0] = 240;
+            piece.couleur_piece[1] = 240;
+            piece.couleur_piece[2] = 240;
+            couleur = 4;
             piece.grille[1][0] = couleur;
             piece.grille[1][1] = couleur;
             piece.grille[1][2] = couleur;
@@ -79,6 +100,10 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
             // 0 1 1 0
             // 0 1 0 0
             // 0 0 0 0
+            piece.couleur_piece[0] = 240;
+            piece.couleur_piece[1] = 240;
+            piece.couleur_piece[2] = 240;
+            couleur = 5;
             piece.grille[1][1] = couleur;
             piece.grille[1][2] = couleur;
             piece.grille[2][0] = couleur;
@@ -90,6 +115,10 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
             // 0 1 1 0
             // 0 0 1 0
             // 0 0 0 0
+            piece.couleur_piece[0] = 240;
+            piece.couleur_piece[1] = 240;
+            piece.couleur_piece[2] = 240;
+            couleur = 6;
             piece.grille[1][0] = couleur;
             piece.grille[1][1] = couleur;
             piece.grille[2][1] = couleur;
@@ -135,10 +164,8 @@ void TournerTetrominos(Tétrominos* piece) {
 
 // Créer un Tétrominos aléatoirement (tu utiliseras la fonction Creer Tetrominos)
 Tétrominos NouveauTetrominos() {
-    // 7 couleurs
-    int couleur = rand() % 7;
     // 7 formes
     char figure = rand() % 7; 
-    return CreerTetrominos(figure, couleur + 1);
+    return CreerTetrominos(figure);
 }
 

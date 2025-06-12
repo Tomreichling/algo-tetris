@@ -7,10 +7,11 @@ typedef struct tetrominos{
     int y;
     char rotation;
     char grille[4][4];
+    int couleur_piece[3];
 } Tétrominos;
 
 // Créer un tétrominos (utilise TournerTetrominos)
-Tétrominos CreerTetrominos(char figure, int couleur);
+Tétrominos CreerTetrominos(char figure);
 
 // Tourne le tétrominos
 void TournerTetrominos(Tétrominos* piece);
