@@ -27,6 +27,8 @@ void entrees_jeu() {
         case 32:
             sauter_piece();
             break;
+        default:
+            break;
     }
 }
 // gères toutes les entrées spéciales de l'utilisateur
@@ -50,6 +52,8 @@ void entrees_speciales_jeu() {
         // bas
         case 14: 
             descendre_piece();
+            break;
+        default:
             break;
     }
 }
