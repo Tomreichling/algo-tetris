@@ -48,10 +48,10 @@ Tétrominos CreerTetrominos(char figure) {
             // 0 1 1 0
             // 0 0 0 0
 
-            piece.grille[0][0] = 3;
-            piece.grille[0][1] = 3;
-            piece.grille[0][2] = 3;
+            piece.grille[1][0] = 3;
+            piece.grille[1][1] = 3;
             piece.grille[1][2] = 3;
+            piece.grille[2][2] = 3;
             break;
         case 'i':
         case 4: 
@@ -67,15 +67,15 @@ Tétrominos CreerTetrominos(char figure) {
             break;
         case 'j':
         case 5: 
-            // 0 1 0 0
-            // 0 1 0 0
-            // 1 1 0 0
+            // 0 0 1 0
+            // 0 0 1 0
+            // 0 1 1 0
             // 0 0 0 0
 
-            piece.grille[1][0] = 5;
-            piece.grille[1][1] = 5;
-            piece.grille[1][2] = 5;
+            piece.grille[2][0] = 5;
+            piece.grille[2][1] = 5;
             piece.grille[2][2] = 5;
+            piece.grille[1][2] = 5;
             break;
         case 's':
         case 6: 

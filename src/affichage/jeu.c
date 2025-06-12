@@ -95,9 +95,9 @@ void afficherProchainePiece(Tétrominos piece) {
                 x = ki;
                 y = kj;
                 posXD = Dcarreau_droite + (taille_droite / 5) + x * taille_carreau;
-                posYD = (hauteur / 2.5) + y * taille_carreau;
+                posYD = (hauteur / 2.5) + (3 - y) * taille_carreau;
                 posXA = Dcarreau_droite + (taille_droite / 5) + (x + 1) * taille_carreau;
-                posYA = (hauteur / 2.5) + (y + 1) * taille_carreau;
+                posYA = (hauteur / 2.5) + (4 - y) * taille_carreau;
                 couleur = piece.grille[ki][kj];
                 switch (couleur) {
                     case 1:
