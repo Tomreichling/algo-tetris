@@ -25,9 +25,7 @@ Tétrominos CreerTetrominos(char figure) {
             // 0 1 1 0
             // 0 1 1 0
             // 0 0 0 0
-            piece.couleur_piece[0] = 240;
-            piece.couleur_piece[1] = 240;
-            piece.couleur_piece[2] = 240;
+
             couleur = 0;
             piece.grille[1][1] = couleur;
             piece.grille[1][2] = couleur;
@@ -40,9 +38,6 @@ Tétrominos CreerTetrominos(char figure) {
             // 0 1 1 0
             // 0 1 0 0
             // 0 0 0 0
-            piece.couleur_piece[0] = 240;
-            piece.couleur_piece[1] = 240;
-            piece.couleur_piece[2] = 240;
             couleur = 1;
             piece.grille[1][0] = couleur;
             piece.grille[1][1] = couleur;
@@ -55,9 +50,7 @@ Tétrominos CreerTetrominos(char figure) {
             // 0 1 0 0
             // 0 1 1 0
             // 0 0 0 0
-            piece.couleur_piece[0] = 240;
-            piece.couleur_piece[1] = 240;
-            piece.couleur_piece[2] = 240;
+
             couleur = 2;
             piece.grille[0][0] = couleur;
             piece.grille[0][1] = couleur;
@@ -70,9 +63,7 @@ Tétrominos CreerTetrominos(char figure) {
             // 0 1 0 0
             // 0 1 0 0
             // 0 1 0 0
-            piece.couleur_piece[0] = 240;
-            piece.couleur_piece[1] = 240;
-            piece.couleur_piece[2] = 240;
+
             couleur = 3;
             piece.grille[1][0] = couleur;
             piece.grille[1][1] = couleur;
@@ -85,9 +76,7 @@ Tétrominos CreerTetrominos(char figure) {
             // 0 1 0 0
             // 1 1 0 0
             // 0 0 0 0
-            piece.couleur_piece[0] = 240;
-            piece.couleur_piece[1] = 240;
-            piece.couleur_piece[2] = 240;
+
             couleur = 4;
             piece.grille[1][0] = couleur;
             piece.grille[1][1] = couleur;
@@ -100,9 +89,7 @@ Tétrominos CreerTetrominos(char figure) {
             // 0 1 1 0
             // 0 1 0 0
             // 0 0 0 0
-            piece.couleur_piece[0] = 240;
-            piece.couleur_piece[1] = 240;
-            piece.couleur_piece[2] = 240;
+
             couleur = 5;
             piece.grille[1][1] = couleur;
             piece.grille[1][2] = couleur;
@@ -115,9 +102,7 @@ Tétrominos CreerTetrominos(char figure) {
             // 0 1 1 0
             // 0 0 1 0
             // 0 0 0 0
-            piece.couleur_piece[0] = 240;
-            piece.couleur_piece[1] = 240;
-            piece.couleur_piece[2] = 240;
+ 
             couleur = 6;
             piece.grille[1][0] = couleur;
             piece.grille[1][1] = couleur;
