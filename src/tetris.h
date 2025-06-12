@@ -31,6 +31,7 @@ enum ETAT_JEU { MENU, JEU, FIN };
 typedef struct jeu{
     int t_demarrage; // temps auquel la partie a commencé (secondes)
     int score;
+    int nb_piece; // le nombre de pièce écoulé
     int etat; // enum ETAT_JEU
     char grille[COLONNES][LIGNES];
     // actuelle

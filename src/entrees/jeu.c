@@ -100,6 +100,9 @@ void bouger_piece_gauche(){
 }
 
 
-// void sauter_piece (){
-
-// }
+void sauter_piece (){
+    int numero_piece = jeu.nb_piece;
+    while (numero_piece != jeu.nb_piece){
+        descendre_piece();
+    }
+}

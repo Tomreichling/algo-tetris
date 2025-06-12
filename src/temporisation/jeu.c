@@ -34,6 +34,7 @@ void descendre_piece() {
         copier_tableau44(jeu.piece.grille, jeu.grille, jeu.piece.x, jeu.piece.y);
         jeu.piece = jeu.prochaine_piece;
         jeu.prochaine_piece = NouveauTetrominos();
+        jeu.nb_piece++;
     }
 }
 
