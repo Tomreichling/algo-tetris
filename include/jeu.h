@@ -76,4 +76,7 @@ void bouger_piece_droite();
 // bouge la pièce dans la variable globale jeu vers la gauche si possible
 void bouger_piece_gauche();
 
+// faire sauter la piece 
+void sauter_piece (); 
+
 #endif
