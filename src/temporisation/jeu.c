@@ -92,3 +92,14 @@ void retire_ligne(int i, char grille[COLONNES][LIGNES]) {
     }
 }
 
+void *musicThread(void* musique){ 
+    char* str = (char*) musique;
+    system(str);
+
+    return NULL;
+}
+
+void playsound(char* musique){
+    pthread_t tid; 
+    pthread_create(&tid, NULL, musicThread, (void*) musique); 
+}
