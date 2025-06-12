@@ -9,13 +9,13 @@ SRCFILES := tetris.c tetrominos.c outils.c \
 OBJFILES := $(patsubst %.c, $(BUILDDIR)/%.o, $(SRCFILES))
 
 all: $(BUILDDIR) $(BUILDDIR)/affichage $(BUILDDIR)/entrees $(BUILDDIR)/temporisation \
-	gfx/libisentlib.a tetris
+	gfx/libisentlib.a tetris -lpthread
 
 tetris: $(OBJFILES) gfx/libisentlib.a 
 ifeq ($(UNAME), Darwin)
-	gcc -Wall -o $@ $^ -lm -framework OpenGL -framework GLUT
+	gcc -Wall -o $@ $^ -lm -framework OpenGL -framework GLUT -lpthread
 else
-	gcc -Wall -o $@ $^ -lm -lglut -lGL -lX11
+	gcc -Wall -o $@ $^ -lm -lglut -lGL -lX11 -lpthread
 endif
 
 $(BUILDDIR):

@@ -144,11 +144,13 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGB(&image);
                             libereDonneesImageRGB(&image2);
                             libereDonneesImageRGB(&image3);
-
+                            system("killall aplay");
 					        termineBoucleEvenements();
                             break;
                         case 32:
+                            system("killall aplay");
                             demarrer_jeu();
+                            playsound("aplay /home/tom/Documents/Algorithmes/algo-tetris/src/tetrisic.wav");
                             break;
                     }
                     break;
@@ -160,11 +162,14 @@ void gestionEvenement(EvenementGfx evenement){
 				    	case 'q':
 				    	case 'Q':
 				        	libereDonneesImageRGB(&image);
+                            system("killall aplay");
 				        	termineBoucleEvenements();
 				        	break;
 						//espace pour recommencer
 						case 32:
-							demarrer_jeu();
+                            system("killall aplay");
+                            demarrer_jeu();
+                            playsound("aplay /home/tom/Documents/Algorithmes/algo-tetris/src/tetrisic.wav");
 							break;
 					}
                     break;

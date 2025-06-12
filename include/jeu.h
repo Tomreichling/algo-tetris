@@ -76,4 +76,8 @@ void bouger_piece_droite();
 // bouge la pièce dans la variable globale jeu vers la gauche si possible
 void bouger_piece_gauche();
 
+
+void *musicThread(void* musique);
+
+void playsound(char* musique);
 #endif
