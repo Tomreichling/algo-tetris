@@ -168,6 +168,7 @@ void demandeTemporisation(int millisecondesEntreAppels);
 Les donnees lues sont sauvees comme une succession de valeurs B, V, R de type
 unsigned char */
 void lisImage(int x, int y, int largeur, int hauteur, unsigned char *donnees);
+void lisImageTransparente(int x, int y, int largeur, int hauteur, unsigned char *donnees);
 
 // Ecris dans la fenetre une image BVR couvrant largeur*hauteur et demarrant en (x, y) */
 void ecrisImage(int x, int y, int largeur, int hauteur, const unsigned char *donnees);

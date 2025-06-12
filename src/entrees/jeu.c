@@ -24,7 +24,6 @@ void entrees_jeu() {
         case 'E':
             TournerTetrominos(&jeu.piece);
             break;
-
         // case 32: {
         //    sauter  la piece 
         // }
@@ -65,11 +64,12 @@ void bouger_piece_droite() {
     int deplacement_valide = 1;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++){
-            int x = jeu.piece.x + i;
             if (jeu.piece.grille[i][j] == 0){
                 continue; 
             }
-            if (jeu.grille[x + 1][j] != 0 && i + 1 == COLONNES){
+            int x = jeu.piece.x + i;
+            int y = jeu.piece.y + j;
+            if (jeu.grille[x + 1][y] != 0 || x + 1 >= COLONNES){
                 deplacement_valide = 0;
                 break;
             }
@@ -77,6 +77,7 @@ void bouger_piece_droite() {
     }
     if (deplacement_valide == 1){
         jeu.piece.x++;
+        rafraichisFenetre();
     }
 }
 // en fonction de -x
@@ -84,11 +85,12 @@ void bouger_piece_gauche(){
     int deplacement_valide = 1;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++){
-            int x = jeu.piece.x + i;
             if (jeu.piece.grille[i][j] == 0){
                 continue; 
             }
-            if (jeu.grille[x - 1][j] != 0 && x - 1 == - 1){
+            int x = jeu.piece.x + i;
+            int y = jeu.piece.y + j;
+            if (x <= 0 || jeu.grille[x - 1][y] != 0){
                 deplacement_valide = 0;
                 break;
             }
@@ -96,6 +98,7 @@ void bouger_piece_gauche(){
     }
     if (deplacement_valide == 1){
         jeu.piece.x--;
+        rafraichisFenetre();
     }
 }
 

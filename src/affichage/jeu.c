@@ -168,14 +168,43 @@ void afficherScore() {
     int taille_droite = largeurFenetre() - (taille_carreau * COLONNES);
     int Dcarreau_droite = largeurFenetre() - taille_droite;
     char score[100];
-    sprintf(score, "Score : %d", jeu.score);
+    float xbarre = Dcarreau_droite + taille_droite - (taille_droite / 10);
+    float proportion_score = jeu.score /100.0;
+
+    if (jeu.score < 500) {
+        proportion_score = jeu.score / 500.0;
+        sprintf(score, "Score : %d / 500", jeu.score);    
+    } 
+    else if (jeu.score < 2000) {
+        proportion_score = jeu.score / 2000.0;
+        sprintf(score, "Score : %d / 2000", jeu.score);
+    } 
+    else if (jeu.score < 5000) {
+        proportion_score = jeu.score / 5000.0;
+        sprintf(score, "Score : %d / 5000", jeu.score);
+    } 
+    else {
+        proportion_score = jeu.score / 10000.0;
+        sprintf(score, "Score : %d / 10000", jeu.score);
+    }
 
     couleurCourante(0, 0, 0);
     afficheChaine(score, 30, Dcarreau_droite + (taille_droite / 10), hauteur / 7);
     afficheChaine("7:07", 30, Dcarreau_droite + taille_droite - (taille_droite / 6), hauteur / 7); //j'ai mis le temps de jeu dans le score
 
     couleurCourante(150, 150, 150);
-    rectangle(Dcarreau_droite + (taille_droite / 10), hauteur / 8, Dcarreau_droite + taille_droite - (taille_droite / 10), hauteur / 12);
+    rectangle(Dcarreau_droite + (taille_droite / 10), hauteur / 8, xbarre, hauteur / 12);
+
+    if (proportion_score > 1) {
+        proportion_score = 1;
+    }
+    
+    couleurCourante(95, 0, 60);
+    rectangle(Dcarreau_droite + (taille_droite / 10)+2, hauteur / 8-2, (Dcarreau_droite + (taille_droite / 10)+2)-(((Dcarreau_droite + (taille_droite / 10)+2)-xbarre) * proportion_score), (hauteur / 12)+2);
+
+    
+
+
 }
 
 void afficherPrevisualisation(int x, int y, char couleur) { //refaire la fonctions pour les differents tetrominos
@@ -184,34 +213,12 @@ void afficherPrevisualisation(int x, int y, char couleur) { //refaire la fonctio
     int taille_carreau = hauteur / LIGNES;
 
     int posXD = x * taille_carreau;
-    int posYD = (LIGNES - 19) * taille_carreau;
+    int posYD = (LIGNES - y) * taille_carreau;
     int posXA = (x+1) * taille_carreau;
-    int posYA = (LIGNES - 19 - 1) * taille_carreau;
+    int posYA = (LIGNES - y - 1) * taille_carreau;
 
     epaisseurDeTrait(3);
-    switch (couleur) { //revoir les couleurs parce que bofbof
-        case 1:
-            couleurCourante(0, 230, 230);
-            break;
-        case 2:
-            couleurCourante(220, 140, 0);
-            break;
-        case 3:
-            couleurCourante(0, 0, 220);
-            break;
-        case 4:
-            couleurCourante(220, 220, 0);
-            break;
-        case 5:
-            couleurCourante(140, 0, 220);
-            break;
-        case 6:
-            couleurCourante(0, 220, 0);
-            break;
-        case 7:
-            couleurCourante(220, 0, 0);
-            break;
-    }
+    couleurCourante(100, 100, 100);
+           
     rectangle(marge + posXD + 1, marge + posYD - 1, marge + posXA - 1, marge + posYA + 1);
-
 }

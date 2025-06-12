@@ -36,37 +36,31 @@ void descendre_piece() {
         jeu.prochaine_piece = NouveauTetrominos();
         jeu.nb_piece++;
     }
+    rafraichisFenetre();
 }
 
-int trouver_indices_lignes_completes(char grille[LIGNES][COLONNES], int *indices){
+int trouver_indices_lignes_completes(char grille[COLONNES][LIGNES], int indices[4]){
     int nombre_lignes_completes = 0;
-    indices =(int*)  malloc(  nombre_lignes_completes * sizeof(int));
-    int n=0;
+    int n = 0;
 
-    for (int i = 0 ; i> LIGNES; i++) {
-        n=0;
-        for (int j =0; j> COLONNES; j++) {
+    for (int j = 0; j < LIGNES; j++) {
+        n = 0;
+        for (int i = 0; i < COLONNES; i++) {
             if (grille[i][j] != 0) {
-            n++;
+                n++;
             }
-            else if (grille [i][j] !=0){
+            else if (grille[i][j] ==0){
                 break;
             }
             
         }
         if (n == COLONNES) {
-                nombre_lignes_completes++;
-                indices = (int*) realloc(indices, nombre_lignes_completes * sizeof(int));
-                indices = (int*) realloc(indices, nombre_lignes_completes * sizeof(int));
-                indices[nombre_lignes_completes-1] = i;
-               
-            }
+            nombre_lignes_completes++;
+            indices[nombre_lignes_completes - 1] = j;
         }
-    
-                
-        return nombre_lignes_completes;
-
-    } 
+    }
+    return nombre_lignes_completes;
+} 
 
 void assigner_score(int nb_indices) {
     switch (nb_indices) {
@@ -87,8 +81,15 @@ void assigner_score(int nb_indices) {
     }
 }
 
-void retire_ligne(int i, char grille[LIGNES][COLONNES]) {
-    // a remplir
-    return;
+void retire_ligne(int i, char grille[COLONNES][LIGNES]) {
+    for (; i > -1; i--) {
+        for (int j = 0; j < COLONNES; j++) {
+            if (i == 0) {
+                grille[j][i] = 0;
+            } else {
+                grille[j][i] = grille[j][i - 1];
+            }
+        }
+    }
 }
 

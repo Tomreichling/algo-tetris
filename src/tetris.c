@@ -16,9 +16,9 @@ int main(int argc, char **argv)
 // Variable globale accessible dans tous le programme.
 Jeu jeu = {0};
 
-void gestionEvenement(EvenementGfx evenement)
-{
+void gestionEvenement(EvenementGfx evenement){
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
+	static bool pause = false;
 	static DonneesImageRGB *image = NULL;
     static DonneesImageRGB *image2 = NULL;
     static DonneesImageRGB *image3 = NULL;
@@ -42,17 +42,14 @@ void gestionEvenement(EvenementGfx evenement)
                     descendre_piece();
                     
                     // On trouve les lignes complètes
-                    int *indices = NULL; 
+                    int indices[4]; 
                     int lignes = trouver_indices_lignes_completes(jeu.grille, indices);
-                    if(indices == NULL) {
-                        break;
-                    }
 
                     // On assigne un score en conséquent
                     assigner_score(lignes);
                     // On supprime les lignes complètes en partant du haut de la grille
                     for(int i = 0; i < lignes; i++) {
-                        // retire_ligne(indices[i], jeu.grille);
+                        retire_ligne(indices[i], jeu.grille);
                     }
                     break;
                 default:
@@ -73,6 +70,24 @@ void gestionEvenement(EvenementGfx evenement)
 					afficherProchainePiece(jeu.prochaine_piece);
 					afficherAides();
 					afficherScore();
+
+                    int y_previ, y_base = jeu.piece.y;
+                    while (descente_possible(&jeu.piece)) {   
+                            jeu.piece.y++;
+                    }    
+                    y_previ = jeu.piece.y;
+                    jeu.piece.y = y_base;
+                        
+                    
+
+                    for (int i = 0; i < 4; i++) {
+                        for (int j = 0; j < 4; j++) {
+                            if (jeu.piece.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherPrevisualisation(jeu.piece.x + i, y_previ + j, jeu.piece.grille[i][j]);
+                        }
+                    }
 
                     for(int i = 0; i < COLONNES; i++) {
                         for(int j = 0; j < LIGNES; j++) {
@@ -97,19 +112,32 @@ void gestionEvenement(EvenementGfx evenement)
                     break;
             }
 			break;
-		case Clavier:
-            if(caractereClavier() == 'f') {
+		case Clavier: {
+
+            char caractere = caractereClavier();
+            
+            if(caractere == 'f') {
                 pleinEcran = !pleinEcran;
                 if (pleinEcran)
                     modePleinEcran();
                 else
                     redimensionneFenetre(LARGEUR, LONGUEUR);
                 break;
+            } else if(caractere == 'p') {
+                pause = !pause;
+                if(pause) {
+                    demandeTemporisation(-1);
+                } else {
+                    demandeTemporisation(1000);
+                }
+            }
+            if(pause) {
+                break;
             }
             switch(jeu.etat) {
                 // *caractereClavier() donne la touche*
                 case MENU:
-                    switch (caractereClavier()){
+                    switch (caractere){
                         case 'q':
                         case 'Q':
 
@@ -120,7 +148,6 @@ void gestionEvenement(EvenementGfx evenement)
 					        termineBoucleEvenements();
                             break;
                         case 32:
-                            // espace pour démarrer le jeu 
                             demarrer_jeu();
                             break;
                     }
@@ -128,14 +155,13 @@ void gestionEvenement(EvenementGfx evenement)
                 case JEU:
                     entrees_jeu();
                     break;
-                                case FIN:
-				        	switch (caractereClavier()) {
-					        	case 'q':
-					        	case 'Q':
-						        	libereDonneesImageRGB(&image);
-						        	termineBoucleEvenements();
-						        	break;
-
+                case FIN:
+				    switch (caractere) {
+				    	case 'q':
+				    	case 'Q':
+				        	libereDonneesImageRGB(&image);
+				        	termineBoucleEvenements();
+				        	break;
 						//espace pour recommencer
 						case 32:
 							demarrer_jeu();
@@ -143,7 +169,9 @@ void gestionEvenement(EvenementGfx evenement)
 					}
                     break;
             }
+        }
 		case ClavierSpecial:
+            if(pause) break;
             switch(jeu.etat) {
                 case JEU:
                     entrees_speciales_jeu();
@@ -152,7 +180,6 @@ void gestionEvenement(EvenementGfx evenement)
                     break;
             }
 			break;
-		
 		case Redimensionnement: 
 			printf("Largeur : %d\t", largeurFenetre());
 			printf("Hauteur : %d\n", hauteurFenetre());

@@ -435,6 +435,12 @@ static unsigned char bleuDuPixel(int pixel)
 	return pixel&0x0FF;
 }
 
+/* Renvoie la composante bleue du pixel */
+static unsigned char alphaDuPixel(int pixel)
+{
+	return (pixel >> 24) & 0x0FF;
+}
+
 /* Lis une portion de la fenetre, couvrant largeur*hauteur et demarrant en (x, y)
 Les donnees lues sont sauvees comme une succession de valeurs B, V, R de type
 unsigned char */
@@ -454,6 +460,27 @@ void lisImage(int x, int y, int largeur, int hauteur, unsigned char *donnees) {
 		ptrDonnees[2] = rougeDuPixel(pixel);
 		++ptrPixel;								// On passe au pixel suivant
 		ptrDonnees += 3;						// On passe aux donnees suivantes		
+	}
+	free(pixels);
+}
+
+void lisImageTransparente(int x, int y, int largeur, int hauteur, unsigned char *donnees) {
+	unsigned char *ptrDonnees;
+	int *pixels = (int*) malloc(largeur * hauteur * sizeof(int));
+	int *ptrPixel;
+	int index;
+	glReadPixels(x, y, largeur, hauteur, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, pixels);
+	ptrPixel = pixels;
+	ptrDonnees = donnees;
+	for (index = largeur * hauteur; index != 0; --index) { // On parcourt tous les pixels lus
+		int pixel = *ptrPixel;					// On lit le pixel courant
+		// On extrait chaque composante du pixel, que l'on met dans les donnees
+		ptrDonnees[0] = bleuDuPixel(pixel);
+		ptrDonnees[1] = vertDuPixel(pixel);
+		ptrDonnees[2] = rougeDuPixel(pixel);
+		ptrDonnees[3] = alphaDuPixel(pixel);
+		++ptrPixel;								// On passe au pixel suivant
+		ptrDonnees += 4;						// On passe aux donnees suivantes		
 	}
 	free(pixels);
 }
