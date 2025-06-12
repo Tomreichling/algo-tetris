@@ -30,26 +30,26 @@ void afficherCarreau(int x, int y, char couleur) {
 
     epaisseurDeTrait(3);
     switch (couleur) {
-        case 0:
+        case 1:
             couleurCourante(240, 240, 0); //jaune
                
             break;
-        case 1:
+        case 2:
             couleurCourante(160, 0, 240); //violet
             break;
-        case 2:
+        case 3:
             couleurCourante(240, 160, 0); //orange
             break;
-        case 3:
+        case 4:
             couleurCourante(0, 240, 240); //turquoise
             break;
-        case 4:
+        case 5:
             couleurCourante(0, 0, 240); //bleu
             break;
-        case 5:
+        case 6:
             couleurCourante(0, 240, 0); //vert
             break;
-        case 6:
+        case 7:
             couleurCourante(240, 0, 0);//rouge
             break;
     }
