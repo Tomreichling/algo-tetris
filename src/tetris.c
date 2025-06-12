@@ -138,8 +138,7 @@ void gestionEvenement(EvenementGfx evenement){
                 // *caractereClavier() donne la touche*
                 case MENU:
                     switch (caractere){
-                        case 'q':
-                        case 'Q':
+                        case 27 :
 
                             libereDonneesImageRGB(&image);
                             libereDonneesImageRGB(&image2);
@@ -156,11 +155,15 @@ void gestionEvenement(EvenementGfx evenement){
                     break;
                 case JEU:
                     entrees_jeu();
+                    if (caractere == 27){
+				        	libereDonneesImageRGB(&image);
+                            system("killall aplay");
+				        	termineBoucleEvenements();
+                    }
                     break;
                 case FIN:
 				    switch (caractere) {
-				    	case 'q':
-				    	case 'Q':
+				    	case 27 :
 				        	libereDonneesImageRGB(&image);
                             system("killall aplay");
 				        	termineBoucleEvenements();
