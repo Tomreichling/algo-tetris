@@ -172,7 +172,7 @@ void afficherAides() {
 
 // affiche le score du joueur
 void afficherScore() {
-    int static dernier;
+    int static dernier = -1;
     int palier;
 
     int hauteur = hauteurFenetre();
@@ -209,10 +209,10 @@ void afficherScore() {
         demandeTemporisation(300); 
     }
 
-    if (palier != dernier) {
+    if (palier != dernier && dernier != -1) {
         lancer_scintillement();
-        dernier = palier;
     }
+    dernier = palier;
 
     //on affiche le score de la partie
     couleurCourante(0, 0, 0);

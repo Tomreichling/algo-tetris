@@ -44,7 +44,7 @@ void scintillementPalier() {
         else {
             couleurCourante(0, 0, 0);
         }
-        epaisseurDeTrait(10000);
+        epaisseurDeTrait(10);
         ligne(marge, marge, marge + (taille_carreau * COLONNES), marge);
         ligne(marge, marge + (taille_carreau * LIGNES), marge + (taille_carreau * COLONNES), marge + (taille_carreau * LIGNES));
         ligne(marge, marge, marge, marge + (taille_carreau * LIGNES));
