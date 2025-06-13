@@ -53,6 +53,7 @@ void gestionEvenement(EvenementGfx evenement){
                         minutes ++;
                         secondes = 0;
                     }
+
                     
                     // On assigne un score en conséquent
                     assigner_score(lignes);
@@ -76,6 +77,7 @@ void gestionEvenement(EvenementGfx evenement){
                     break;
                 case JEU:
 					affichageJeu();
+                    scintillementPalier();
 					afficherTitre(16, 3);
 					afficherProchainePiece(jeu.prochaine_piece);
 					afficherAides();

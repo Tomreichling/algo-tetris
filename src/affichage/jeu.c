@@ -8,7 +8,7 @@ void affichageJeu() {
     
     int hauteur = hauteurFenetre() - 80;
     int taille_carreau = hauteur / LIGNES;
-
+    
     for (int i = 0; i <= LIGNES; i++) {
         ligne(marge, marge + (i * taille_carreau), marge + (taille_carreau * COLONNES), marge + (i * taille_carreau));
     }
@@ -33,7 +33,6 @@ void afficherCarreau(int x, int y, char couleur) {
     switch (couleur) {
         case 1:
             couleurCourante(240, 240, 0); //jaune
-               
             break;
         case 2:
             couleurCourante(160, 0, 240); //violet
@@ -173,6 +172,9 @@ void afficherAides() {
 
 // affiche le score du joueur
 void afficherScore() {
+    int static dernier;
+    int palier;
+
     int hauteur = hauteurFenetre();
     int taille_carreau = hauteur / LIGNES;
     int taille_droite = largeurFenetre() - (taille_carreau * COLONNES);
@@ -183,25 +185,35 @@ void afficherScore() {
 
     //on fait les differents palier de score
     if (jeu.score < 500) {
+        palier = 500;
         proportion_score = jeu.score / 500.0;
-        sprintf(score, "Score : %d / 500", jeu.score);   
-        demandeTemporisation(1300); 
+        sprintf(score, "Score : %d / 500", jeu.score);  
+        demandeTemporisation(1300);
     } 
     else if (jeu.score < 2000) {
+        palier = 2000;
         proportion_score = jeu.score / 2000.0;
         sprintf(score, "Score : %d / 2000", jeu.score);
         demandeTemporisation(1000); 
     } 
     else if (jeu.score < 5000) {
+        palier = 5000;
         proportion_score = jeu.score / 5000.0;
         sprintf(score, "Score : %d / 5000", jeu.score);
         demandeTemporisation(700); 
     } 
     else {
+        palier = 10000;
         proportion_score = jeu.score / 10000.0;
         sprintf(score, "Score : %d / 10000", jeu.score);
         demandeTemporisation(300); 
     }
+
+    if (palier != dernier) {
+        lancer_scintillement();
+        dernier = palier;
+    }
+
     //on affiche le score de la partie
     couleurCourante(0, 0, 0);
     afficheChaine(score, 30, Dcarreau_droite + (taille_droite / 10), hauteur / 7); 
@@ -246,7 +258,7 @@ void afficherTimer (int minute, int seconde) {
     int taille_droite = largeurFenetre() - (taille_carreau * COLONNES);
     int Dcarreau_droite = largeurFenetre() - taille_droite;
     char timer[100];
-
+    
     sprintf(timer, "%d : %d", minute, seconde);
     couleurCourante(0, 0, 0);
     afficheChaine(timer, 30, Dcarreau_droite + taille_droite - (taille_droite / 4), hauteur / 7); //j'ai mis le temps de jeu dans le score
