@@ -62,7 +62,7 @@ zip:
 #	tar -cvzf libisentlib.tgz *.[ch] *.bmp *.pdf makefile
 
 clean:
-	rm -f *~ *.o
+	rm -f *~ *.o libisentlib.a
 
 deepclean: clean
 	rm -f exemple exempleTortue libisentlib.a
