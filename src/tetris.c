@@ -147,15 +147,19 @@ void gestionEvenement(EvenementGfx evenement){
                 // *caractereClavier() donne la touche*
                 case MENU:
                     switch (caractere){
-                        case 'q':
-                        case 'Q':
+                        case 27 :
+
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
-					        termineBoucleEvenements();
+                            systemKillAplay();
+					        
+                            termineBoucleEvenements();
                             break;
                         case 32:
+                            systemKillAplay();
                             demarrer_jeu();
+                            systemAplay();
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
@@ -164,16 +168,34 @@ void gestionEvenement(EvenementGfx evenement){
                     break;
                 case JEU:
                     entrees_jeu();
+                    if (caractere == 27){
+                            libereDonneesImageRGBA(&demarrer);
+                            libereDonneesImageRGBA(&multijoueur);
+                            libereDonneesImageRGBA(&quitter);
+                            systemKillAplay();
+				        	termineBoucleEvenements();
+                    }
                     break;
                 case FIN:
 				    switch (caractere) {
-				    	case 'q':
-				    	case 'Q':
-				        	termineBoucleEvenements();
-				        	break;
-						//espace pour recommencer
+
+				    	case 27 :
+                        libereDonneesImageRGBA(&demarrer);
+                        libereDonneesImageRGBA(&multijoueur);
+                        libereDonneesImageRGBA(&quitter);
+                        systemKillAplay();
+                        termineBoucleEvenements();
+
+				    
 						case 32:
-							demarrer_jeu();
+                            
+                            systemKillAplay();
+                            demarrer_jeu();
+                            systemAplay();
+
+                            libereDonneesImageRGBA(&demarrer);
+                            libereDonneesImageRGBA(&multijoueur);
+                            libereDonneesImageRGBA(&quitter);
 							break;
 					}
                     break;
@@ -197,4 +219,26 @@ void gestionEvenement(EvenementGfx evenement){
         default:
             break;
 	}
+}
+
+void systemAplay() {
+    #ifdef __linux__
+        playsound("aplay $(pwd)/src/tetrisic.wav");
+    #elif defined(__APPLE__)
+        playsound("afplay $(pwd)/src/tetrisic.wav");
+    #else
+        printf("ce système ne prermet pas de lancer la musique");
+    #endif
+
+}
+
+void systemKillAplay() {
+    #ifdef __linux__
+        system("killall aplay");
+    #elif defined(__APPLE__)
+        system("killall afplay");
+    #else
+        printf("pourquoi arrêter si il n'y a rien ?");
+    #endif
+
 }
