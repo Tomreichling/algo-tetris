@@ -143,6 +143,9 @@ void gestionEvenement(EvenementGfx evenement){
                             break;
                         case 32:
                             demarrer_jeu();
+                            libereDonneesImageRGBA(&demarrer);
+                            libereDonneesImageRGBA(&multijoueur);
+                            libereDonneesImageRGBA(&quitter);
                             break;
                     }
                     break;
@@ -153,9 +156,6 @@ void gestionEvenement(EvenementGfx evenement){
 				    switch (caractere) {
 				    	case 'q':
 				    	case 'Q':
-				        	libereDonneesImageRGBA(&demarrer);
-                            libereDonneesImageRGBA(&multijoueur);
-                            libereDonneesImageRGBA(&quitter);
 				        	termineBoucleEvenements();
 				        	break;
 						//espace pour recommencer
