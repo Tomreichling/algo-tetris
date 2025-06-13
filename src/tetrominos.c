@@ -4,7 +4,7 @@
 
 #define SIZE 4 
 
-Tétrominos CreerTetrominos(char figure, int couleur) {
+Tétrominos CreerTetrominos(char figure) {
     Tétrominos piece = {0};
     piece.x = COLONNES / 2 - 2;
     
@@ -19,81 +19,87 @@ Tétrominos CreerTetrominos(char figure, int couleur) {
     switch (figure)
     {
         case 'o':
-        case 0: 
-            // 0 0 0 0
-            // 0 1 1 0
-            // 0 1 1 0
-            // 0 0 0 0
-            piece.grille[1][1] = couleur;
-            piece.grille[1][2] = couleur;
-            piece.grille[2][1] = couleur;
-            piece.grille[2][2] = couleur;
-            break;
         case 1: 
+            // 0 0 0 0
+            // 0 1 1 0
+            // 0 1 1 0
+            // 0 0 0 0
+
+            piece.grille[1][1] = 1;
+            piece.grille[1][2] = 1;
+            piece.grille[2][1] = 1;
+            piece.grille[2][2] = 1;
+            break;
+        case 2: 
         case 't':
             // 0 1 0 0
             // 0 1 1 0
             // 0 1 0 0
             // 0 0 0 0
-            piece.grille[1][0] = couleur;
-            piece.grille[1][1] = couleur;
-            piece.grille[1][2] = couleur;
-            piece.grille[2][1] = couleur;
+            piece.grille[1][0] = 2;
+            piece.grille[1][1] = 2;
+            piece.grille[1][2] = 2;
+            piece.grille[2][1] = 2;
             break;
         case 'l':
-        case 2:     
+        case 3:     
             // 0 1 0 0
             // 0 1 0 0
             // 0 1 1 0
             // 0 0 0 0
-            piece.grille[0][0] = couleur;
-            piece.grille[0][1] = couleur;
-            piece.grille[0][2] = couleur;
-            piece.grille[1][2] = couleur;
+
+            piece.grille[1][0] = 3;
+            piece.grille[1][1] = 3;
+            piece.grille[1][2] = 3;
+            piece.grille[2][2] = 3;
             break;
         case 'i':
-        case 3: 
-            // 0 1 0 0
-            // 0 1 0 0
-            // 0 1 0 0
-            // 0 1 0 0
-            piece.grille[1][0] = couleur;
-            piece.grille[1][1] = couleur;
-            piece.grille[1][2] = couleur;
-            piece.grille[1][3] = couleur;
-            break;
-        case 'j':
         case 4: 
             // 0 1 0 0
             // 0 1 0 0
-            // 1 1 0 0
-            // 0 0 0 0
-            piece.grille[1][0] = couleur;
-            piece.grille[1][1] = couleur;
-            piece.grille[1][2] = couleur;
-            piece.grille[2][2] = couleur;
+            // 0 1 0 0
+            // 0 1 0 0
+
+            piece.grille[1][0] = 4;
+            piece.grille[1][1] = 4;
+            piece.grille[1][2] = 4;
+            piece.grille[1][3] = 4;
             break;
-        case 's':
+        case 'j':
         case 5: 
             // 0 0 1 0
+            // 0 0 1 0
+            // 0 1 1 0
+            // 0 0 0 0
+
+            piece.grille[2][0] = 5;
+            piece.grille[2][1] = 5;
+            piece.grille[2][2] = 5;
+            piece.grille[1][2] = 5;
+            break;
+        case 's':
+        case 6: 
+            // 0 0 1 0
             // 0 1 1 0
             // 0 1 0 0
             // 0 0 0 0
-            piece.grille[1][1] = couleur;
-            piece.grille[1][2] = couleur;
-            piece.grille[2][0] = couleur;
-            piece.grille[2][1] = couleur;
+
+            piece.grille[1][1] = 6;
+            piece.grille[1][2] = 6;
+            piece.grille[2][0] = 6;
+            piece.grille[2][1] = 6;
             break;
         case 'z':
-        case 6: 
+        case 0: 
             // 0 1 0 0
             // 0 1 1 0
             // 0 0 1 0
             // 0 0 0 0
-            piece.grille[1][0] = couleur;
-            piece.grille[1][1] = couleur;
-            piece.grille[2][1] = couleur;
-            piece.grille[2][2] = couleur;
+
+            piece.grille[1][0] = 7;
+            piece.grille[1][1] = 7;
+            piece.grille[2][1] = 7;
+            piece.grille[2][2] = 7;
             break;
         default: 
             printf("forme indisponible!");
@@ -135,10 +141,7 @@ void TournerTetrominos(Tétrominos* piece) {
 
 // Créer un Tétrominos aléatoirement (tu utiliseras la fonction Creer Tetrominos)
 Tétrominos NouveauTetrominos() {
-    // 7 couleurs
-    int couleur = rand() % 7;
     // 7 formes
     char figure = rand() % 7; 
-    return CreerTetrominos(figure, couleur + 1);
+    return CreerTetrominos(figure);
 }
-

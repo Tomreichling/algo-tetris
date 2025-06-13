@@ -1,4 +1,4 @@
-#include "./tetris.h"
+#include "tetris.h"
 
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
 des qu'une evenement survient */
@@ -19,16 +19,18 @@ Jeu jeu = {0};
 void gestionEvenement(EvenementGfx evenement){
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
 	static bool pause = false;
-	static DonneesImageRGB *image = NULL;
-    static DonneesImageRGB *image2 = NULL;
-    static DonneesImageRGB *image3 = NULL;
+	static DonneesImageRGBA *demarrer = NULL;
+	static DonneesImageRGBA *multijoueur = NULL;
+	static DonneesImageRGBA *quitter = NULL;
+	int static minutes;
+	int static secondes;
 	
 	switch (evenement)
 	{
 		case Initialisation:
-            image = lisBMPRGB("./assets/Group_1.bmp");
-            image2 = lisBMPRGB("./assets/Group_2.bmp");
-            image3 = lisBMPRGB("./assets/Group_3.bmp");
+            demarrer = lisBMPRGBA("./assets/demarrer.bmp");
+            multijoueur = lisBMPRGBA("./assets/multijoueur.bmp");
+            quitter = lisBMPRGBA("./assets/quitter.bmp");
 			demandeTemporisation(-1);
 			jeu.etat = MENU;
 
@@ -36,22 +38,30 @@ void gestionEvenement(EvenementGfx evenement){
 		case Temporisation:
             switch (jeu.etat)
             {
-                case JEU:
+                case JEU: {
                     // On vérifie si on peut descendre la pièce
                     // on la descends ou la place sur grille
                     descendre_piece();
                     
                     // On trouve les lignes complètes
-                    int indices[4]; 
+                    int static indices[4]; 
                     int lignes = trouver_indices_lignes_completes(jeu.grille, indices);
 
+                    //timer
+                    secondes ++;
+                    if (secondes == 60) {
+                        minutes ++;
+                        secondes = 0;
+                    }
+                    
                     // On assigne un score en conséquent
                     assigner_score(lignes);
                     // On supprime les lignes complètes en partant du haut de la grille
                     for(int i = 0; i < lignes; i++) {
-                        retire_ligne(indices[i], jeu.grille);
+                        retire_ligne(indices[i]);
                     }
                     break;
+                }
                 default:
                     break;
             }
@@ -62,7 +72,7 @@ void gestionEvenement(EvenementGfx evenement){
             switch (jeu.etat)
             {
                 case MENU:
-					afficheMenu(image, image2, image3);
+					afficheMenu(demarrer, multijoueur, quitter);
                     break;
                 case JEU:
 					affichageJeu();
@@ -70,15 +80,15 @@ void gestionEvenement(EvenementGfx evenement){
 					afficherProchainePiece(jeu.prochaine_piece);
 					afficherAides();
 					afficherScore();
+                    afficherTimer(minutes, secondes);
 
+                    animer_saut();
                     int y_previ, y_base = jeu.piece.y;
                     while (descente_possible(&jeu.piece)) {   
-                            jeu.piece.y++;
+                        jeu.piece.y++;
                     }    
                     y_previ = jeu.piece.y;
                     jeu.piece.y = y_base;
-                        
-                    
 
                     for (int i = 0; i < 4; i++) {
                         for (int j = 0; j < 4; j++) {
@@ -113,7 +123,6 @@ void gestionEvenement(EvenementGfx evenement){
             }
 			break;
 		case Clavier: {
-
             char caractere = caractereClavier();
             
             if(caractere == 'f') {
@@ -131,24 +140,23 @@ void gestionEvenement(EvenementGfx evenement){
                     demandeTemporisation(1000);
                 }
             }
-            if(pause) {
-                break;
-            }
+            if(pause) break;
             switch(jeu.etat) {
                 // *caractereClavier() donne la touche*
                 case MENU:
                     switch (caractere){
                         case 27 :
 
-                            libereDonneesImageRGB(&image);
-                            libereDonneesImageRGB(&image2);
-                            libereDonneesImageRGB(&image3);
+                            libereDonneesImageRGBA(&demarrer);
+                            libereDonneesImageRGBA(&multijoueur);
+                            libereDonneesImageRGBA(&quitter);
                             system("killall aplay");
-					        termineBoucleEvenements();
+					                  termineBoucleEvenements();
                             break;
                         case 32:
                             system("killall aplay");
                             demarrer_jeu();
+
                             #ifdef __linux__
                                 playsound("aplay $(pwd)/src/tetrisic.wav");
                             #elif defined(__APPLE__)
@@ -157,6 +165,9 @@ void gestionEvenement(EvenementGfx evenement){
                                 printf("ce système ne prermet pas de lancer la musique");
                             #endif
 
+                            libereDonneesImageRGBA(&demarrer);
+                            libereDonneesImageRGBA(&multijoueur);
+                            libereDonneesImageRGBA(&quitter);
                             break;
                     }
                     break;
@@ -170,15 +181,16 @@ void gestionEvenement(EvenementGfx evenement){
                     break;
                 case FIN:
 				    switch (caractere) {
+
 				    	case 27 :
 				        	libereDonneesImageRGB(&image);
                             system("killall aplay");
-				        	termineBoucleEvenements();
-				        	break;
-						//espace pour recommencer
+
+				    
 						case 32:
-                            system("killall aplay");
+                         system("killall aplay");
                             demarrer_jeu();
+
                             #ifdef __linux__
                                 playsound("aplay $(pwd)/src/tetrisic.wav");
                             #elif defined(__APPLE__)
@@ -187,10 +199,14 @@ void gestionEvenement(EvenementGfx evenement){
                                 printf("ce système ne prermet pas de lancer la musique");
                             #endif
 
+                            libereDonneesImageRGBA(&demarrer);
+                            libereDonneesImageRGBA(&multijoueur);
+                            libereDonneesImageRGBA(&quitter);
 							break;
 					}
                     break;
             }
+            break;
         }
 		case ClavierSpecial:
             if(pause) break;

@@ -1,6 +1,7 @@
 #ifndef JEU_H
 #define JEU_H
 #include "../src/tetris.h"
+
 ///////////////
 // Affichage //
 ///////////////
@@ -22,13 +23,14 @@ void afficherScore();
 // on utilise la variable globale jeu
 void afficherPrevisualisation(int x, int y, char couleur);
 
+//on affiche le timer depuis le début de la partie
+void afficherTimer (int minute, int seconde);
+
 ///////////////////
 // Temporisation //
 ///////////////////
 
-
 // Alla 
-
 
 // chaque 30s, la temporisation s'accélère.
 // trouve le temps depuis le démarrage de la partie 
@@ -45,10 +47,10 @@ void assigner_score(int nb_indices);
 
 // supprime la ligne d'indice i et descends le reste du tableau d'une ligne 
 // (seulement les lignes haut-dessus)
-void retire_ligne(int i, char grille[COLONNES][LIGNES]);
+void retire_ligne(int i);
 
-// Renvoie 1 si on peut descendre la pièce de y + 1 sinon 0
-int descente_possible(Tétrominos *piece);
+// Renvoie si on peut descendre la pièce de 1
+bool descente_possible(Tétrominos *piece);
 
 // utiliser la variable global jeu pour monter la pièce
 void descendre_piece();
@@ -58,16 +60,9 @@ void descendre_piece();
 /////////////
 
 // gères toutes les entrées de l'utilisateur
-// - Q -> bouger la pièce à Gauche
-// - D -> bouger la pièce à Droite
-// - Z -> accélerer la pièce
-// - Espace -> Faire sauter la pièce
 void entrees_jeu();
 
 // gères toutes les entrées spéciales de l'utilisateur
-// - Flèche de gauche pour aller à gauche -> bouger la pièce à Gauche
-// - Flèche de droite pour aller à droite -> bouger la pièce à Droite
-// - Flèche du haut pour accélerer -> accélérer la piècer
 void entrees_speciales_jeu();
 
 // bouge la pièce dans la variable globale jeu vers la droite si possible
@@ -76,7 +71,8 @@ void bouger_piece_droite();
 // bouge la pièce dans la variable globale jeu vers la gauche si possible
 void bouger_piece_gauche();
 
-void sauter_piece();
+// faire sauter la piece 
+void sauter_piece (); 
 
 
 void *musicThread(void* musique);

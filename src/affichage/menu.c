@@ -3,7 +3,7 @@
 #define LargeurFenetre 800
 #define HauteurFenetre 600
 
-void afficheMenu(DonneesImageRGB *image,  DonneesImageRGB *image2 , DonneesImageRGB *image3) {
+void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , DonneesImageRGBA *quitter) {
     effaceFenetre(255, 255, 255);
     
     couleurCourante(0, 0, 0);
@@ -13,20 +13,33 @@ void afficheMenu(DonneesImageRGB *image,  DonneesImageRGB *image2 , DonneesImage
         ligne(i, 0, i, hauteurFenetre());
     }
     
-   for (int j=0; j < hauteurFenetre() ; j+= hauteurFenetre()/20){
+    for (int j=0; j < hauteurFenetre() ; j+= hauteurFenetre()/20){
         ligne(0, j, largeurFenetre() , j);
     }
 
-    if (image && image2 && image3 != NULL) 
-			{
-			    ecrisImage(2*(largeurFenetre()/3)+35, hauteurFenetre()/3-150, image2->largeurImage, image2->hauteurImage, image2->donneesRGB);
-                ecrisImage(2*(largeurFenetre()/3), 2*(hauteurFenetre()/3)-200, image3->largeurImage, image3->hauteurImage, image3->donneesRGB);
-                ecrisImage(2*(largeurFenetre()/3)+10, hauteurFenetre()-250, image->largeurImage, image->hauteurImage, image->donneesRGB);
-			}
+    if (demarrer != NULL && mutlijoueur != NULL && quitter != NULL) {
+        int max_x = largeurFenetre();
+        int max_y = hauteurFenetre();
+        int padding = 64;
 
+	    ecrisImageARVB(
+            (max_x - padding - demarrer->largeurImage), 
+            (max_y - padding - demarrer->hauteurImage), 
+            demarrer->largeurImage, demarrer->hauteurImage, (int*) demarrer->donneesRGBA
+        );
+        ecrisImageARVB(
+            (max_x - padding - mutlijoueur->largeurImage),
+            (max_y / 2 - mutlijoueur->hauteurImage / 2), 
+            mutlijoueur->largeurImage, mutlijoueur->hauteurImage, (int*) mutlijoueur->donneesRGBA
+        );
+        ecrisImageARVB(
+            (max_x - padding - quitter->largeurImage),
+            (padding), 
+            quitter->largeurImage, quitter->hauteurImage, (int*) quitter->donneesRGBA
+        );
+	}
 
     couleurCourante(0, 0, 128);
     epaisseurDeTrait(2);
     afficheChaine("Appuyez sur Espace pour Jouer", 20, largeurFenetre()/2-150,  hauteurFenetre()/3-80);
-    
 }

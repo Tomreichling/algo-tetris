@@ -15,4 +15,7 @@ void demarrer_jeu();
 //  - rafraichis l'affichage
 void gameover();
 
+// Vérifie si des coordonées sont comprises dans la grille
+bool dansGrille(int x, int y);
+
 #endif

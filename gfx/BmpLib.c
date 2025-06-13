@@ -47,11 +47,9 @@ DonneesImageRGB *lisBMPRGB(char *nom)
 	
 	if (donneesImage != NULL)
 	{
-// 		donneesImage != NULL
 		FILE *fichierBMP = fopen(nom, "rb");
 		if (fichierBMP != NULL)
 		{
-// 			fichierBMP != NULL
 // 			Si le header commence bien par 'B' et 'M'...
 			if (fgetc(fichierBMP) == 'B' && fgetc(fichierBMP) == 'M')
 			{
@@ -246,4 +244,155 @@ bool ecrisBMPRGB_Dans(DonneesImageRGB *donneesImage, char *nom)
 	}
 	
 	return toutOK;
+}
+
+
+// Modification Livio
+/* Renvoie la longueur d'une scanline, qui doit etre multiple de quatre octets */
+static int tailleScanLineRGBA(int largeurImage)
+{
+    // mistral (je trouvais pas comment adapter à 32 bits)
+	return (largeurImage * 4 + 3) & ~(int)0x03;
+}
+
+void libereDonneesImageRGBA(DonneesImageRGBA **structure)
+{
+	if (structure != NULL)
+	{
+		if (*structure != NULL)
+		{
+			free((*structure)->donneesRGBA);
+			free(*structure);
+		}
+		*structure = NULL;
+	}
+}
+
+/* Fonction essayant de lire le fichier passe en parametre, et renvoyant une structure
+	contenant les informations de l'image en cas de succes, NULL sinon */
+DonneesImageRGBA *lisBMPRGBA(char *nom)
+{
+	DonneesImageRGBA *donneesImage = (DonneesImageRGBA*)calloc(1, sizeof(DonneesImageRGBA));
+	bool toutOK = false;
+	
+	if (donneesImage != NULL)
+	{
+		FILE *fichierBMP = fopen(nom, "rb");
+		if (fichierBMP != NULL)
+		{
+// 			Si le header commence bien par 'B' et 'M'...
+			if (fgetc(fichierBMP) == 'B' && fgetc(fichierBMP) == 'M')
+			{
+// 				... alors la suite du fichier peut etre interpretee
+				int fileHeader[3];
+				if (fread(fileHeader, sizeof(fileHeader), 1, fichierBMP) == 1)
+				{
+// 					Lecture du header de fichier
+					int offsetDonnees = little32VersNatif(fileHeader[2]);
+					
+					int bitmapInfoHeader[10];
+					if (fread(bitmapInfoHeader, sizeof(bitmapInfoHeader), 1, fichierBMP) == 1)
+					{
+// 						On ne lit que les images 32 bits non compressees
+                        // Pour 24 bits -> 0x[0018]0001 ou 1 * 16 + 8 = 24
+                        // Pour 32 bits -> 0x[0020]0001 ou 2 * 16 + 0 = 32
+                        // On a 0001 à la fin parce qu'on est en little endian (ps: voir internet),
+                        // il corresponds à la metadonnée "color planes" que l'on assigne à 1.
+						if ((little32VersNatif(bitmapInfoHeader[3]) == 0x00200001) && (little32VersNatif(bitmapInfoHeader[4]) == 0))
+						{
+							bool hautVersBas = false; // Utile pour detecter les BMP allant de haut en bas au lieu de bas vers haut
+// 							Lecture du header de bitmap (uniquement les informations qui nous interessent)
+							donneesImage->largeurImage = little32VersNatif(bitmapInfoHeader[1]);
+							donneesImage->hauteurImage = little32VersNatif(bitmapInfoHeader[2]);
+
+							if (donneesImage->hauteurImage < 0)
+							{
+								donneesImage->hauteurImage = -donneesImage->hauteurImage;
+								hautVersBas = true;
+							}
+							
+// 							On alloue la place pour lire les donnes
+							if ((donneesImage->donneesRGBA = (unsigned char *)malloc((unsigned int)donneesImage->largeurImage * (unsigned int)donneesImage->hauteurImage * 4)) != NULL)
+							{
+// 								donneesImage->donneesRGB != NULL
+								
+								const int tailleScanLine = tailleScanLineRGBA(donneesImage->largeurImage);
+								unsigned char *scanline = (unsigned char *)malloc((unsigned int)tailleScanLine);
+// 								Une scanline doit avoir une taille multiple de quatre octets
+// 								On alloue la place pour lire chaque scanline
+								if (scanline != NULL)
+								{
+// 									scanline != NULL
+// 									On se positionne sur le debut des donnees a lire
+									if (fseek(fichierBMP, offsetDonnees, SEEK_SET) == 0)
+									{
+										unsigned char *pointeurDonnees  = donneesImage->donneesRGBA +
+															(hautVersBas ?
+															donneesImage->largeurImage*4*(donneesImage->hauteurImage-1) :
+															0);
+// 										Tout s'est bien passe jusqu'a present
+										toutOK = true;
+										for (int indexLigne = 0; (indexLigne < donneesImage->hauteurImage) && toutOK; ++indexLigne)
+										{
+// 											On recopie ligne a ligne les informations
+											if (fread(scanline, (unsigned int)tailleScanLine, 1, fichierBMP) == 1)
+											{
+												memcpy(pointeurDonnees, scanline, (unsigned int)(donneesImage->largeurImage*4));
+												if (hautVersBas)
+													pointeurDonnees -= donneesImage->largeurImage*4;
+												else
+													pointeurDonnees += donneesImage->largeurImage*4;
+											}
+											else
+											{
+												toutOK = false;
+											}
+										}
+									}
+// 									Quoi qu'il arrive il faut liberer le buffer memoire de lecture d'une scanline
+									free(scanline);
+								}
+// 								Si tout ne s'est pas bien passe, il faut liberer l'espace memoire pour stocker l'image
+								if (!toutOK)
+								{
+									free(donneesImage->donneesRGBA);
+								}
+							}
+							else
+							{
+								fprintf(stderr, "Impossible d'allouer l'espace mémoire pour les données de l'image\n"); fflush(stderr);
+							}
+						}
+						else
+						{
+							fprintf(stderr, "Le fichier n'est pas au format 24b non-compressé\n"); fflush(stderr);
+						}
+					}
+				}
+			}
+			else
+			{
+				fprintf(stderr, "Le fichier n'est pas dans un format BMP correct\n"); fflush(stderr);
+			}
+// 			Quoi qu'il arrive il faut fermer le fichier
+			fclose(fichierBMP);
+		}
+		else
+		{
+			fprintf(stderr, "Impossible d'ouvrir le fichier BMP en lecture\n"); fflush(stderr);
+		}
+		
+// 		Si tout ne s'est pas bien passe on libere les donnees image et on les met a NULL
+		if (!toutOK)
+		{
+			free(donneesImage);
+			donneesImage = NULL;
+		}
+	}
+	else
+	{
+		fprintf(stderr, "Pas assez de mémoire pour stocker l'image\n"); fflush(stderr);
+	}
+	
+	return donneesImage;
 }

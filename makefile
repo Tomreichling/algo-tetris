@@ -2,7 +2,7 @@ UNAME := $(shell uname)
 
 BUILDDIR := ./build
 SRC := ./src
-SRCFILES := tetris.c tetrominos.c outils.c \
+SRCFILES := tetris.c tetrominos.c outils.c animations.c \
 	affichage/jeu.c affichage/menu.c affichage/fin.c \
 	temporisation/jeu.c temporisation/menu.c temporisation/fin.c \
 	entrees/jeu.c entrees/menu.c entrees/fin.c
@@ -37,5 +37,6 @@ gfx/libisentlib.a:
 
 clean:
 	cd gfx && make clean && cd ..
+	
 	rm -rf $(BUILDDIR)
 	rm -f tetris

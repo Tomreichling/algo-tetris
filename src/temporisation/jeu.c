@@ -1,7 +1,7 @@
 #include "../tetris.h"
 
-int descente_possible(Tétrominos *piece) {
-    int deplacement_possible = 1;
+bool descente_possible(Tétrominos *piece) {
+    bool deplacement_possible = true;
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
             if(piece->grille[i][j] == 0) {
@@ -10,8 +10,8 @@ int descente_possible(Tétrominos *piece) {
 
             int x = piece->x + i;
             int y = piece->y + j;
-            if(jeu.grille[x][y + 1] != 0 || y + 1 == LIGNES) {
-                deplacement_possible = 0;
+            if(jeu.grille[x][y + 1] != 0 || !dansGrille(x, y + 1)) {
+                deplacement_possible = false;
                 break;
             } 
         }
@@ -81,13 +81,13 @@ void assigner_score(int nb_indices) {
     }
 }
 
-void retire_ligne(int i, char grille[COLONNES][LIGNES]) {
+void retire_ligne(int i) {
     for (; i > -1; i--) {
         for (int j = 0; j < COLONNES; j++) {
             if (i == 0) {
-                grille[j][i] = 0;
+                jeu.grille[j][i] = 0;
             } else {
-                grille[j][i] = grille[j][i - 1];
+                jeu.grille[j][i] = jeu.grille[j][i - 1];
             }
         }
     }
