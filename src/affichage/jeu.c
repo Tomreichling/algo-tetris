@@ -85,6 +85,7 @@ void afficherProchainePiece(Tétrominos piece) {
     couleurCourante(0, 0, 0);
     epaisseurDeTrait(2);
 
+    afficheChaine("Prochaine piece :", 20, Dcarreau_droite + (taille_droite / 5), (hauteur / 1.75) + taille_carreau);
     //on affiche la grille pour la prochaine piece
     for (int i = 0; i <= 4; i++) {
         ligne(Dcarreau_droite + (taille_droite / 5), (hauteur / 2.5) + (i * taille_carreau), Dcarreau_droite + (taille_droite / 5) + (taille_carreau * 4), (hauteur / 2.5) + (i * taille_carreau));
