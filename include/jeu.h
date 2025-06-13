@@ -23,6 +23,9 @@ void afficherScore();
 // on utilise la variable globale jeu
 void afficherPrevisualisation(int x, int y, char couleur);
 
+//on affiche le timer depuis le début de la partie
+void afficherTimer (int minute, int seconde);
+
 ///////////////////
 // Temporisation //
 ///////////////////
