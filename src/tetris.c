@@ -149,7 +149,14 @@ void gestionEvenement(EvenementGfx evenement){
                         case 32:
                             system("killall aplay");
                             demarrer_jeu();
-                            playsound("aplay $(pwd)/src/tetrisic.wav");
+                            #ifdef __linux__
+                                playsound("aplay $(pwd)/src/tetrisic.wav");
+                            #elif defined(__APPLE__)
+                                system("afplay $(pwd)/src/tetrisic.wav");
+                            #else
+                                printf("ce système ne prermet pas de lancer la musique")
+                            #endif
+
                             break;
                     }
                     break;
@@ -172,7 +179,14 @@ void gestionEvenement(EvenementGfx evenement){
 						case 32:
                             system("killall aplay");
                             demarrer_jeu();
-                            playsound("aplay $(pwd)/src/tetrisic.wav");
+                            #ifdef __linux__
+                                playsound("aplay $(pwd)/src/tetrisic.wav");
+                            #elif defined(__APPLE__)
+                                system("afplay $(pwd)/src/tetrisic.wav");
+                            #else
+                                printf("ce système ne prermet pas de lancer la musique")
+                            #endif
+                            
 							break;
 					}
                     break;
