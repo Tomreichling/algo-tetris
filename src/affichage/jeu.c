@@ -157,7 +157,7 @@ void afficherAides() {
         afficheChaine("Q/Fleche de gauche pour se deplacer a gauche", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3));
         afficheChaine("D/Fleche de droite pour se deplacer a droite", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 50);
         afficheChaine("S/Fleche du bas pour accelerer", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 100);
-        afficheChaine("A pour tourner", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 150);
+        afficheChaine("E/Fleche du haut pour tourner", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 150);
         afficheChaine("Espace pour sauter", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 200);    
     }
     else {
@@ -165,7 +165,7 @@ void afficherAides() {
         afficheChaine("Q/Fleche de gauche pour se deplacer a gauche", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3));
         afficheChaine("D/Fleche de droite pour se deplacer a droite", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 100);
         afficheChaine("S/Fleche du bas pour accelerer", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 200);
-        afficheChaine("A pour tourner", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 300);
+        afficheChaine("E/Fleche du haut pour tourner", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 300);
         afficheChaine("Espace pour sauter", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 400);
     }
 }
