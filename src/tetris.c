@@ -150,34 +150,14 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
-                            #ifdef __linux__
-                                system("killall aplay");
-                            #elif defined(__APPLE__)
-                                system("killall afplay");
-                            #else
-                                printf("pourquoi arrêter si il n'y a rien ?");
-                            #endif
+                            systemKillAplay();
 					        
                             termineBoucleEvenements();
                             break;
                         case 32:
-                            #ifdef __linux__
-                                system("killall aplay");
-                            #elif defined(__APPLE__)
-                                 system("killall afplay");
-                            #else
-                                printf("pourquoi arrêter si il n'y a rien ?");
-                            #endif
+                            systemKillAplay();
                             demarrer_jeu();
-
-                            #ifdef __linux__
-                                playsound("aplay $(pwd)/src/tetrisic.wav");
-                            #elif defined(__APPLE__)
-                                playsound("afplay $(pwd)/src/tetrisic.wav");
-                            #else
-                                printf("ce système ne prermet pas de lancer la musique");
-                            #endif
-
+                            systemAplay();
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
@@ -190,14 +170,8 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
-                            #ifdef __linux__
-                                system("killall aplay");
-                            #elif defined(__APPLE__)
-                                system("killall afplay");
-                            #else
-                                printf("pourquoi arrêter si il n'y a rien ?");
-                            #endif
-				        	    termineBoucleEvenements();
+                            systemKillAplay();
+				        	termineBoucleEvenements();
                     }
                     break;
                 case FIN:
@@ -207,36 +181,15 @@ void gestionEvenement(EvenementGfx evenement){
                         libereDonneesImageRGBA(&demarrer);
                         libereDonneesImageRGBA(&multijoueur);
                         libereDonneesImageRGBA(&quitter);
-                        #ifdef __linux__
-                            system("killall aplay");
-                        #elif defined(__APPLE__)
-                            system("killall afplay");
-                        #else
-                            printf("pourquoi arrêter si il n'y a rien ?");
-                        #endif
-				        
+                        systemKillAplay();
                         termineBoucleEvenements();
 
 				    
 						case 32:
                             
-                            #ifdef __linux__
-                                system("killall aplay");
-                            #elif defined(__APPLE__)
-                                system("killall afplay");
-                            #else
-                            printf("pourquoi arrêter si il n'y a rien ?");
-                            #endif
-                           
+                            systemKillAplay();
                             demarrer_jeu();
-
-                            #ifdef __linux__
-                                playsound("aplay $(pwd)/src/tetrisic.wav");
-                            #elif defined(__APPLE__)
-                                playsound("afplay $(pwd)/src/tetrisic.wav");
-                            #else
-                                printf("ce système ne prermet pas de lancer la musique");
-                            #endif
+                            systemAplay();
 
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
@@ -264,4 +217,26 @@ void gestionEvenement(EvenementGfx evenement){
         default:
             break;
 	}
+}
+
+void systemAplay() {
+    #ifdef __linux__
+        playsound("aplay $(pwd)/src/tetrisic.wav");
+    #elif defined(__APPLE__)
+        playsound("afplay $(pwd)/src/tetrisic.wav");
+    #else
+        printf("ce système ne prermet pas de lancer la musique");
+    #endif
+
+}
+
+void systemKillAplay() {
+    #ifdef __linux__
+        system("killall aplay");
+    #elif defined(__APPLE__)
+        system("killall afplay");
+    #else
+        printf("pourquoi arrêter si il n'y a rien ?");
+    #endif
+
 }
