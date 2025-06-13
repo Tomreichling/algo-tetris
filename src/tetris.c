@@ -154,7 +154,7 @@ void gestionEvenement(EvenementGfx evenement){
                             #elif defined(__APPLE__)
                                 system("afplay $(pwd)/src/tetrisic.wav");
                             #else
-                                printf("ce système ne prermet pas de lancer la musique")
+                                printf("ce système ne prermet pas de lancer la musique");
                             #endif
 
                             break;
@@ -184,9 +184,9 @@ void gestionEvenement(EvenementGfx evenement){
                             #elif defined(__APPLE__)
                                 system("afplay $(pwd)/src/tetrisic.wav");
                             #else
-                                printf("ce système ne prermet pas de lancer la musique")
+                                printf("ce système ne prermet pas de lancer la musique");
                             #endif
-                            
+
 							break;
 					}
                     break;
