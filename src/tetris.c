@@ -82,7 +82,7 @@ void gestionEvenement(EvenementGfx evenement){
 					afficherScore();
                     afficherTimer(minutes, secondes);
 
-
+                    animer_saut();
                     int y_previ, y_base = jeu.piece.y;
                     while (descente_possible(&jeu.piece)) {   
                             jeu.piece.y++;

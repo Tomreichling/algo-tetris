@@ -22,8 +22,6 @@ void entrees_jeu() {
         case 32: // Barre espace
             sauter_piece();
             break;
-        default:
-            break;
     }
 }
 // gères toutes les entrées spéciales de l'utilisateur
@@ -40,8 +38,6 @@ void entrees_speciales_jeu() {
             break;
         case 14:  // flèche du bas
             descendre_piece();
-            break;
-        default:
             break;
     }
 }
@@ -89,10 +85,6 @@ void bouger_piece_gauche(){
     }
 }
 
-
 void sauter_piece() {
-    int numero_piece = jeu.nb_piece;
-    while (numero_piece == jeu.nb_piece && jeu.etat == JEU){
-        descendre_piece();
-    }
+    lancer_animation_saut();
 }

@@ -12,11 +12,10 @@
 // et qui fera appel à demandeRedessinDans_ms
 
 typedef struct animation {
-    int id; // identifiant de l'animation (unique pour chaque animation, ex: 1 pour le saut, 2 pour le temps)
-    unsigned int etapes; // en combien d'étapes l'animation se fait (ex: 10 actualisations sur 1 secondes)
     unsigned int interval; // en millisecondes
-    unsigned int duree; // duree en millisecondes
-    unsigned int etape; // l'étape à laquelle on est.
+    unsigned int etape; // l'étape à laquelle on est. (on part du maximum et on décremente)
 } Animation;
 
+void lancer_animation_saut();
+void animer_saut();
 #endif
