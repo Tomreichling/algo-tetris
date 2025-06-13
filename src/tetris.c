@@ -74,7 +74,7 @@ void gestionEvenement(EvenementGfx evenement){
 
                     int y_previ, y_base = jeu.piece.y;
                     while (descente_possible(&jeu.piece)) {   
-                            jeu.piece.y++;
+                        jeu.piece.y++;
                     }    
                     y_previ = jeu.piece.y;
                     jeu.piece.y = y_base;

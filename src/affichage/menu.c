@@ -13,20 +13,33 @@ void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , Do
         ligne(i, 0, i, hauteurFenetre());
     }
     
-   for (int j=0; j < hauteurFenetre() ; j+= hauteurFenetre()/20){
+    for (int j=0; j < hauteurFenetre() ; j+= hauteurFenetre()/20){
         ligne(0, j, largeurFenetre() , j);
     }
 
-    if (demarrer != NULL && mutlijoueur != NULL && quitter != NULL) 
-			{
-			    ecrisImageARVB(2*(largeurFenetre()/3)+35, hauteurFenetre()/3-150, demarrer->largeurImage, demarrer->hauteurImage, (int*) demarrer->donneesRGBA);
-                ecrisImageARVB(2*(largeurFenetre()/3), 2*(hauteurFenetre()/3)-200, mutlijoueur->largeurImage, mutlijoueur->hauteurImage, (int*) mutlijoueur->donneesRGBA);
-                ecrisImageARVB(2*(largeurFenetre()/3)+10, hauteurFenetre()-250, quitter->largeurImage, quitter->hauteurImage, (int*) quitter->donneesRGBA);
-			}
+    if (demarrer != NULL && mutlijoueur != NULL && quitter != NULL) {
+        int max_x = largeurFenetre();
+        int max_y = hauteurFenetre();
+        int padding = 64;
 
+	    ecrisImageARVB(
+            (max_x - padding - demarrer->largeurImage), 
+            (max_y - padding - demarrer->hauteurImage), 
+            demarrer->largeurImage, demarrer->hauteurImage, (int*) demarrer->donneesRGBA
+        );
+        ecrisImageARVB(
+            (max_x - padding - mutlijoueur->largeurImage),
+            (max_y / 2 - mutlijoueur->hauteurImage / 2), 
+            mutlijoueur->largeurImage, mutlijoueur->hauteurImage, (int*) mutlijoueur->donneesRGBA
+        );
+        ecrisImageARVB(
+            (max_x - padding - quitter->largeurImage),
+            (padding), 
+            quitter->largeurImage, quitter->hauteurImage, (int*) quitter->donneesRGBA
+        );
+	}
 
     couleurCourante(0, 0, 128);
     epaisseurDeTrait(2);
     afficheChaine("Appuyez sur Espace pour Jouer", 20, largeurFenetre()/2-150,  hauteurFenetre()/3-80);
-    
 }

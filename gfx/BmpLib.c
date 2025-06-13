@@ -251,7 +251,8 @@ bool ecrisBMPRGB_Dans(DonneesImageRGB *donneesImage, char *nom)
 /* Renvoie la longueur d'une scanline, qui doit etre multiple de quatre octets */
 static int tailleScanLineRGBA(int largeurImage)
 {
-	return (largeurImage*4+4)&(int)0x0FFFFFFFCL;
+    // mistral (je trouvais pas comment adapter à 32 bits)
+	return (largeurImage * 4 + 3) & ~(int)0x03;
 }
 
 void libereDonneesImageRGBA(DonneesImageRGBA **structure)
@@ -297,7 +298,6 @@ DonneesImageRGBA *lisBMPRGBA(char *nom)
                         // Pour 32 bits -> 0x[0020]0001 ou 2 * 16 + 0 = 32
                         // On a 0001 à la fin parce qu'on est en little endian (ps: voir internet),
                         // il corresponds à la metadonnée "color planes" que l'on assigne à 1.
-                        printf("compression: %d\n", little32VersNatif(bitmapInfoHeader[4]));
 						if ((little32VersNatif(bitmapInfoHeader[3]) == 0x00200001) && (little32VersNatif(bitmapInfoHeader[4]) == 0))
 						{
 							bool hautVersBas = false; // Utile pour detecter les BMP allant de haut en bas au lieu de bas vers haut
