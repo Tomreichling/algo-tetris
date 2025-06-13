@@ -21,6 +21,7 @@
 
 #include "../include/tetrominos.h" // Fonctions tetrominos
 #include "../include/outils.h" // Fonctions utilitaires
+#include "../include/animations.h" // Gestion des animations
 
 #include "../include/fin.h" // Fonctions affichage/tempo/entrees dans le mode "fin"
 #include "../include/menu.h" // Fonctions affichage/tempo/entrees dans le mode "menu"
