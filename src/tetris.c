@@ -176,6 +176,7 @@ void gestionEvenement(EvenementGfx evenement){
 					}
                     break;
             }
+            break;
         }
 		case ClavierSpecial:
             if(pause) break;
