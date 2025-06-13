@@ -183,19 +183,23 @@ void afficherScore() {
     //on fait les differents palier de score
     if (jeu.score < 500) {
         proportion_score = jeu.score / 500.0;
-        sprintf(score, "Score : %d / 500", jeu.score);    
+        sprintf(score, "Score : %d / 500", jeu.score);   
+        demandeTemporisation(1000); 
     } 
     else if (jeu.score < 2000) {
         proportion_score = jeu.score / 2000.0;
         sprintf(score, "Score : %d / 2000", jeu.score);
+        demandeTemporisation(700); 
     } 
     else if (jeu.score < 5000) {
         proportion_score = jeu.score / 5000.0;
         sprintf(score, "Score : %d / 5000", jeu.score);
+        demandeTemporisation(400); 
     } 
     else {
         proportion_score = jeu.score / 10000.0;
         sprintf(score, "Score : %d / 10000", jeu.score);
+        demandeTemporisation(100); 
     }
     //on affiche le score de la partie
     couleurCourante(0, 0, 0);
