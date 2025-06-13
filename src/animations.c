@@ -26,7 +26,7 @@ void animer_saut() {
 
 void lancer_scintillement() {
     anim_scintillement.interval = 1000;
-    anim_scintillement.etape = 25;
+    anim_scintillement.etape = 3;
     scintillement = &anim_scintillement;
     demandeRedessinDans_ms(scintillement->interval);
 }
@@ -42,13 +42,13 @@ void scintillementPalier() {
             couleurCourante(255, 0, 0);
         }
         else {
-            couleurCourante(0, 0, 0);
+            couleurCourante(255, 255, 255);
         }
-        // rectangle(marge, marge, marge + (taille_carreau * COLONNES), marge + (taille_carreau * LIGNES));
-        ligne(marge, marge, marge + (taille_carreau * COLONNES), marge);
-        ligne(marge, marge + (taille_carreau * LIGNES), marge + (taille_carreau * COLONNES), marge + (taille_carreau * LIGNES));
-        ligne(marge, marge, marge, marge + (taille_carreau * LIGNES));
-        ligne(marge + (taille_carreau * COLONNES), marge, marge + (taille_carreau * COLONNES), marge + (taille_carreau * LIGNES));
+        rectangle(marge, marge, marge + (taille_carreau * COLONNES), marge + (taille_carreau * LIGNES));
+        // ligne(marge, marge, marge + (taille_carreau * COLONNES), marge);
+        // ligne(marge, marge + (taille_carreau * LIGNES), marge + (taille_carreau * COLONNES), marge + (taille_carreau * LIGNES));
+        // ligne(marge, marge, marge, marge + (taille_carreau * LIGNES));
+        // ligne(marge + (taille_carreau * COLONNES), marge, marge + (taille_carreau * COLONNES), marge + (taille_carreau * LIGNES));
         scintillement->etape--;
         demandeRedessinDans_ms(scintillement->interval);
     
