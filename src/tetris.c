@@ -20,8 +20,10 @@ void gestionEvenement(EvenementGfx evenement){
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
 	static bool pause = false;
 	static DonneesImageRGBA *demarrer = NULL;
-    static DonneesImageRGBA *multijoueur = NULL;
-    static DonneesImageRGBA *quitter = NULL;
+	static DonneesImageRGBA *multijoueur = NULL;
+	static DonneesImageRGBA *quitter = NULL;
+	int static minutes;
+	int static secondes;
 	
 	switch (evenement)
 	{
@@ -44,6 +46,13 @@ void gestionEvenement(EvenementGfx evenement){
                     // On trouve les lignes complètes
                     int static indices[4]; 
                     int lignes = trouver_indices_lignes_completes(jeu.grille, indices);
+
+                    //timer
+                    secondes ++;
+                    if (secondes == 60) {
+                        minutes ++;
+                        secondes = 0;
+                    }
                     
                     // On assigne un score en conséquent
                     assigner_score(lignes);
@@ -71,6 +80,8 @@ void gestionEvenement(EvenementGfx evenement){
 					afficherProchainePiece(jeu.prochaine_piece);
 					afficherAides();
 					afficherScore();
+                    afficherTimer(minutes, secondes);
+
 
                     int y_previ, y_base = jeu.piece.y;
                     while (descente_possible(&jeu.piece)) {   
@@ -165,6 +176,7 @@ void gestionEvenement(EvenementGfx evenement){
 					}
                     break;
             }
+            break;
         }
 		case ClavierSpecial:
             if(pause) break;

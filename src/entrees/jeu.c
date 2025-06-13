@@ -15,8 +15,8 @@ void entrees_jeu() {
         case 's':
             descendre_piece();
             break;
-        case 'z':
-        case 'Z':
+        case 'e':
+        case 'E':
             TournerTetrominos(&jeu.piece);
             break;
         case 32: // Barre espace

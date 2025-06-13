@@ -23,6 +23,7 @@ void afficherCarreau(int x, int y, char couleur) {
     int hauteur = hauteurFenetre() - 80;
     int taille_carreau = hauteur / LIGNES;
 
+    //on prend les coordonnées des carreaux a colorier
     int posXD = x * taille_carreau;
     int posYD = (LIGNES - y) * taille_carreau;
     int posXA = (x+1) * taille_carreau;
@@ -58,15 +59,17 @@ void afficherCarreau(int x, int y, char couleur) {
 
 
 void afficherTitre(int y, int x) {
+    //on obtient les coordonnées de la partie de droite (a droite de la grille tetris)
     int hauteur = hauteurFenetre();
     int taille_carreau = hauteur / LIGNES;
     int taille_droite = largeurFenetre() - (taille_carreau * COLONNES);
     int Dcarreau_droite = largeurFenetre() - taille_droite;
 
+    //on rend la partie a droite du jeu en blanc
     couleurCourante(255, 255, 255);
     rectangle(Dcarreau_droite, hauteur, largeurFenetre(), 0);
-    //au dessus est la partie pour obtenir les coordonnées de la partie de droite
-    //en dessous l'endroit ou on met le titre
+
+    //On place le titre
     couleurCourante(0, 0, 0);
     afficheChaine("TETRISEN", 89, Dcarreau_droite + (taille_droite / 3), hauteur - (hauteur / 5));
 }
@@ -81,6 +84,9 @@ void afficherProchainePiece(Tétrominos piece) {
 
     couleurCourante(0, 0, 0);
     epaisseurDeTrait(2);
+
+    afficheChaine("Prochaine piece :", 20, Dcarreau_droite + (taille_droite / 5), (hauteur / 1.75) + taille_carreau);
+    //on affiche la grille pour la prochaine piece
     for (int i = 0; i <= 4; i++) {
         ligne(Dcarreau_droite + (taille_droite / 5), (hauteur / 2.5) + (i * taille_carreau), Dcarreau_droite + (taille_droite / 5) + (taille_carreau * 4), (hauteur / 2.5) + (i * taille_carreau));
     }
@@ -88,16 +94,19 @@ void afficherProchainePiece(Tétrominos piece) {
         ligne(Dcarreau_droite + (taille_droite / 5) + (j * taille_carreau), hauteur / 2.5, Dcarreau_droite + (taille_droite / 5) + (j * taille_carreau), (hauteur / 2.5) + (4 * taille_carreau));
     }
 
-    couleurCourante(255, 0, 0);
+    //et la on affiche le tetrominos dans la grille créée
     for (int ki = 0; ki < 4; ki++) {
         for (int kj = 0; kj < 4; kj++) {
             if (piece.grille[ki][kj] != 0) {
                 x = ki;
                 y = kj;
+                //coordonnées des carreaux
                 posXD = Dcarreau_droite + (taille_droite / 5) + x * taille_carreau;
                 posYD = (hauteur / 2.5) + (3 - y) * taille_carreau;
                 posXA = Dcarreau_droite + (taille_droite / 5) + (x + 1) * taille_carreau;
                 posYA = (hauteur / 2.5) + (4 - y) * taille_carreau;
+
+                //on prend la couleur de la piece pour ensuite l'afficher de la même couleur
                 couleur = piece.grille[ki][kj];
                 switch (couleur) {
                     case 1:
@@ -143,13 +152,13 @@ void afficherAides() {
     ligne(Dcarreau_droite + (taille_droite / 2), hauteur / 4, Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 4));
 
     //on va afficher les regles des différentes touches 
-    //le if parce que c'est responsive
+    //le if parce que on test de le rendre responsive
     if (hauteurFenetre() == 800 && largeurFenetre() == 1200) {
         taille_text = 13;
         afficheChaine("Q/Fleche de gauche pour se deplacer a gauche", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3));
         afficheChaine("D/Fleche de droite pour se deplacer a droite", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 50);
         afficheChaine("S/Fleche du bas pour accelerer", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 100);
-        afficheChaine("A pour tourner", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 150);
+        afficheChaine("E/Fleche du haut pour tourner", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 150);
         afficheChaine("Espace pour sauter", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 200);    
     }
     else {
@@ -157,12 +166,12 @@ void afficherAides() {
         afficheChaine("Q/Fleche de gauche pour se deplacer a gauche", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3));
         afficheChaine("D/Fleche de droite pour se deplacer a droite", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 100);
         afficheChaine("S/Fleche du bas pour accelerer", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 200);
-        afficheChaine("A pour tourner", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 300);
+        afficheChaine("E/Fleche du haut pour tourner", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 300);
         afficheChaine("Espace pour sauter", taille_text, marge + Dcarreau_droite + (taille_droite / 2), hauteur - (hauteur / 3) - 400);
     }
 }
 
-// affiche le score du joueur, le temps écoulé (utiliser)
+// affiche le score du joueur
 void afficherScore() {
     int hauteur = hauteurFenetre();
     int taille_carreau = hauteur / LIGNES;
@@ -172,54 +181,73 @@ void afficherScore() {
     float xbarre = Dcarreau_droite + taille_droite - (taille_droite / 10);
     float proportion_score = jeu.score /100.0;
 
+    //on fait les differents palier de score
     if (jeu.score < 500) {
         proportion_score = jeu.score / 500.0;
-        sprintf(score, "Score : %d / 500", jeu.score);    
+        sprintf(score, "Score : %d / 500", jeu.score);   
+        demandeTemporisation(1300); 
     } 
     else if (jeu.score < 2000) {
         proportion_score = jeu.score / 2000.0;
         sprintf(score, "Score : %d / 2000", jeu.score);
+        demandeTemporisation(1000); 
     } 
     else if (jeu.score < 5000) {
         proportion_score = jeu.score / 5000.0;
         sprintf(score, "Score : %d / 5000", jeu.score);
+        demandeTemporisation(700); 
     } 
     else {
         proportion_score = jeu.score / 10000.0;
         sprintf(score, "Score : %d / 10000", jeu.score);
+        demandeTemporisation(300); 
     }
-
+    //on affiche le score de la partie
     couleurCourante(0, 0, 0);
-    afficheChaine(score, 30, Dcarreau_droite + (taille_droite / 10), hauteur / 7);
-    afficheChaine("7:07", 30, Dcarreau_droite + taille_droite - (taille_droite / 6), hauteur / 7); //j'ai mis le temps de jeu dans le score
+    afficheChaine(score, 30, Dcarreau_droite + (taille_droite / 10), hauteur / 7); 
 
+    //on affiche la barre de score a vide
     couleurCourante(150, 150, 150);
-    rectangle(Dcarreau_droite + (taille_droite / 10), hauteur / 8, xbarre, hauteur / 12);
+    rectangle(Dcarreau_droite + (taille_droite / 10), hauteur / 8, xbarre, hauteur / 12); 
 
     if (proportion_score > 1) {
         proportion_score = 1;
     }
     
-    couleurCourante(95, 0, 60);
+    //on affiche la barre de score qui se remplie au fur et a mesure en fonction de la proportion score/score_max
+    couleurCourante(95, 0, 60); 
     rectangle(Dcarreau_droite + (taille_droite / 10)+2, hauteur / 8-2, (Dcarreau_droite + (taille_droite / 10)+2)-(((Dcarreau_droite + (taille_droite / 10)+2)-xbarre) * proportion_score), (hauteur / 12)+2);
-
-    
-
-
 }
 
-void afficherPrevisualisation(int x, int y, char couleur) { //refaire la fonctions pour les differents tetrominos
+//on refait excatement la meme chose que pour afficher les carreaux du bloc mais on le fait avec la couleur grise, la plus grosse partie du travail se fait dans tetris.c
+void afficherPrevisualisation(int x, int y, char couleur) {
     int marge = 40;
     int hauteur = hauteurFenetre() - 80;
     int taille_carreau = hauteur / LIGNES;
 
+    //coordonnées pour les carreaux a colorier
     int posXD = x * taille_carreau;
     int posYD = (LIGNES - y) * taille_carreau;
     int posXA = (x+1) * taille_carreau;
     int posYA = (LIGNES - y - 1) * taille_carreau;
 
     epaisseurDeTrait(3);
-    couleurCourante(100, 100, 100);
+    couleurCourante(100, 100, 100); //on affiche la previsualisation en gris
            
     rectangle(marge + posXD + 1, marge + posYD - 1, marge + posXA - 1, marge + posYA + 1);
+}
+
+
+//on affiche le timer par incrementation au fur et a mesure de la partie.
+//on fait l'incrementation dans la partie temporisation dans tetris.c
+void afficherTimer (int minute, int seconde) {
+    int hauteur = hauteurFenetre();
+    int taille_carreau = hauteur / LIGNES;
+    int taille_droite = largeurFenetre() - (taille_carreau * COLONNES);
+    int Dcarreau_droite = largeurFenetre() - taille_droite;
+    char timer[100];
+
+    sprintf(timer, "%d : %d", minute, seconde);
+    couleurCourante(0, 0, 0);
+    afficheChaine(timer, 30, Dcarreau_droite + taille_droite - (taille_droite / 4), hauteur / 7); //j'ai mis le temps de jeu dans le score
 }
