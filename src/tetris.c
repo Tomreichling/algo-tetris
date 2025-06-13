@@ -150,11 +150,24 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
-                            system("killall aplay");
-					                  termineBoucleEvenements();
+                            #ifdef __linux__
+                                system("killall aplay");
+                            #elif defined(__APPLE__)
+                                system("killall afplay");
+                            #else
+                                printf("pourquoi arrêter si il n'y a rien ?");
+                            #endif
+					        
+                            termineBoucleEvenements();
                             break;
                         case 32:
-                            system("killall aplay");
+                            #ifdef __linux__
+                                system("killall aplay");
+                            #elif defined(__APPLE__)
+                                 system("killall afplay");
+                            #else
+                                printf("pourquoi arrêter si il n'y a rien ?");
+                            #endif
                             demarrer_jeu();
 
                             #ifdef __linux__
@@ -177,8 +190,14 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
-                            system("killall aplay");
-				        	termineBoucleEvenements();
+                            #ifdef __linux__
+                                system("killall aplay");
+                            #elif defined(__APPLE__)
+                                system("killall afplay");
+                            #else
+                                printf("pourquoi arrêter si il n'y a rien ?");
+                            #endif
+				        	    termineBoucleEvenements();
                     }
                     break;
                 case FIN:
@@ -188,12 +207,27 @@ void gestionEvenement(EvenementGfx evenement){
                         libereDonneesImageRGBA(&demarrer);
                         libereDonneesImageRGBA(&multijoueur);
                         libereDonneesImageRGBA(&quitter);
-                        system("killall aplay");
-				        termineBoucleEvenements();
+                        #ifdef __linux__
+                            system("killall aplay");
+                        #elif defined(__APPLE__)
+                            system("killall afplay");
+                        #else
+                            printf("pourquoi arrêter si il n'y a rien ?");
+                        #endif
+				        
+                        termineBoucleEvenements();
 
 				    
 						case 32:
-                            system("killall aplay");
+                            
+                            #ifdef __linux__
+                                system("killall aplay");
+                            #elif defined(__APPLE__)
+                                system("killall afplay");
+                            #else
+                            printf("pourquoi arrêter si il n'y a rien ?");
+                            #endif
+                           
                             demarrer_jeu();
 
                             #ifdef __linux__
