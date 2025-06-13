@@ -2,7 +2,7 @@
 #define MENU_H
 #include "../src/tetris.h"
 // affichage
-void afficheMenu(DonneesImageRGB *image, DonneesImageRGB *image3 , DonneesImageRGB *image2);
+void afficheMenu(DonneesImageRGBA *image, DonneesImageRGBA *image3 , DonneesImageRGBA *image2);
 
 // temporisation
 

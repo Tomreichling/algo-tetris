@@ -19,16 +19,16 @@ Jeu jeu = {0};
 void gestionEvenement(EvenementGfx evenement){
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
 	static bool pause = false;
-	static DonneesImageRGB *image = NULL;
-    static DonneesImageRGB *image2 = NULL;
-    static DonneesImageRGB *image3 = NULL;
+	static DonneesImageRGBA *demarrer = NULL;
+    static DonneesImageRGBA *multijoueur = NULL;
+    static DonneesImageRGBA *quitter = NULL;
 	
 	switch (evenement)
 	{
 		case Initialisation:
-            image = lisBMPRGB("./assets/Group_1.bmp");
-            image2 = lisBMPRGB("./assets/Group_2.bmp");
-            image3 = lisBMPRGB("./assets/Group_3.bmp");
+            demarrer = lisBMPRGBA("./assets/demarrer.bmp");
+            multijoueur = lisBMPRGBA("./assets/multijoueur.bmp");
+            quitter = lisBMPRGBA("./assets/quitter.bmp");
 			demandeTemporisation(-1);
 			jeu.etat = MENU;
 
@@ -63,7 +63,7 @@ void gestionEvenement(EvenementGfx evenement){
             switch (jeu.etat)
             {
                 case MENU:
-					afficheMenu(image, image2, image3);
+					afficheMenu(demarrer, multijoueur, quitter);
                     break;
                 case JEU:
 					affichageJeu();
@@ -136,11 +136,9 @@ void gestionEvenement(EvenementGfx evenement){
                     switch (caractere){
                         case 'q':
                         case 'Q':
-
-                            libereDonneesImageRGB(&image);
-                            libereDonneesImageRGB(&image2);
-                            libereDonneesImageRGB(&image3);
-
+                            libereDonneesImageRGBA(&demarrer);
+                            libereDonneesImageRGBA(&multijoueur);
+                            libereDonneesImageRGBA(&quitter);
 					        termineBoucleEvenements();
                             break;
                         case 32:
@@ -155,7 +153,9 @@ void gestionEvenement(EvenementGfx evenement){
 				    switch (caractere) {
 				    	case 'q':
 				    	case 'Q':
-				        	libereDonneesImageRGB(&image);
+				        	libereDonneesImageRGBA(&demarrer);
+                            libereDonneesImageRGBA(&multijoueur);
+                            libereDonneesImageRGBA(&quitter);
 				        	termineBoucleEvenements();
 				        	break;
 						//espace pour recommencer

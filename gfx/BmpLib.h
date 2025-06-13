@@ -27,4 +27,20 @@ DonneesImageRGB *lisBMPRGB(char *nom);
 	Renvoie faux en cas de probleme, vrai sinon */
 bool ecrisBMPRGB_Dans(DonneesImageRGB *donneesImage, char *nom);
 
+
+// Modification Livio
+typedef struct
+{
+	int largeurImage;
+	int hauteurImage;
+	unsigned char *donneesRGBA; /* Donnees sauvees dans l'ordre bleu-vert-rouge-alpha */
+} DonneesImageRGBA;
+
+/* Fonction s'occupant de la liberation complete d'une structure DonneesImageRGB */
+void libereDonneesImageRGBA(DonneesImageRGBA **structure);
+
+/* Fonction essayant de lire le fichier passe en parametre, et renvoyant une structure
+	contenant les informations de l'image en cas de succes, NULL sinon */
+DonneesImageRGBA *lisBMPRGBA(char *nom);
+
 #endif

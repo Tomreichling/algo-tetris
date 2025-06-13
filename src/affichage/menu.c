@@ -3,7 +3,7 @@
 #define LargeurFenetre 800
 #define HauteurFenetre 600
 
-void afficheMenu(DonneesImageRGB *image,  DonneesImageRGB *image2 , DonneesImageRGB *image3) {
+void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , DonneesImageRGBA *quitter) {
     effaceFenetre(255, 255, 255);
     
     couleurCourante(0, 0, 0);
@@ -17,11 +17,11 @@ void afficheMenu(DonneesImageRGB *image,  DonneesImageRGB *image2 , DonneesImage
         ligne(0, j, largeurFenetre() , j);
     }
 
-    if (image && image2 && image3 != NULL) 
+    if (demarrer != NULL && mutlijoueur != NULL && quitter != NULL) 
 			{
-			    ecrisImage(2*(largeurFenetre()/3)+35, hauteurFenetre()/3-150, image2->largeurImage, image2->hauteurImage, image2->donneesRGB);
-                ecrisImage(2*(largeurFenetre()/3), 2*(hauteurFenetre()/3)-200, image3->largeurImage, image3->hauteurImage, image3->donneesRGB);
-                ecrisImage(2*(largeurFenetre()/3)+10, hauteurFenetre()-250, image->largeurImage, image->hauteurImage, image->donneesRGB);
+			    ecrisImageARVB(2*(largeurFenetre()/3)+35, hauteurFenetre()/3-150, demarrer->largeurImage, demarrer->hauteurImage, (int*) demarrer->donneesRGBA);
+                ecrisImageARVB(2*(largeurFenetre()/3), 2*(hauteurFenetre()/3)-200, mutlijoueur->largeurImage, mutlijoueur->hauteurImage, (int*) mutlijoueur->donneesRGBA);
+                ecrisImageARVB(2*(largeurFenetre()/3)+10, hauteurFenetre()-250, quitter->largeurImage, quitter->hauteurImage, (int*) quitter->donneesRGBA);
 			}
 
 

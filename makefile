@@ -37,5 +37,6 @@ gfx/libisentlib.a:
 
 clean:
 	cd gfx && make clean && cd ..
+	
 	rm -rf $(BUILDDIR)
 	rm -f tetris
