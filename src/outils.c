@@ -45,9 +45,9 @@ bool dansGrille(int x, int y) {
 
 void demarrer_musique() {
     #ifdef __linux__
-        playsound("aplay $(pwd)/src/tetrisic.wav");
+        playsound("aplay $(pwd)/assets/tetrisic.wav");
     #elif defined(__APPLE__)
-        playsound("afplay $(pwd)/src/tetrisic.wav");
+        playsound("afplay $(pwd)/assets/tetrisic.wav");
     #else
         printf("ce système ne prermet pas de lancer la musique");
     #endif
