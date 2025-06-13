@@ -18,4 +18,28 @@ void gameover();
 // Vérifie si des coordonées sont comprises dans la grille
 bool dansGrille(int x, int y);
 
+//////////////////////// 
+// Gestion des images //
+////////////////////////
+typedef unsigned int ImageId;
+typedef struct image {
+    ImageId id;
+    unsigned int largeur;
+    unsigned int hauteur;
+    unsigned char *donnees;
+} Image;
+
+
+// Tableau des images disponible globalement
+extern Image* images;
+extern int nb_images;
+
+// Lis une image, l'ajoute au tableau et renvoie son identifiant
+ImageId lireImage(char *nom);
+// Trouve une image dans le tableau des images
+Image* trouveImage(ImageId id);
+// Libere une image du tableau et libere son tableau de pixels
+void libereImage(ImageId id);
+
+
 #endif

@@ -42,3 +42,56 @@ bool dansGrille(int x, int y) {
         y >= 0 && y < LIGNES
     );
 }
+
+Image* images;
+static int nb_images = 0;
+
+ImageId trouveIdentifiantImage() {
+    ImageId id = 1;
+    int passed = 0;
+    while(passed != nb_images) {
+        for(int i = 0; i < nb_images; i++) {
+            if(images[i].id == id) {
+                id++;
+            } else {
+                passed++;
+            }
+        }
+    }
+}
+
+// Lis une image, l'ajoute au tableau et renvoie son identifiant
+ImageId lireImage(char *nom) {
+    DonneesImageRGBA* image = lisBMPRGBA(nom);
+    Image image_traite;
+    image_traite.id = trouveIdentifiantImage();
+    image_traite.largeur = image->largeurImage;
+    image_traite.hauteur = image->hauteurImage;
+    image_traite.donnees = image->donneesRGBA;
+    images = (Image*) realloc(images, nb_images++ * sizeof(Image));
+    images[nb_images - 1] = image_traite;
+
+    return image_traite.id;
+}
+// Trouve une image dans le tableau des images
+Image* trouveImage(ImageId id) {
+    for(int i = 0; i < nb_images; i++) {
+        if(images[i].id == id) {
+            return &images[i];
+        }
+    }
+    return NULL;
+}
+// Libere une image du tableau et libere son tableau de pixels
+void libereImage(ImageId id) {
+    bool found = false;
+    for(int i = 0; i < nb_images; i++) {
+        if(images[i].id == id) {
+            free(images[i].donnees);
+            found = true;
+        } else if(found) {
+            images[i - 1] = images[i];
+        }
+    }
+    images = (Image*) realloc(images, nb_images-- * sizeof(Image));
+}
