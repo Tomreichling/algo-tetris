@@ -174,9 +174,20 @@ void gestionEvenement(EvenementGfx evenement){
                 case JEU:
                     entrees_jeu();
                     if (caractere == 27){
-				        	libereDonneesImageRGB(&image);
-                            system("killall aplay");
-				        	termineBoucleEvenements();
+                        system("killall aplay");
+                        demarrer_jeu();
+
+                        #ifdef __linux__
+                            playsound("aplay $(pwd)/src/tetrisic.wav");
+                        #elif defined(__APPLE__)
+                            system("afplay $(pwd)/src/tetrisic.wav");
+                        #else
+                            printf("ce système ne prermet pas de lancer la musique");
+                        #endif
+
+                        libereDonneesImageRGBA(&demarrer);
+                        libereDonneesImageRGBA(&multijoueur);
+                        libereDonneesImageRGBA(&quitter);
                     }
                     break;
                 case FIN:
