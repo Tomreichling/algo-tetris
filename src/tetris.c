@@ -3,6 +3,8 @@
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
 des qu'une evenement survient */
 void gestionEvenement(EvenementGfx evenement);
+void systemAplay();
+void systemKillAplay();
 
 int main(int argc, char **argv)
 {
@@ -215,4 +217,28 @@ void gestionEvenement(EvenementGfx evenement){
         default:
             break;
 	}
+
+
+}
+
+void systemAplay() {
+    #ifdef __linux__
+        playsound("aplay $(pwd)/assets/tetrisic.wav");
+    #elif defined(__APPLE__)
+        playsound("afplay $(pwd)/assets/tetrisic.wav");
+    #else
+        printf("ce système ne prermet pas de lancer la musique");
+    #endif
+
+} 
+
+void systemKillAplay() {
+    #ifdef __linux__
+        system("killall aplay");
+    #elif defined(__APPLE__)
+        system("killall afplay");
+    #else
+        printf("pourquoi arrêter si il n'y a rien ?");
+    #endif
+
 }
