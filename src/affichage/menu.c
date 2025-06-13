@@ -9,12 +9,12 @@ void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , Do
     couleurCourante(0, 0, 0);
     epaisseurDeTrait(5);
    
-    for (int i=0; i <  largeurFenetre(); i+=hauteurFenetre()/20){
+    for (int i = 0; i < largeurFenetre(); i += hauteurFenetre() / 20){
         ligne(i, 0, i, hauteurFenetre());
     }
     
-    for (int j=0; j < hauteurFenetre() ; j+= hauteurFenetre()/20){
-        ligne(0, j, largeurFenetre() , j);
+    for (int j = 0; j < hauteurFenetre(); j += hauteurFenetre() / 20){
+        ligne(0, j, largeurFenetre(), j);
     }
 
     if (demarrer != NULL && mutlijoueur != NULL && quitter != NULL) {

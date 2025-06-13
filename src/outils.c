@@ -42,3 +42,24 @@ bool dansGrille(int x, int y) {
         y >= 0 && y < LIGNES
     );
 }
+
+void demarrer_musique() {
+    #ifdef __linux__
+        playsound("aplay $(pwd)/src/tetrisic.wav");
+    #elif defined(__APPLE__)
+        playsound("afplay $(pwd)/src/tetrisic.wav");
+    #else
+        printf("ce système ne prermet pas de lancer la musique");
+    #endif
+
+}
+
+void stopper_musique() {
+    #ifdef __linux__
+        system("killall aplay");
+    #elif defined(__APPLE__)
+        system("killall afplay");
+    #else
+        printf("pourquoi arrêter si il n'y a rien ?");
+    #endif
+}

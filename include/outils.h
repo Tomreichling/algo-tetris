@@ -18,4 +18,7 @@ void gameover();
 // Vérifie si des coordonées sont comprises dans la grille
 bool dansGrille(int x, int y);
 
+void demarrer_musique();
+void stopper_musique();
+
 #endif
