@@ -173,7 +173,7 @@ void gestionEvenement(EvenementGfx evenement){
                             #ifdef __linux__
                                 playsound("aplay $(pwd)/src/tetrisic.wav");
                             #elif defined(__APPLE__)
-                                system("afplay $(pwd)/src/tetrisic.wav");
+                                playsound("afplay $(pwd)/src/tetrisic.wav");
                             #else
                                 printf("ce système ne prermet pas de lancer la musique");
                             #endif
@@ -233,7 +233,7 @@ void gestionEvenement(EvenementGfx evenement){
                             #ifdef __linux__
                                 playsound("aplay $(pwd)/src/tetrisic.wav");
                             #elif defined(__APPLE__)
-                                system("afplay $(pwd)/src/tetrisic.wav");
+                                playsound("afplay $(pwd)/src/tetrisic.wav");
                             #else
                                 printf("ce système ne prermet pas de lancer la musique");
                             #endif
