@@ -20,5 +20,9 @@ bool dansGrille(int x, int y);
 
 void demarrer_musique();
 void stopper_musique();
+void jumpSoundEffect();
+void moveSoundEffect();
+void ligneSoundEffect();
+void levelUpSoundEffect();
 
 #endif

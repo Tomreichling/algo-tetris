@@ -2,8 +2,7 @@
 #define MENU_H
 #include "../src/tetris.h"
 // affichage
-void afficheMenu(DonneesImageRGBA *image, DonneesImageRGBA *image3 , DonneesImageRGBA *image2);
-
+void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , DonneesImageRGBA *quitter, DonneesImageRGBA *titre,DonneesImageRGBA *gemme );
 // temporisation
 
 // entrees

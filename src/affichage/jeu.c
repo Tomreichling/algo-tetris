@@ -1,4 +1,6 @@
 #include "../tetris.h"
+int passage = 1;
+
 
 void affichageJeu() {
     int marge = 40;
@@ -118,7 +120,7 @@ void afficherProchainePiece(Tétrominos piece) {
                         couleurCourante(240, 160, 0); //orange
                         break;
                     case 4:
-                        couleurCourante(0, 240, 240); //turquoise
+                        couleurCourante(0, 200, 255); //turquoise
                         break;
                     case 5:
                         couleurCourante(0, 0, 240); //bleu
@@ -170,11 +172,10 @@ void afficherAides() {
     }
 }
 
-// affiche le score du joueur
+// affiche le score
 void afficherScore() {
     int static dernier = -1;
     int palier;
-
     int hauteur = hauteurFenetre();
     int taille_carreau = hauteur / LIGNES;
     int taille_droite = largeurFenetre() - (taille_carreau * COLONNES);
@@ -182,6 +183,9 @@ void afficherScore() {
     char score[100];
     float xbarre = Dcarreau_droite + taille_droite - (taille_droite / 10);
     float proportion_score = jeu.score /100.0;
+
+
+    
 
     //on fait les differents palier de score
     if (jeu.score < 500) {
@@ -214,6 +218,18 @@ void afficherScore() {
     }
     dernier = palier;
 
+    // mode son du passage de palier
+
+    if (palier == 2000 && passage == 1) {
+        levelUpSoundEffect();
+        passage ++ ;
+    } 
+    else if (palier == 5000 && passage == 2) {
+        levelUpSoundEffect();
+        passage ++ ;
+    }
+   
+
     //on affiche le score de la partie
     couleurCourante(0, 0, 0);
     afficheChaine(score, 30, Dcarreau_droite + (taille_droite / 10), hauteur / 7); 
@@ -226,7 +242,7 @@ void afficherScore() {
         proportion_score = 1;
     }
     
-    //on affiche la barre de score qui se remplie au fur et a mesure en fonction de la proportion score/score_max
+    //on affiche la barre de score qui se remplie en fonction de la proportion score/score_max
     couleurCourante(95, 0, 60); 
     rectangle(Dcarreau_droite + (taille_droite / 10)+2, hauteur / 8-2, (Dcarreau_droite + (taille_droite / 10)+2)-(((Dcarreau_droite + (taille_droite / 10)+2)-xbarre) * proportion_score), (hauteur / 12)+2);
 }

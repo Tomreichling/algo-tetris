@@ -54,6 +54,46 @@ void demarrer_musique() {
 
 }
 
+void moveSoundEffect() {
+    #ifdef __linux__
+        playsound("aplay $(pwd)/assets/simpleMove.wav");
+    #elif defined(__APPLE__)
+        playsound("afplay $(pwd)/assets/simpleMove.wav");
+    #else
+        printf("ce système ne prermet pas de lancer la musique");
+    #endif
+}
+
+void jumpSoundEffect() {
+    #ifdef __linux__
+        playsound("aplay $(pwd)/assets/jump.wav");
+    #elif defined(__APPLE__)
+        playsound("afplay $(pwd)/assets/jump.wav");
+    #else
+        printf("ce système ne prermet pas de lancer la musique");
+    #endif
+}
+
+void levelUpSoundEffect() {
+    #ifdef __linux__
+        playsound("aplay $(pwd)/assets/levelUp.wav");
+    #elif defined(__APPLE__)
+        playsound("afplay $(pwd)/assets/levelUp.wav");
+    #else
+        printf("ce système ne prermet pas de lancer la musique");
+    #endif
+}
+
+void ligneSoundEffect() {
+    #ifdef __linux__
+        playsound("aplay $(pwd)/assets/ligneComplete.wav");
+    #elif defined(__APPLE__)
+        playsound("afplay $(pwd)/assets/ligneComplete.wav");
+    #else
+        printf("ce système ne prermet pas de lancer la musique");
+    #endif
+}
+
 void stopper_musique() {
     #ifdef __linux__
         system("killall aplay");

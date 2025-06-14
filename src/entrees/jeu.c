@@ -28,12 +28,15 @@ void entrees_jeu() {
 void entrees_speciales_jeu() {
     switch(toucheClavier()) {
         case 16: // fleche droite 
+            moveSoundEffect();
             bouger_piece_droite();
             break;
         case 15: // flèche gauche
+            moveSoundEffect();
             bouger_piece_gauche();
             break;
         case 13: // flèche du haut
+            moveSoundEffect();
             TournerTetrominos(&jeu.piece);
             break;
         case 14:  // flèche du bas
@@ -86,5 +89,6 @@ void bouger_piece_gauche(){
 }
 
 void sauter_piece() {
+    jumpSoundEffect();
     lancer_animation_saut();
 }

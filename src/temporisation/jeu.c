@@ -65,15 +65,19 @@ int trouver_indices_lignes_completes(char grille[COLONNES][LIGNES], int indices[
 void assigner_score(int nb_indices) {
     switch (nb_indices) {
         case 1:
+            ligneSoundEffect();
             jeu.score += 40;
             break;
         case 2:
+            ligneSoundEffect();
             jeu.score += 100;
             break;
         case 3:
+            ligneSoundEffect();
             jeu.score += 300;
             break;
         case 4:
+            ligneSoundEffect();
             jeu.score += 1200;
             break;
         default:
@@ -82,6 +86,7 @@ void assigner_score(int nb_indices) {
 }
 
 void retire_ligne(int i) {
+    
     for (; i > -1; i--) {
         for (int j = 0; j < COLONNES; j++) {
             if (i == 0) {

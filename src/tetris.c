@@ -22,6 +22,8 @@ void gestionEvenement(EvenementGfx evenement){
 	static DonneesImageRGBA *demarrer = NULL;
 	static DonneesImageRGBA *multijoueur = NULL;
 	static DonneesImageRGBA *quitter = NULL;
+    static DonneesImageRGBA *titre = NULL;
+    static DonneesImageRGBA *gemme = NULL;
 	int static minutes;
 	int static secondes;
 	
@@ -31,6 +33,8 @@ void gestionEvenement(EvenementGfx evenement){
             demarrer = lisBMPRGBA("./assets/demarrer.bmp");
             multijoueur = lisBMPRGBA("./assets/multijoueur.bmp");
             quitter = lisBMPRGBA("./assets/quitter.bmp");
+            titre = lisBMPRGBA("./assets/tetrisen.bmp");
+            gemme = lisBMPRGBA("./assets/gemme.bmp");
 			demandeTemporisation(-1);
 			jeu.etat = MENU;
 
@@ -72,7 +76,7 @@ void gestionEvenement(EvenementGfx evenement){
             switch (jeu.etat)
             {
                 case MENU:
-					afficheMenu(demarrer, multijoueur, quitter);
+					afficheMenu(demarrer, multijoueur, quitter, titre, gemme);
                     break;
                 case JEU:
 					affichageJeu();
@@ -151,6 +155,8 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
+                            libereDonneesImageRGBA(&titre);
+                            libereDonneesImageRGBA(&gemme);
                             stopper_musique();
 					        
                             termineBoucleEvenements();
@@ -162,6 +168,9 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
+                            libereDonneesImageRGBA(&titre);
+                            libereDonneesImageRGBA(&gemme);
+
                             break;
                     }
                     break;
@@ -171,6 +180,8 @@ void gestionEvenement(EvenementGfx evenement){
                         libereDonneesImageRGBA(&demarrer);
                         libereDonneesImageRGBA(&multijoueur);
                         libereDonneesImageRGBA(&quitter);
+                        libereDonneesImageRGBA(&titre);
+                        libereDonneesImageRGBA(&gemme);
                         stopper_musique();
 				        termineBoucleEvenements();
                     }
@@ -181,6 +192,8 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
+                            libereDonneesImageRGBA(&titre);
+                            libereDonneesImageRGBA(&gemme);
                             stopper_musique();
                             termineBoucleEvenements();
 				    
@@ -192,6 +205,8 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
+                            libereDonneesImageRGBA(&titre);
+                            libereDonneesImageRGBA(&gemme);
 							break;
 					}
                     break;
