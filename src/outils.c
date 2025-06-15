@@ -58,7 +58,7 @@ void moveSoundEffect() {
     #ifdef __linux__
         playsound("aplay $(pwd)/assets/simpleMove.wav");
     #elif defined(__APPLE__)
-        playsoundc("afplay $(pwd)/assets/simpleMove.wav &");
+        playsound("afplay $(pwd)/assets/simpleMove.wav &");
     #else
         printf("ce système ne prermet pas de lancer la musique");
     #endif
