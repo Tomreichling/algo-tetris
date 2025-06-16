@@ -22,6 +22,8 @@ void demarrer_jeu() {
     jeu.piece = NouveauTetrominos();
     jeu.prochaine_piece = NouveauTetrominos();
     jeu.score = 0;
+    jeu.minutes = 0;
+    jeu.secondes = 0;
     
     printf("Lancement du jeu\n");
     demandeTemporisation(1000);

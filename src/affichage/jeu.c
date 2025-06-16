@@ -1,6 +1,6 @@
 #include "../tetris.h"
-int passage = 1;
 
+int passage = 1;
 
 void affichageJeu() {
     int marge = 40;
@@ -54,12 +54,15 @@ void afficherCarreau(int x, int y, char couleur) {
         case 7:
             couleurCourante(240, 0, 0);//rouge
             break;
+        case 8:
+            couleurCourante(150, 150, 150); //gris previsualisation
+            break;
     }
     rectangle(marge + posXD + 1, marge + posYD - 1, marge + posXA - 1, marge + posYA + 1);
 }
 
 
-void afficherTitre(int y, int x) {
+void afficherTitre(int y, int x, DonneesImageRGBA *titre) {
     //on obtient les coordonnées de la partie de droite (a droite de la grille tetris)
     int hauteur = hauteurFenetre();
     int taille_carreau = hauteur / LIGNES;
@@ -72,7 +75,13 @@ void afficherTitre(int y, int x) {
 
     //On place le titre
     couleurCourante(0, 0, 0);
-    afficheChaine("TETRISEN", 89, Dcarreau_droite + (taille_droite / 3), hauteur - (hauteur / 5));
+
+    ecrisImageARVB(Dcarreau_droite + (taille_droite / 5), 
+    hauteur - (hauteur / 4.5), 
+    titre->largeurImage, 
+    titre->hauteurImage, 
+    (int*) titre->donneesRGBA);
+    // afficheChaine("TETRISEN", 89, Dcarreau_droite + (taille_droite / 3), hauteur - (hauteur / 5));
 }
 
 void afficherProchainePiece(Tétrominos piece) {
@@ -120,7 +129,7 @@ void afficherProchainePiece(Tétrominos piece) {
                         couleurCourante(240, 160, 0); //orange
                         break;
                     case 4:
-                        couleurCourante(0, 200, 255); //turquoise
+                        couleurCourante(0, 240, 255); //turquoise
                         break;
                     case 5:
                         couleurCourante(0, 0, 240); //bleu
@@ -137,7 +146,6 @@ void afficherProchainePiece(Tétrominos piece) {
         }
     } 
 }
-
 
 // affiche une aide pour les touches
 void afficherAides() {
@@ -184,9 +192,6 @@ void afficherScore() {
     float xbarre = Dcarreau_droite + taille_droite - (taille_droite / 10);
     float proportion_score = jeu.score /100.0;
 
-
-    
-
     //on fait les differents palier de score
     if (jeu.score < 500) {
         palier = 500;
@@ -219,17 +224,15 @@ void afficherScore() {
     dernier = palier;
 
     // mode son du passage de palier
-
     if (palier == 2000 && passage == 1) {
         levelUpSoundEffect();
-        passage ++ ;
+        passage++;
     } 
     else if (palier == 5000 && passage == 2) {
         levelUpSoundEffect();
-        passage ++ ;
+        passage++;
     }
    
-
     //on affiche le score de la partie
     couleurCourante(0, 0, 0);
     afficheChaine(score, 30, Dcarreau_droite + (taille_droite / 10), hauteur / 7); 
@@ -244,27 +247,8 @@ void afficherScore() {
     
     //on affiche la barre de score qui se remplie en fonction de la proportion score/score_max
     couleurCourante(95, 0, 60); 
-    rectangle(Dcarreau_droite + (taille_droite / 10)+2, hauteur / 8-2, (Dcarreau_droite + (taille_droite / 10)+2)-(((Dcarreau_droite + (taille_droite / 10)+2)-xbarre) * proportion_score), (hauteur / 12)+2);
+    rectangle(Dcarreau_droite + (taille_droite / 10) + 2, hauteur / 8 - 2, (Dcarreau_droite + (taille_droite / 10)+2)-(((Dcarreau_droite + (taille_droite / 10)+2)-xbarre) * proportion_score), (hauteur / 12)+2);
 }
-
-//on refait excatement la meme chose que pour afficher les carreaux du bloc mais on le fait avec la couleur grise, la plus grosse partie du travail se fait dans tetris.c
-void afficherPrevisualisation(int x, int y, char couleur) {
-    int marge = 40;
-    int hauteur = hauteurFenetre() - 80;
-    int taille_carreau = hauteur / LIGNES;
-
-    //coordonnées pour les carreaux a colorier
-    int posXD = x * taille_carreau;
-    int posYD = (LIGNES - y) * taille_carreau;
-    int posXA = (x+1) * taille_carreau;
-    int posYA = (LIGNES - y - 1) * taille_carreau;
-
-    epaisseurDeTrait(3);
-    couleurCourante(100, 100, 100); //on affiche la previsualisation en gris
-           
-    rectangle(marge + posXD + 1, marge + posYD - 1, marge + posXA - 1, marge + posYA + 1);
-}
-
 
 //on affiche le timer par incrementation au fur et a mesure de la partie.
 //on fait l'incrementation dans la partie temporisation dans tetris.c

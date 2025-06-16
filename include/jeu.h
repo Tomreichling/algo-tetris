@@ -12,16 +12,13 @@ void affichageJeu();
 // affiche un carreau d'une couleur donnée
 void afficherCarreau(int x, int y, char couleur);
 // affiche Tetris en haut à droite à gauche de l'écran
-void afficherTitre(int y, int x);
+void afficherTitre(int y, int x, DonneesImageRGBA *titre);
 // affiche prochaine pièce
 void afficherProchainePiece(Tétrominos piece);
 // affiche une aide pour les touches
 void afficherAides();
 // affiche le score du joueur, le temps écoulé (utiliser)
 void afficherScore();
-
-// on utilise la variable globale jeu
-void afficherPrevisualisation(int x, int y, char couleur);
 
 //on affiche le timer depuis le début de la partie
 void afficherTimer (int minute, int seconde);

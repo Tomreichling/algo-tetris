@@ -39,6 +39,8 @@ typedef struct jeu{
     int nb_piece; // le nombre de pièce écoulé
     int etat; // enum ETAT_JEU
     char grille[COLONNES][LIGNES];
+    int minutes;
+    int secondes;
     // actuelle
     Tétrominos piece;
     // next
