@@ -142,6 +142,29 @@ void TournerTetrominos(Tétrominos* piece) {
 // Créer un Tétrominos aléatoirement (tu utiliseras la fonction Creer Tetrominos)
 Tétrominos NouveauTetrominos() {
     // 7 formes
-    char figure = rand() % 7; 
-    return CreerTetrominos(figure);
+    static int figures[7];
+    if(jeu.nb_piece % 7 == 0) {
+        // Remplir le tableau avec des valeurs aléatoires distinctes entre 0 et 6
+        int nb_figures = 0;
+
+        for (int i = 0; i < 7; i++){
+            int figure_en_cours;
+            bool condition; // ps dedans
+            do {
+                figure_en_cours = rand() % 7;
+                condition = true;
+                for (int i = 0; i < nb_figures; i++){
+                    if (figure_en_cours == figures[i]){
+                        condition = false;
+                       
+                    }
+                }
+            } while(condition == false);
+
+            figures[i] = figure_en_cours;
+            nb_figures++; 
+        }
+    }
+
+    return CreerTetrominos(figures[jeu.nb_piece % 7]);
 }
