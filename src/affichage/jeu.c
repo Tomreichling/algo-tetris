@@ -59,7 +59,7 @@ void afficherCarreau(int x, int y, char couleur) {
 }
 
 
-void afficherTitre(int y, int x) {
+void afficherTitre(int y, int x, DonneesImageRGBA *titre) {
     //on obtient les coordonnées de la partie de droite (a droite de la grille tetris)
     int hauteur = hauteurFenetre();
     int taille_carreau = hauteur / LIGNES;
@@ -72,7 +72,13 @@ void afficherTitre(int y, int x) {
 
     //On place le titre
     couleurCourante(0, 0, 0);
-    afficheChaine("TETRISEN", 89, Dcarreau_droite + (taille_droite / 3), hauteur - (hauteur / 5));
+
+    ecrisImageARVB(Dcarreau_droite + (taille_droite / 5), 
+    hauteur - (hauteur / 4.5), 
+    titre->largeurImage, 
+    titre->hauteurImage, 
+    (int*) titre->donneesRGBA);
+    // afficheChaine("TETRISEN", 89, Dcarreau_droite + (taille_droite / 3), hauteur - (hauteur / 5));
 }
 
 void afficherProchainePiece(Tétrominos piece) {
@@ -138,7 +144,6 @@ void afficherProchainePiece(Tétrominos piece) {
     } 
 }
 
-
 // affiche une aide pour les touches
 void afficherAides() {
     int hauteur = hauteurFenetre();
@@ -184,9 +189,6 @@ void afficherScore() {
     float xbarre = Dcarreau_droite + taille_droite - (taille_droite / 10);
     float proportion_score = jeu.score /100.0;
 
-
-    
-
     //on fait les differents palier de score
     if (jeu.score < 500) {
         palier = 500;
@@ -219,17 +221,15 @@ void afficherScore() {
     dernier = palier;
 
     // mode son du passage de palier
-
     if (palier == 2000 && passage == 1) {
         levelUpSoundEffect();
-        passage ++ ;
+        passage++;
     } 
     else if (palier == 5000 && passage == 2) {
         levelUpSoundEffect();
-        passage ++ ;
+        passage++;
     }
    
-
     //on affiche le score de la partie
     couleurCourante(0, 0, 0);
     afficheChaine(score, 30, Dcarreau_droite + (taille_droite / 10), hauteur / 7); 
@@ -244,7 +244,7 @@ void afficherScore() {
     
     //on affiche la barre de score qui se remplie en fonction de la proportion score/score_max
     couleurCourante(95, 0, 60); 
-    rectangle(Dcarreau_droite + (taille_droite / 10)+2, hauteur / 8-2, (Dcarreau_droite + (taille_droite / 10)+2)-(((Dcarreau_droite + (taille_droite / 10)+2)-xbarre) * proportion_score), (hauteur / 12)+2);
+    rectangle(Dcarreau_droite + (taille_droite / 10) + 2, hauteur / 8 - 2, (Dcarreau_droite + (taille_droite / 10)+2)-(((Dcarreau_droite + (taille_droite / 10)+2)-xbarre) * proportion_score), (hauteur / 12)+2);
 }
 
 //on refait excatement la meme chose que pour afficher les carreaux du bloc mais on le fait avec la couleur grise, la plus grosse partie du travail se fait dans tetris.c

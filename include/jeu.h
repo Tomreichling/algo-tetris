@@ -12,7 +12,7 @@ void affichageJeu();
 // affiche un carreau d'une couleur donnée
 void afficherCarreau(int x, int y, char couleur);
 // affiche Tetris en haut à droite à gauche de l'écran
-void afficherTitre(int y, int x);
+void afficherTitre(int y, int x, DonneesImageRGBA *titre);
 // affiche prochaine pièce
 void afficherProchainePiece(Tétrominos piece);
 // affiche une aide pour les touches
