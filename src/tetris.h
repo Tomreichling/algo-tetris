@@ -1,6 +1,8 @@
 #ifndef TETRIS_H
 #define TETRIS_H
 
+// #define PRODUCTION; // Mettre en commentaire pour WSL & Mac
+
 // ecran
 #define LARGEUR 1200
 #define LONGUEUR 800
@@ -15,9 +17,12 @@
 #include <math.h> // Pour pouvoir utiliser sin() et cos()
 #include <time.h> // Pour pouvoir utiliser sin() et cos()
 #include <string.h>
-#include <unistd.h>
-#include <sys/prctl.h>
-#include <signal.h>
+
+#ifdef PRODUCTION
+    #include <unistd.h>
+    #include <sys/prctl.h>
+    #include <signal.h>
+#endif
 
 #include "../gfx/GfxLib.h" // Seul cet include est necessaire pour faire du graphique
 #include "../gfx/BmpLib.h" // Cet include permet de manipuler des fichiers BMP

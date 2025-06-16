@@ -100,20 +100,24 @@ void retire_ligne(int i) {
 
 
 void playsound(const char* musique){
-    pid_t pid = fork();
-    if (pid < 0) return;
-    if (pid == 0) {
-        setup_death_signal();
-        #ifdef __linux__
-        execlp("aplay", "aplay", musique, (char *)NULL);
-        #elif __APPLE__
-        execlp("afplay", "afplay", musique, (char *)NULL);
-        #endif
-        exit(EXIT_FAILURE);
-    }
+    #ifdef PRODUCTION
+        pid_t pid = fork();
+        if (pid < 0) return;
+        if (pid == 0) {
+            setup_death_signal();
+            #ifdef __linux__
+            execlp("aplay", "aplay", musique, (char *)NULL);
+            #elif __APPLE__
+            execlp("afplay", "afplay", musique, (char *)NULL);
+            #endif
+            exit(EXIT_FAILURE);
+        }
+    #endif
 }
 
 void setup_death_signal() {
-    if (prctl(PR_SET_PDEATHSIG, SIGTERM) == -1) exit(EXIT_FAILURE);
-    if (getppid() == 1) exit(EXIT_FAILURE);
+    #ifdef PRODUCTION
+        if (prctl(PR_SET_PDEATHSIG, SIGTERM) == -1) exit(EXIT_FAILURE);
+        if (getppid() == 1) exit(EXIT_FAILURE);
+    #endif
 }
