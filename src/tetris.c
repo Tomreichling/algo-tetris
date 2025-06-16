@@ -98,7 +98,7 @@ void gestionEvenement(EvenementGfx evenement){
                             if (jeu.piece.grille[i][j] == 0) {
                                 continue;
                             }
-                            afficherPrevisualisation(jeu.piece.x + i, y_previ + j, jeu.piece.grille[i][j]);
+                            afficherCarreau(jeu.piece.x + i, y_previ + j, 8);
                         }
                     }
 
