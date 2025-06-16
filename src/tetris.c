@@ -123,6 +123,10 @@ void gestionEvenement(EvenementGfx evenement){
                 case FIN:
                     // Afficher le jeu + Gameover + score
                     break;
+                case MULTI: //mode multijoueur
+                    affichageJeu();
+                    affichageEnnemi();
+                    break;
             }
 			break;
 		case Clavier: {
@@ -166,9 +170,18 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
-
                             break;
-                    }
+
+                        case 109: //77 pour la majuscule
+                            stopper_musique();
+                            demarrer_multi();
+                            demarrer_musique();
+                            libereDonneesImageRGBA(&demarrer);
+                            libereDonneesImageRGBA(&multijoueur);
+                            libereDonneesImageRGBA(&quitter);
+                            break;
+                    }   
+                    
                     break;
                 case JEU:
                     entrees_jeu();

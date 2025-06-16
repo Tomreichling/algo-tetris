@@ -3,7 +3,7 @@ UNAME := $(shell uname)
 BUILDDIR := ./build
 SRC := ./src
 SRCFILES := tetris.c tetrominos.c outils.c animations.c \
-	affichage/jeu.c affichage/menu.c affichage/fin.c \
+	affichage/jeu.c affichage/menu.c affichage/fin.c affichage/multi.c \
 	temporisation/jeu.c temporisation/menu.c temporisation/fin.c \
 	entrees/jeu.c entrees/menu.c entrees/fin.c
 OBJFILES := $(patsubst %.c, $(BUILDDIR)/%.o, $(SRCFILES))

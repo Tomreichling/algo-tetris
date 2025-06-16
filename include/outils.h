@@ -10,6 +10,12 @@ void copier_tableau44(char tableau[4][4], char grille[COLONNES][LIGNES], int xi,
 //  - passe le mode à JEU
 void demarrer_jeu();
 
+// Passe du mode MENU au mode MULTI
+//  - reinitialise la partie
+//  - passe le mode à JEU
+void demarrer_multi();
+
+
 // Passe du mode JEU au mode FIN
 //  - Change la temporisation
 //  - rafraichis l'affichage
@@ -18,6 +24,7 @@ void gameover();
 // Vérifie si des coordonées sont comprises dans la grille
 bool dansGrille(int x, int y);
 
+//Sons
 void demarrer_musique();
 void stopper_musique();
 void jumpSoundEffect();

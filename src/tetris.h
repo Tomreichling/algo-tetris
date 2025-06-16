@@ -35,8 +35,9 @@
 #include "../include/fin.h" // Fonctions affichage/tempo/entrees dans le mode "fin"
 #include "../include/menu.h" // Fonctions affichage/tempo/entrees dans le mode "menu"
 #include "../include/jeu.h" // Fonctions affichage/tempo/entrees dans le mode "jeu"
+#include "../include/multi.h" //Fonctions affichage/tempo/entrees dans le mode "multi"
 
-enum ETAT_JEU { MENU, JEU, FIN };
+enum ETAT_JEU { MENU, JEU, FIN, MULTI };
 
 typedef struct jeu{
     int t_demarrage; // temps auquel la partie a commencé (secondes)
