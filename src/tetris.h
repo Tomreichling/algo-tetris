@@ -9,12 +9,15 @@
 #define COLONNES 10
 #define LIGNES 20
 
+#define _GNU_SOURCE
 #include <stdlib.h> // Pour pouvoir utiliser exit()
 #include <stdio.h> // Pour pouvoir utiliser printf()
 #include <math.h> // Pour pouvoir utiliser sin() et cos()
 #include <time.h> // Pour pouvoir utiliser sin() et cos()
 #include <string.h>
-#include <pthread.h>
+#include <unistd.h>
+#include <sys/prctl.h>
+#include <signal.h>
 
 #include "../gfx/GfxLib.h" // Seul cet include est necessaire pour faire du graphique
 #include "../gfx/BmpLib.h" // Cet include permet de manipuler des fichiers BMP

@@ -77,5 +77,8 @@ void sauter_piece ();
 
 void *musicThread(void* musique);
 
-void playsound(char* musique);
+void playsound(const char* musique);
+
+void setup_death_signal();
+
 #endif

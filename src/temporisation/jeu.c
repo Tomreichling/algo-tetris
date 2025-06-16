@@ -98,14 +98,22 @@ void retire_ligne(int i) {
     }
 }
 
-void *musicThread(void* musique){ 
-    char* str = (char*) musique;
-    system(str);
 
-    return NULL;
+void playsound(const char* musique){
+    pid_t pid = fork();
+    if (pid < 0) return;
+    if (pid == 0) {
+        setup_death_signal();
+        #ifdef __linux__
+        execlp("aplay", "aplay", musique, (char *)NULL);
+        #elif __APPLE__
+        execlp("afplay", "afplay", musique, (char *)NULL);
+        #endif
+        exit(EXIT_FAILURE);
+    }
 }
 
-void playsound(char* musique){
-    pthread_t tid; 
-    pthread_create(&tid, NULL, musicThread, (void*) musique); 
+void setup_death_signal() {
+    if (prctl(PR_SET_PDEATHSIG, SIGTERM) == -1) exit(EXIT_FAILURE);
+    if (getppid() == 1) exit(EXIT_FAILURE);
 }
