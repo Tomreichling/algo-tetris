@@ -42,7 +42,8 @@ void scintillementPalier() {
             couleurCourante(255, 0, 0);
         }
         else {
-            couleurCourante(255, 255, 255);
+            // couleurCourante(0, 0, 0); //pour les lignes
+            couleurCourante(255, 255, 255); //pour les rectangles
         }
         rectangle(marge, marge, marge + (taille_carreau * COLONNES), marge + (taille_carreau * LIGNES));
         // ligne(marge, marge, marge + (taille_carreau * COLONNES), marge);

@@ -24,8 +24,6 @@ void gestionEvenement(EvenementGfx evenement){
 	static DonneesImageRGBA *quitter = NULL;
     static DonneesImageRGBA *titre = NULL;
     static DonneesImageRGBA *gemme = NULL;
-	int static minutes;
-	int static secondes;
 	
 	switch (evenement)
 	{
@@ -52,10 +50,10 @@ void gestionEvenement(EvenementGfx evenement){
                     int lignes = trouver_indices_lignes_completes(jeu.grille, indices);
 
                     //timer
-                    secondes ++;
-                    if (secondes == 60) {
-                        minutes ++;
-                        secondes = 0;
+                    jeu.secondes ++;
+                    if (jeu.secondes == 60) {
+                        jeu.minutes ++;
+                        jeu.secondes = 0;
                     }
                     
                     // On assigne un score en conséquent
@@ -81,11 +79,11 @@ void gestionEvenement(EvenementGfx evenement){
                 case JEU:
 					affichageJeu();
                     scintillementPalier();
-					afficherTitre(16, 3);
+					afficherTitre(16, 3, titre);
 					afficherProchainePiece(jeu.prochaine_piece);
 					afficherAides();
 					afficherScore();
-                    afficherTimer(minutes, secondes);
+                    afficherTimer(jeu.minutes, jeu.secondes);
 
                     animer_saut();
                     int y_previ, y_base = jeu.piece.y;
@@ -168,8 +166,6 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
-                            libereDonneesImageRGBA(&titre);
-                            libereDonneesImageRGBA(&gemme);
 
                             break;
                     }
@@ -205,7 +201,6 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
-                            libereDonneesImageRGBA(&titre);
                             libereDonneesImageRGBA(&gemme);
 							break;
 					}

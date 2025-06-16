@@ -40,8 +40,6 @@ void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , Do
         ligne(0, j, largeurFenetre(), j);
     }
 
-   
-
     if (demarrer != NULL && mutlijoueur != NULL && quitter != NULL) {
         int max_x = largeurFenetre();
         int max_y = hauteurFenetre();
