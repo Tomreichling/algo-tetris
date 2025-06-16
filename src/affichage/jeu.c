@@ -46,19 +46,46 @@ void afficherCarreau(int x, int y, char couleur) {
             couleurCourante(0, 240, 240); //turquoise
             break;
         case 5:
-            couleurCourante(0, 0, 240); //bleu
+            couleurCourante(0, 0, 220); //bleu
             break;
         case 6:
-            couleurCourante(0, 240, 0); //vert
+            couleurCourante(0, 220, 0); //vert
             break;
         case 7:
-            couleurCourante(240, 0, 0);//rouge
+            couleurCourante(220, 0, 0);//rouge
             break;
         case 8:
             couleurCourante(150, 150, 150); //gris previsualisation
             break;
     }
     rectangle(marge + posXD + 1, marge + posYD - 1, marge + posXA - 1, marge + posYA + 1);
+    switch (couleur) {
+        case 1:
+            couleurCourante(255, 255, 0); //jaune
+            break;
+        case 2:
+            couleurCourante(180, 0, 255); //violet
+            break;
+        case 3:
+            couleurCourante(255, 180, 0); //orange
+            break;
+        case 4:
+            couleurCourante(0, 255, 255); //turquoise
+            break;
+        case 5:
+            couleurCourante(0, 0, 255); //bleu
+            break;
+        case 6:
+            couleurCourante(0, 255, 0); //vert
+            break;
+        case 7:
+            couleurCourante(255, 0, 0);//rouge
+            break;
+        case 8:
+            couleurCourante(170, 170, 170); //gris previsualisation
+            break;
+    }
+    rectangle(marge + posXD + 10, marge + posYD - 10, marge + posXA - 10, marge + posYA + 10);
 }
 
 
@@ -132,16 +159,43 @@ void afficherProchainePiece(Tétrominos piece) {
                         couleurCourante(0, 240, 255); //turquoise
                         break;
                     case 5:
-                        couleurCourante(0, 0, 240); //bleu
+                        couleurCourante(0, 0, 220); //bleu
                         break;
                     case 6:
-                        couleurCourante(0, 240, 0); //vert
+                        couleurCourante(0, 220, 0); //vert
                         break;
                     case 7:
-                        couleurCourante(240, 0, 0);//rouge
+                        couleurCourante(220, 0, 0);//rouge
                         break;
                 }
                 rectangle(posXD + 1, posYD + 1, posXA - 1, posYA - 1);
+                switch (couleur) {
+                    case 1:
+                        couleurCourante(255, 255, 0); //jaune
+                        break;
+                    case 2:
+                        couleurCourante(180, 0, 255); //violet
+                        break;
+                    case 3:
+                        couleurCourante(255, 180, 0); //orange
+                        break;
+                    case 4:
+                        couleurCourante(0, 255, 255); //turquoise
+                        break;
+                    case 5:
+                        couleurCourante(0, 0, 255); //bleu
+                        break;
+                    case 6:
+                        couleurCourante(0, 255, 0); //vert
+                        break;
+                    case 7:
+                        couleurCourante(255, 0, 0);//rouge
+                        break;
+                    case 8:
+                        couleurCourante(170, 170, 170); //gris previsualisation
+                        break;
+                }
+                rectangle(posXD + 10, posYD + 10, posXA - 10, posYA - 10);
             }
         }
     } 
