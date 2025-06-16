@@ -45,63 +45,35 @@ bool dansGrille(int x, int y) {
     );
 }
 
-void demarrer_musique() {
-    #ifdef __linux__
-        playsound("aplay $(pwd)/assets/tetrisic2.wav");
-    #elif defined(__APPLE__)
-        playsound("afplay $(pwd)/assets/tetrisic2.wav &");
-    #else
-        printf("ce système ne prermet pas de lancer la musique");
-    #endif
 
+// On a fait des fonctions pour les musiques mais on aurait pu faire un playsound direct.
+//les fonctions permettent de mettre d'autre action si bsn à l'avenir si autre méthode pour lire le son
+void demarrer_musique() {
+    playsound("assets/tetrisic2.wav");
+}
+
+void gameOverSoundEffect() {
+    playsound("assets/gameover.wav");
 }
 
 void moveSoundEffect() {
-    #ifdef __linux__
-        playsound("aplay $(pwd)/assets/simpleMove.wav");
-    #elif defined(__APPLE__)
-        playsound("afplay $(pwd)/assets/simpleMove.wav &");
-    #else
-        printf("ce système ne prermet pas de lancer la musique");
-    #endif
+    playsound("assets/simpleMove.wav");
 }
 
 void jumpSoundEffect() {
-    #ifdef __linux__
-        playsound("aplay $(pwd)/assets/jump.wav");
-    #elif defined(__APPLE__)
-        playsound("afplay $(pwd)/assets/jump.wav &");
-    #else
-        printf("ce système ne prermet pas de lancer la musique");
-    #endif
+    playsound("assets/jump.wav");
+ 
 }
 
 void levelUpSoundEffect() {
-    #ifdef __linux__
-        playsound("aplay $(pwd)/assets/levelUp.wav");
-    #elif defined(__APPLE__)
-        playsound("afplay $(pwd)/assets/levelUp.wav &");
-    #else
-        printf("ce système ne prermet pas de lancer la musique");
-    #endif
+    playsound("assets/levelUp.wav");
 }
 
 void ligneSoundEffect() {
-    #ifdef __linux__
-        playsound("aplay $(pwd)/assets/ligneComplete.wav");
-    #elif defined(__APPLE__)
-        playsound("afplay $(pwd)/assets/ligneComplete.wav &");
-    #else
-        printf("ce système ne prermet pas de lancer la musique");
-    #endif
+    playsound("assets/ligneComplete.wav");
+  
 }
 
 void stopper_musique() {
-    #ifdef __linux__
-        system("killall aplay");
-    #elif defined(__APPLE__)
-        system("killall afplay");
-    #else
-        printf("pourquoi arrêter si il n'y a rien ?");
-    #endif
+    system("killall aplay");
 }
