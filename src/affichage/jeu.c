@@ -19,7 +19,6 @@ void affichageJeu() {
     }
 }
 
-
 void afficherCarreau(int x, int y, char couleur) {
     int marge = 40;
     int hauteur = hauteurFenetre() - 80;
@@ -87,7 +86,6 @@ void afficherCarreau(int x, int y, char couleur) {
     }
     rectangle(marge + posXD + 10, marge + posYD - 10, marge + posXA - 10, marge + posYA + 10);
 }
-
 
 void afficherTitre(int y, int x, DonneesImageRGBA *titre) {
     //on obtient les coordonnées de la partie de droite (a droite de la grille tetris)

@@ -94,3 +94,79 @@ void afficherCarreauEnnemi(int x, int y, char couleur) {
     }
     rectangle(taille_droite + posXD + 10, marge + posYD - 10, taille_droite + posXA - 10, marge + posYA + 10);
 }
+
+void affichageBarresScroll(DonneesImageRGBA *gemme) {
+    int marge = 40;
+    int hauteur = hauteurFenetre() - 80;
+    int taille_carreau = hauteur / LIGNES;
+    int tailleGrille = (2 * marge) + (taille_carreau * COLONNES);
+    couleurCourante(150, 150, 150);
+
+    char score[100], scoreEnnemi[100];
+    int static dernier = -1;
+    float palier;
+    float xbarre = (3.2 * marge) + tailleGrille + (taille_carreau * COLONNES);
+    float proportion_score;
+    
+    //on met les memes plaiers que pour le jeu
+    //et en meme temps on fait notre score
+    if (jeu.score < 500) {
+        palier = 500;
+        proportion_score = jeu.score / palier;
+        sprintf(score, "%d / 500", jeu.score);  
+        demandeTemporisation(1300);
+    } 
+    else if (jeu.score < 2000) {
+        palier = 2000;
+        proportion_score = jeu.score / palier;
+        sprintf(score, "%d / 2000", jeu.score);
+        demandeTemporisation(1000); 
+    } 
+    else if (jeu.score < 5000) {
+        palier = 5000;
+        proportion_score = jeu.score / palier;
+        sprintf(score, "%d / 5000", jeu.score);
+        demandeTemporisation(700); 
+    } 
+    else {
+        palier = 10000;
+        proportion_score = jeu.score / palier;
+        sprintf(score, "%d / 10000", jeu.score);
+        demandeTemporisation(300); 
+    }
+
+    if (proportion_score > 1) {
+    proportion_score = 1;
+    }   
+    
+    //je met le if car sinon la barre se retrouve sur la grille
+    if (largeurFenetre() != 1200 && hauteurFenetre() != 800) {
+        rectangle(tailleGrille, hauteur + 30, xbarre, hauteur - 10); //barre du haut (la notre)
+        rectangle(tailleGrille, marge, xbarre, 2 * marge); //barre du bas (ennemi)
+
+    
+        //on affiche la barre de score qui se remplie en fonction de la proportion score/score_max
+        couleurCourante(95, 0, 60); 
+        rectangle(tailleGrille, hauteur + 30, tailleGrille + ((xbarre - tailleGrille) * proportion_score), hauteur - 10); 
+         
+        
+
+        //il faut faire la meme chose pour la barre ennemi
+    }
+    
+    //on affiche notre score de partie
+    couleurCourante(255, 255, 255);
+    afficheChaine(score, 30, tailleGrille + 100, hauteur - 5);
+
+
+    //affichage des gemmes sur les barres de scores
+    //affichage de notre gemme
+    
+    //affichage de la gemme ennemi (rouge)
+
+    //on fait l'animation de scintillement
+    if (palier != dernier && dernier != -1) {
+        lancer_scintillement();
+    }
+    dernier = palier;
+}

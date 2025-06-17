@@ -11,4 +11,6 @@ void affichageEnnemi();
 //affiche la grille ennemi
 void afficherCarreauEnnemi(int x, int y, char couleur);
 
+void affichageBarresScroll(DonneesImageRGBA *gemme);
+
 #endif

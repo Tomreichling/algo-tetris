@@ -24,6 +24,7 @@ void gestionEvenement(EvenementGfx evenement){
 	static DonneesImageRGBA *quitter = NULL;
     static DonneesImageRGBA *titre = NULL;
     static DonneesImageRGBA *gemme = NULL;
+    // static DonneesImageRGBA *gemme2 = NULL;
 	
 	switch (evenement)
 	{
@@ -40,6 +41,7 @@ void gestionEvenement(EvenementGfx evenement){
 		case Temporisation:
             switch (jeu.etat)
             {
+                case MULTI:
                 case JEU: {
                     // On vérifie si on peut descendre la pièce
                     // on la descends ou la place sur grille
@@ -64,11 +66,6 @@ void gestionEvenement(EvenementGfx evenement){
                     }
                     break;
                 }
-                case MULTI:
-                    descendre_piece();
-                    break;
-                default:
-                    break;
             }
 			
 			rafraichisFenetre();
@@ -130,6 +127,7 @@ void gestionEvenement(EvenementGfx evenement){
                     affichageJeu();
                     affichageEnnemi();
                     // affichageSupp();
+                    affichageBarresScroll(gemme);
                     afficherProchainePiece(jeu.prochaine_piece);
 
                     animer_saut();
@@ -168,24 +166,10 @@ void gestionEvenement(EvenementGfx evenement){
                             afficherCarreau(jeu.piece.x + i, jeu.piece.y + j, jeu.piece.grille[i][j]);
                         }
                     }
-                    break;
+                    
                     //fin affichage dans la premiere grille
                     //on fait la meme chose mais pour la grille ennemi
-                    int y_previEnnemi, y_baseEnnemi = jeu.piece.y;
-                    while (descente_possible(&jeu.piece)) {   
-                        jeu.piece.y++;
-                    }    
-                    y_previEnnemi = jeu.piece.y;
-                    jeu.piece.y = y_baseEnnemi;
-
-                    for (int i = 0; i < 4; i++) {
-                        for (int j = 0; j < 4; j++) {
-                            if (jeu.piece.grille[i][j] == 0) {
-                                continue;
-                            }
-                            afficherCarreauEnnemi(jeu.piece.x + i, y_previEnnemi + j, 8);
-                        }
-                    }
+                    //on ne met pas de previsualisation car pas besoin
 
                     for(int i = 0; i < COLONNES; i++) {
                         for(int j = 0; j < LIGNES; j++) {
