@@ -231,8 +231,7 @@ void gestionEvenement(EvenementGfx evenement){
                 // *caractereClavier() donne la touche*
                 case MENU:
                     switch (caractere){
-                        case 27 :
-
+                        case 27 : //echap
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
@@ -242,7 +241,7 @@ void gestionEvenement(EvenementGfx evenement){
 					        
                             termineBoucleEvenements();
                             break;
-                        case 32:
+                        case 32: //barre d'espace
                             stopper_musique();
                             demarrer_jeu();
                             demarrer_musique();
@@ -250,8 +249,9 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
                             break;
-
-                        case 109: //77 pour la majuscule
+                        
+                        case 77: //touche M
+                        case 109: //touche m 
                             stopper_musique();
                             demarrer_multi();
                             demarrer_musique();
