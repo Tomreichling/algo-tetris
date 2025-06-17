@@ -36,6 +36,7 @@ void gestionEvenement(EvenementGfx evenement){
 			demandeTemporisation(-1);
 			jeu.etat = MENU;
 
+            initialiser_pieces_menu();
 			break;
 		case Temporisation:
             switch (jeu.etat)
@@ -64,6 +65,29 @@ void gestionEvenement(EvenementGfx evenement){
                     }
                     break;
                 }
+                case MENU:
+                    for(int n = 0; n < NB_PIECES_MENU; n++) {
+                        int operation = rand() % 6; 
+                        switch(operation) {
+                            // 0 rien
+                            case 1: // gauche
+                                deplacer_piece_menu(&pieces_menu[n], -1, 0);
+                                break;
+                            case 2: // droite
+                                deplacer_piece_menu(&pieces_menu[n], 1, 0);
+                                break;
+                            case 3: // haut
+                                deplacer_piece_menu(&pieces_menu[n], 0, -1);
+                                break;
+                            case 4: // droite
+                                deplacer_piece_menu(&pieces_menu[n], 0, 1);
+                                break;
+                            case 5: // tourner
+                                tourner_piece_menu(&pieces_menu[n]);
+                                break;
+                            
+                        }
+                    }
                 default:
                     break;
             }
@@ -74,6 +98,8 @@ void gestionEvenement(EvenementGfx evenement){
             switch (jeu.etat)
             {
                 case MENU:
+                    afficheGrilleMenu();
+                    afficherPiecesMenu();
 					afficheMenu(demarrer, multijoueur, quitter, titre, gemme);
                     break;
                 case JEU:
