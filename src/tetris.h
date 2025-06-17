@@ -36,8 +36,9 @@
 #include "../include/menu.h" // Fonctions affichage/tempo/entrees dans le mode "menu"
 #include "../include/jeu.h" // Fonctions affichage/tempo/entrees dans le mode "jeu"
 #include "../include/identification.h" // Fonctions affichage/tempo/entrees dans le mode "identite"
+#include "../include/multi.h" //Fonctions affichage/tempo/entrees dans le mode "multi"
 
-enum ETAT_JEU { MENU, JEU, FIN, IDENTITE};
+enum ETAT_JEU { MENU, JEU, FIN, MULTI, IDENTITE };
 
 typedef struct jeu{
     int score;

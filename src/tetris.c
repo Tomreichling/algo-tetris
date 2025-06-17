@@ -42,6 +42,7 @@ void gestionEvenement(EvenementGfx evenement){
 		case Temporisation:
             switch (jeu.etat)
             {
+                case MULTI:
                 case JEU: {
                     // On vérifie si on peut descendre la pièce
                     // on la descends ou la place sur grille
@@ -66,6 +67,7 @@ void gestionEvenement(EvenementGfx evenement){
                     }
                     break;
                 }
+
                 case MENU:
                     for(int n = 0; n < NB_PIECES_MENU; n++) {
                         int operation = rand() % 6; 
@@ -163,6 +165,73 @@ void gestionEvenement(EvenementGfx evenement){
                         }
                     }
                     break;
+                case MULTI: //mode multijoueur
+                    affichageJeu();
+                    affichageEnnemi();
+                    // affichageSupp();
+                    affichageBarresScroll(gemme);
+                    afficherProchainePiece(jeu.prochaine_piece);
+
+                    animer_saut();
+                    
+                    //ici on fait la meme chose que pour jeu, on affiche dans la grille les pieces et le previsualisation de la premiere grille
+                    int y_previMulti, y_baseMulti = jeu.piece.y;
+                    while (descente_possible(&jeu.piece)) {   
+                        jeu.piece.y++;
+                    }    
+                    y_previMulti = jeu.piece.y;
+                    jeu.piece.y = y_baseMulti;
+
+                    for (int i = 0; i < 4; i++) {
+                        for (int j = 0; j < 4; j++) {
+                            if (jeu.piece.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherCarreau(jeu.piece.x + i, y_previMulti + j, 8);
+                        }
+                    }
+
+                    for(int i = 0; i < COLONNES; i++) {
+                        for(int j = 0; j < LIGNES; j++) {
+                            if(jeu.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherCarreau(i, j, jeu.grille[i][j]);
+                        }
+                    }
+
+                    for(int i = 0; i < 4; i++) {
+                        for(int j = 0; j < 4; j++) {
+                            if(jeu.piece.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherCarreau(jeu.piece.x + i, jeu.piece.y + j, jeu.piece.grille[i][j]);
+                        }
+                    }
+                    
+                    //fin affichage dans la premiere grille
+                    //on fait la meme chose mais pour la grille ennemi
+                    //on ne met pas de previsualisation car pas besoin
+
+                    for(int i = 0; i < COLONNES; i++) {
+                        for(int j = 0; j < LIGNES; j++) {
+                            if(jeu.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherCarreauEnnemi(i, j, jeu.grille[i][j]);
+                        }
+                    }
+
+                    for(int i = 0; i < 4; i++) {
+                        for(int j = 0; j < 4; j++) {
+                            if(jeu.piece.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherCarreauEnnemi(jeu.piece.x + i, jeu.piece.y + j, jeu.piece.grille[i][j]);
+                        }
+                    }
+                    break;
+                    //fin de l'affichage dans la grille ennemi
             }
 			break;
 		case Clavier: {
@@ -206,7 +275,8 @@ void gestionEvenement(EvenementGfx evenement){
                     
                 case MENU:
                     switch (caractere){
-                        case 27 :
+
+                        case 27 : //echap
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
@@ -216,21 +286,37 @@ void gestionEvenement(EvenementGfx evenement){
                             termineBoucleEvenements();
 					        
                             break;
-                        case 32:
+
+                        case 32: //barre d'espace
                             libereDonneesImageRGBA(&demarrer);
                             // libereDonneesImageRGBA(&multijoueur);
                             // libereDonneesImageRGBA(&quitter);
                             libereDonneesImageRGBA(&gemme);
+
                             stopper_musique();
                             demarrer_jeu();
                             demarrer_musique();
                             libereDonneesImageRGBA(&demarrer);
+
                             // libereDonneesImageRGBA(&multijoueur);
                             // libereDonneesImageRGBA(&quitter);
 
+
                             break;
-                    }
+                        
+                        case 77: //touche M
+                        case 109: //touche m 
+                            stopper_musique();
+                            demarrer_multi();
+                            demarrer_musique();
+                            libereDonneesImageRGBA(&demarrer);
+                            libereDonneesImageRGBA(&multijoueur);
+                            libereDonneesImageRGBA(&quitter);
+                            break;
+                    }   
+                    
                     break;
+                case MULTI:
                 case JEU:
                     entrees_jeu();
                         switch (caractere){
@@ -279,6 +365,7 @@ void gestionEvenement(EvenementGfx evenement){
             if(pause) break;
             switch(jeu.etat) {
                 case JEU:
+                case MULTI:
                     entrees_speciales_jeu();
                     break;
                 default:
