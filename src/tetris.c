@@ -24,7 +24,7 @@ void gestionEvenement(EvenementGfx evenement){
 	static DonneesImageRGBA *quitter = NULL;
     static DonneesImageRGBA *titre = NULL;
     static DonneesImageRGBA *gemme = NULL;
-	
+
 	switch (evenement)
 	{
 		case Initialisation:
@@ -34,7 +34,7 @@ void gestionEvenement(EvenementGfx evenement){
             titre = lisBMPRGBA("./assets/tetrisen.bmp");
             gemme = lisBMPRGBA("./assets/gemme.bmp");
 			demandeTemporisation(-1);
-			jeu.etat = MENU;
+			jeu.etat = IDENTITE;
 
 			break;
 		case Temporisation:
@@ -73,7 +73,12 @@ void gestionEvenement(EvenementGfx evenement){
 		case Affichage:
             switch (jeu.etat)
             {
+                case IDENTITE:
+					afficheIdent(titre);
+                    break;
+
                 case MENU:
+                    recupGemmes();
 					afficheMenu(demarrer, multijoueur, quitter, titre, gemme);
                     break;
                 case JEU:
@@ -128,14 +133,14 @@ void gestionEvenement(EvenementGfx evenement){
 		case Clavier: {
             char caractere = caractereClavier();
             
-            if(caractere == 'f') {
+            if(caractere == 'f' && jeu.etat != IDENTITE) {
                 pleinEcran = !pleinEcran;
                 if (pleinEcran)
                     modePleinEcran();
                 else
                     redimensionneFenetre(LARGEUR, LONGUEUR);
                 break;
-            } else if(caractere == 'p') {
+            } else if(caractere == 'p'  && jeu.etat != IDENTITE) {
                 pause = !pause;
                 if(pause) {
                     demandeTemporisation(-1);
@@ -146,45 +151,66 @@ void gestionEvenement(EvenementGfx evenement){
             if(pause) break;
             switch(jeu.etat) {
                 // *caractereClavier() donne la touche*
+                case IDENTITE:
+                    entreeNom();
+                    switch (caractere){
+
+                        case 27 :
+                            libereDonneesImageRGBA(&demarrer);
+                            libereDonneesImageRGBA(&multijoueur);
+                            libereDonneesImageRGBA(&quitter);
+                            libereDonneesImageRGBA(&titre);
+                            libereDonneesImageRGBA(&gemme);
+                            termineBoucleEvenements();
+                            break;
+                        case 13:
+                            jeu.etat = MENU;
+                            break;
+                    }
+                    break;
+                    
                 case MENU:
                     switch (caractere){
                         case 27 :
-
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
                             libereDonneesImageRGBA(&titre);
                             libereDonneesImageRGBA(&gemme);
                             stopper_musique();
+                            termineBoucleEvenements();
 					        
                             termineBoucleEvenements();
                             break;
                         case 32:
-                            stopper_musique();
-                            demarrer_jeu();
-                            demarrer_musique();
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
-
+                            libereDonneesImageRGBA(&gemme);
+                            stopper_musique();
+                            demarrer_jeu();
+                            demarrer_musique();
                             break;
                     }
                     break;
                 case JEU:
                     entrees_jeu();
-                    if (caractere == 27){
-                        libereDonneesImageRGBA(&demarrer);
-                        libereDonneesImageRGBA(&multijoueur);
-                        libereDonneesImageRGBA(&quitter);
-                        libereDonneesImageRGBA(&titre);
-                        libereDonneesImageRGBA(&gemme);
-                        stopper_musique();
-				        termineBoucleEvenements();
+                        switch (caractere){
+                            case 27 :
+                                libereDonneesImageRGBA(&demarrer);
+                                libereDonneesImageRGBA(&multijoueur);
+                                libereDonneesImageRGBA(&quitter);
+                                libereDonneesImageRGBA(&titre);
+                                libereDonneesImageRGBA(&gemme);
+                                stopper_musique();
+				                termineBoucleEvenements();
+                            break;
                     }
-                    break;
+                    break;                   
                 case FIN:
 				    switch (caractere) {
 				    	case 27 :
+                            enregistrerScores();
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
@@ -194,10 +220,11 @@ void gestionEvenement(EvenementGfx evenement){
                             termineBoucleEvenements();
 				    
 						case 32:
+
+                            enregistrerScores();
                             stopper_musique();
                             demarrer_jeu();
                             demarrer_musique();
-
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);

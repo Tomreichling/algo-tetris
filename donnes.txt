@@ -1,0 +1,12 @@
+Nom : Tim	Gemmes : 280
+Nom : Max	Gemmes : 80
+Nom : Elsa	Gemmes : 40
+Nom : GhostRider	Gemmes : 240
+Nom : NightWolf	Gemmes : 600
+Nom : CyberNinja	Gemmes : 400
+Nom : Flo	Gemmes : 440
+Nom : NeonPhoenix	Gemmes : 520
+Nom : Livio	Gemmes : 720
+Nom : Tom	Gemmes : 480
+Nom : grilla	Gemmes : 0
+Nom : Gwenn	Gemmes : 999

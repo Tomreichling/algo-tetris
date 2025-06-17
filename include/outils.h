@@ -24,5 +24,7 @@ void jumpSoundEffect();
 void moveSoundEffect();
 void ligneSoundEffect();
 void levelUpSoundEffect();
+void recupGemmes();
+void enregistrerScores();
 
 #endif

@@ -5,38 +5,38 @@
 
 void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , DonneesImageRGBA *quitter, DonneesImageRGBA *titre, DonneesImageRGBA *gemme) {
     effaceFenetre(255, 255, 255);
-    int tailleCarreau = hauteurFenetre() / 25;
+    int posCarreau = hauteurFenetre() / 25;
 
 // placement des tétrominos statique de déco
     couleurCourante(0,200,255);
     epaisseurDeTrait(3);
-    rectangle(14*tailleCarreau,17*tailleCarreau, 18*tailleCarreau ,18*tailleCarreau);
+    rectangle(14*posCarreau,17*posCarreau, 18*posCarreau ,18*posCarreau);
 
     couleurCourante(240, 0, 0);
-    rectangle(5*tailleCarreau,3*tailleCarreau, 8*tailleCarreau ,4*tailleCarreau);
-    rectangle(6*tailleCarreau,4*tailleCarreau, 7*tailleCarreau ,5*tailleCarreau);
+    rectangle(5*posCarreau,3*posCarreau, 8*posCarreau ,4*posCarreau);
+    rectangle(6*posCarreau,4*posCarreau, 7*posCarreau ,5*posCarreau);
 
     couleurCourante(240, 160, 0);
-    rectangle(3*tailleCarreau,14*tailleCarreau, 4*tailleCarreau ,17*tailleCarreau);
-    rectangle(4*tailleCarreau,16*tailleCarreau, 5*tailleCarreau ,17*tailleCarreau); 
+    rectangle(3*posCarreau,14*posCarreau, 4*posCarreau ,17*posCarreau);
+    rectangle(4*posCarreau,16*posCarreau, 5*posCarreau ,17*posCarreau); 
 
     couleurCourante(160, 0, 240);
-    rectangle(25*tailleCarreau,6*tailleCarreau, 28*tailleCarreau ,7*tailleCarreau);
-    rectangle(25*tailleCarreau,7*tailleCarreau, 26*tailleCarreau ,8*tailleCarreau); 
+    rectangle(25*posCarreau,6*posCarreau, 28*posCarreau ,7*posCarreau);
+    rectangle(25*posCarreau,7*posCarreau, 26*posCarreau ,8*posCarreau); 
 
     couleurCourante(0, 240, 0);
-    rectangle(30*tailleCarreau,16*tailleCarreau, 31*tailleCarreau ,19*tailleCarreau);
-    rectangle(29*tailleCarreau,17*tailleCarreau, 30*tailleCarreau ,18*tailleCarreau); 
+    rectangle(30*posCarreau,16*posCarreau, 31*posCarreau ,19*posCarreau);
+    rectangle(29*posCarreau,17*posCarreau, 30*posCarreau ,18*posCarreau); 
 
     couleurCourante(0, 0, 0);
-    epaisseurDeTrait(5);
+    epaisseurDeTrait(3);
 
 // recupération des données de largeur et hauteur fenêtre 
-    for (int i = 0; i < largeurFenetre(); i += tailleCarreau) {
+    for (int i = 0; i < largeurFenetre(); i += posCarreau) {
         ligne(i, 0, i, hauteurFenetre());
     }
     
-    for (int j = 0; j < hauteurFenetre(); j += tailleCarreau ){
+    for (int j = 0; j < hauteurFenetre(); j += posCarreau ){
         ligne(0, j, largeurFenetre(), j);
     }
 
@@ -56,9 +56,10 @@ void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , Do
         couleurCourante(255, 255, 255);
         epaisseurDeTrait(5);
 
-        if (jeu.score != 0) {
+        printf("%d", jeu.gemmes);
+        if (jeu.gemmes != 0) {
             char gemmes[15];
-            sprintf(gemmes, "%d", jeu.score);
+            sprintf(gemmes, "%d", jeu.gemmes);
             afficheChaine(gemmes, hauteurFenetre()/20, ((max_x/6) - (gemme->largeurImage/2))/5,(max_y-max_y/8) - gemme->hauteurImage*0.7);
         }
         else {
@@ -79,9 +80,6 @@ void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , Do
             ((max_y/2) - titre->hauteurImage), 
             titre->largeurImage, titre->hauteurImage, (int*) titre->donneesRGBA
         );
-
-    //affichage des tetrominos de déco 
-        
 
 
 

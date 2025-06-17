@@ -3,9 +3,9 @@ UNAME := $(shell uname)
 BUILDDIR := ./build
 SRC := ./src
 SRCFILES := tetris.c tetrominos.c outils.c animations.c \
-	affichage/jeu.c affichage/menu.c affichage/fin.c \
+	affichage/jeu.c affichage/identification.c affichage/menu.c affichage/fin.c \
 	temporisation/jeu.c temporisation/menu.c temporisation/fin.c \
-	entrees/jeu.c entrees/menu.c entrees/fin.c
+	entrees/jeu.c entrees/identification.c entrees/menu.c entrees/fin.c
 OBJFILES := $(patsubst %.c, $(BUILDDIR)/%.o, $(SRCFILES))
 
 all: $(BUILDDIR) $(BUILDDIR)/affichage $(BUILDDIR)/entrees $(BUILDDIR)/temporisation \
@@ -13,7 +13,7 @@ all: $(BUILDDIR) $(BUILDDIR)/affichage $(BUILDDIR)/entrees $(BUILDDIR)/temporisa
 
 tetris: $(OBJFILES) gfx/libisentlib.a 
 ifeq ($(UNAME), Darwin)
-	gcc -Wall -o $@ $^ -lm -framework OpenGL -framework GLUT -lpthread
+	gcc -Wall -o $@ $^ -lm -framework OpenGL -framework GLUT
 else
 	gcc -Wall -o $@ $^ -lm -lglut -lGL -lX11 -lpthread
 endif
