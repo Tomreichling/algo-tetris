@@ -32,7 +32,7 @@ void gestionEvenement(EvenementGfx evenement){
             multijoueur = lisBMPRGBA("./assets/multijoueur.bmp");
             quitter = lisBMPRGBA("./assets/quitter.bmp");
             titre = lisBMPRGBA("./assets/tetrisen.bmp");
-            gemme = lisBMPRGBA("./assets/gemme.bmp");
+            gemme = lisBMPRGBA("./assets/gem.bmp");
 			demandeTemporisation(-1);
 			jeu.etat = MENU;
 
@@ -221,7 +221,4 @@ void gestionEvenement(EvenementGfx evenement){
         default:
             break;
 	}
-
-
 }
-
