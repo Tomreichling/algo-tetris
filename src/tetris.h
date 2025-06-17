@@ -35,18 +35,20 @@
 #include "../include/fin.h" // Fonctions affichage/tempo/entrees dans le mode "fin"
 #include "../include/menu.h" // Fonctions affichage/tempo/entrees dans le mode "menu"
 #include "../include/jeu.h" // Fonctions affichage/tempo/entrees dans le mode "jeu"
+#include "../include/identification.h" // Fonctions affichage/tempo/entrees dans le mode "identite"
 #include "../include/multi.h" //Fonctions affichage/tempo/entrees dans le mode "multi"
 
-enum ETAT_JEU { MENU, JEU, FIN, MULTI };
+enum ETAT_JEU { MENU, JEU, FIN, MULTI, IDENTITE };
 
 typedef struct jeu{
-    int t_demarrage; // temps auquel la partie a commencé (secondes)
     int score;
     int nb_piece; // le nombre de pièce écoulé
     int etat; // enum ETAT_JEU
     char grille[COLONNES][LIGNES];
     int minutes;
     int secondes;
+    char nom[21];
+    int gemmes;
     // actuelle
     Tétrominos piece;
     // next
@@ -54,5 +56,6 @@ typedef struct jeu{
 } Jeu;
 
 extern Jeu jeu;
+extern DonneesImageRGBA *image_gameover;
 
 #endif

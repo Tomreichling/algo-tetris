@@ -2,8 +2,7 @@
 
 static int numero_piece_sautant;
 static Animation *animation_saut;
-static Animation *scintillement = NULL;
-static Animation anim_scintillement;
+static Animation *scintillement;
 
 void lancer_animation_saut() {
     numero_piece_sautant = jeu.nb_piece;
@@ -25,9 +24,8 @@ void animer_saut() {
 }
 
 void lancer_scintillement() {
-    anim_scintillement.interval = 1000;
-    anim_scintillement.etape = 3;
-    scintillement = &anim_scintillement;
+    Animation animation = {1000, 3};
+    scintillement = &animation;
     demandeRedessinDans_ms(scintillement->interval);
 }
 
@@ -59,3 +57,24 @@ void scintillementPalier() {
     }
 }
 
+void animer_gameover() {
+    static int t = 0;
+    if (image_gameover == NULL){
+        return; 
+    }
+    t += 1;
+    unsigned char *pixels = image_gameover->donneesRGBA;
+    for (int i = 0; i < (4 * image_gameover->largeurImage * image_gameover->hauteurImage); i += 4){
+        if(pixels[i] == 0 && pixels[i + 1] == 0 && pixels[i + 2] == 0 && pixels[i + 3] == 0) {
+            // donc zone qui contient pas de texte 
+            continue;
+        }
+
+        // pixels[i] = 80;
+        // pixels[i + 1] = 0;
+        // pixels[i + 2] = 250;
+        pixels[i + 3] = (char) 255.0 * (1.0 + cos (0.1 * t) * 0.5); // devenu un char 
+
+    }
+    demandeRedessinDans_ms(100); 
+}
