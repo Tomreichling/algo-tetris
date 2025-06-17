@@ -218,10 +218,6 @@ void gestionEvenement(EvenementGfx evenement){
                     break;
             }
 			break;
-		case Redimensionnement: 
-			printf("Largeur : %d\t", largeurFenetre());
-			printf("Hauteur : %d\n", hauteurFenetre());
-			break;
         default:
             break;
 	}

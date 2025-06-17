@@ -86,7 +86,6 @@ void assigner_score(int nb_indices) {
 }
 
 void retire_ligne(int i) {
-    
     for (; i > -1; i--) {
         for (int j = 0; j < COLONNES; j++) {
             if (i == 0) {
@@ -100,7 +99,9 @@ void retire_ligne(int i) {
 
 
 void playsound(const char* musique){
-    #ifdef PRODUCTION
+    // Ces fonctions ne marchent pas sur WSL & Macos 
+    // (pour développer facilement, on ne l'active pas)
+    #ifdef PRODUCTION 
         pid_t pid = fork();
         if (pid < 0) return;
         if (pid == 0) {
