@@ -15,6 +15,7 @@ int main(int argc, char **argv)
 
 // Variable globale accessible dans tous le programme.
 Jeu jeu = {0};
+DonneesImageRGBA *image_gameover;
 
 void gestionEvenement(EvenementGfx evenement){
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
@@ -121,7 +122,7 @@ void gestionEvenement(EvenementGfx evenement){
                     }
                     break;
                 case FIN:
-                    // Afficher le jeu + Gameover + score
+                    ecranGameOver(quitter, multijoueur);
                     break;
             }
 			break;
@@ -149,7 +150,6 @@ void gestionEvenement(EvenementGfx evenement){
                 case MENU:
                     switch (caractere){
                         case 27 :
-
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);
@@ -164,8 +164,8 @@ void gestionEvenement(EvenementGfx evenement){
                             demarrer_jeu();
                             demarrer_musique();
                             libereDonneesImageRGBA(&demarrer);
-                            libereDonneesImageRGBA(&multijoueur);
-                            libereDonneesImageRGBA(&quitter);
+                            // libereDonneesImageRGBA(&multijoueur);
+                            // libereDonneesImageRGBA(&quitter);
 
                             break;
                     }
@@ -190,14 +190,16 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&quitter);
                             libereDonneesImageRGBA(&titre);
                             libereDonneesImageRGBA(&gemme);
+                            libereDonneesImageRGBA(&image_gameover);
                             stopper_musique();
                             termineBoucleEvenements();
-				    
-						case 32:
+                            
+                            case 32:
                             stopper_musique();
                             demarrer_jeu();
                             demarrer_musique();
-
+                            
+                            libereDonneesImageRGBA(&image_gameover);
                             libereDonneesImageRGBA(&demarrer);
                             libereDonneesImageRGBA(&multijoueur);
                             libereDonneesImageRGBA(&quitter);

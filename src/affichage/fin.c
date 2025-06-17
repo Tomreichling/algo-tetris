@@ -1,32 +1,30 @@
+#include "../tetris.h"
 
-// // #include "../gfx/GfxLib.h"
-// // #include "../gfx/ESLib.h"
-// // #include "tetris.h"
 
-// couleurCourante(255, 0, 0);
+void ecranGameOver(DonneesImageRGBA *quitter, DonneesImageRGBA *multijoueur) {
+    int max_x = largeurFenetre();
+    int max_y = hauteurFenetre();
+    int padding = 64;
 
-// void ecranGameOver (){
-//     EffaceFenetre(BLACK);
-//     for (int x = 0; x < COLONNES; x++) {
-//         for (int y = 0; y < LIGNES; y++) {
-//             if (jeu.grille[x][y] != 0) {
-
-//                 // a revoir 
-//                 // ChoisitCouleurDessin(BLANC);
-//                 // RemplitRectangle(x * TAILLE_CASE, y * TAILLE_CASE, TAILLE_CASE, TAILLE_CASE);
-            
-//     }
-// }
-// }
-
-// }
-
-// int largeurTexte = TailleTexte("GAME OVER");
-
-// // a mettre ds le switch principal 
-
-// // case fin: 
-
-// // ecranGameOver ();
-
-// // break; 
+    effaceFenetre(255, 255, 255);
+    affichageJeu();
+    ecrisImageARVB(
+        (max_x - padding - quitter->largeurImage),
+        (padding), 
+        quitter->largeurImage, quitter->hauteurImage, (int*) quitter->donneesRGBA
+    );
+    ecrisImageARVB(
+        (max_x - padding - multijoueur->largeurImage),
+        (max_y / 2 - multijoueur->hauteurImage / 2), 
+        multijoueur->largeurImage, multijoueur->hauteurImage, (int*) multijoueur->donneesRGBA
+    );
+    afficherScore(); 
+    animer_gameover();
+    gameOverSoundEffect();
+    
+    ecrisImageARVB(
+        max_x - padding - image_gameover->largeurImage,
+        max_y - padding - image_gameover->hauteurImage,
+        image_gameover->largeurImage, image_gameover->hauteurImage, (int*) image_gameover->donneesRGBA   
+    );
+}

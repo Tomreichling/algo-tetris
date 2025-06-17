@@ -24,5 +24,6 @@ void jumpSoundEffect();
 void moveSoundEffect();
 void ligneSoundEffect();
 void levelUpSoundEffect();
+void gameOverSoundEffect();
 
 #endif

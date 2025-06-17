@@ -52,5 +52,6 @@ typedef struct jeu{
 } Jeu;
 
 extern Jeu jeu;
+extern DonneesImageRGBA *image_gameover;
 
 #endif
