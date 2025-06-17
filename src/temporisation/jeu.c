@@ -86,7 +86,6 @@ void assigner_score(int nb_indices) {
 }
 
 void retire_ligne(int i) {
-    
     for (; i > -1; i--) {
         for (int j = 0; j < COLONNES; j++) {
             if (i == 0) {
@@ -100,20 +99,26 @@ void retire_ligne(int i) {
 
 
 void playsound(const char* musique){
-    pid_t pid = fork();
-    if (pid < 0) return;
-    if (pid == 0) {
-        setup_death_signal();
-        #ifdef __linux__
-        execlp("aplay", "aplay", musique, (char *)NULL);
-        #elif __APPLE__
-        execlp("afplay", "afplay", musique, (char *)NULL);
-        #endif
-        exit(EXIT_FAILURE);
-    }
+    // Ces fonctions ne marchent pas sur WSL & Macos 
+    // (pour développer facilement, on ne l'active pas)
+    #ifdef PRODUCTION 
+        pid_t pid = fork();
+        if (pid < 0) return;
+        if (pid == 0) {
+            setup_death_signal();
+            #ifdef __linux__
+            execlp("aplay", "aplay", musique, (char *)NULL);
+            #elif __APPLE__
+            execlp("afplay", "afplay", musique, (char *)NULL);
+            #endif
+            exit(EXIT_FAILURE);
+        }
+    #endif
 }
 
 void setup_death_signal() {
-    if (prctl(PR_SET_PDEATHSIG, SIGTERM) == -1) exit(EXIT_FAILURE);
-    if (getppid() == 1) exit(EXIT_FAILURE);
+    #ifdef PRODUCTION
+        if (prctl(PR_SET_PDEATHSIG, SIGTERM) == -1) exit(EXIT_FAILURE);
+        if (getppid() == 1) exit(EXIT_FAILURE);
+    #endif
 }

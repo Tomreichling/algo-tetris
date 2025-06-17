@@ -1,45 +1,25 @@
 #include "../tetris.h"
 
-#define LargeurFenetre 800
-#define HauteurFenetre 600
+Tétrominos pieces_menu[NB_PIECES_MENU];
 
-void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , DonneesImageRGBA *quitter, DonneesImageRGBA *titre, DonneesImageRGBA *gemme) {
+void afficheGrilleMenu() {
     effaceFenetre(255, 255, 255);
     int posCarreau = hauteurFenetre() / 25;
-
-// placement des tétrominos statique de déco
-    couleurCourante(0,200,255);
-    epaisseurDeTrait(3);
-    rectangle(14*posCarreau,17*posCarreau, 18*posCarreau ,18*posCarreau);
-
-    couleurCourante(240, 0, 0);
-    rectangle(5*posCarreau,3*posCarreau, 8*posCarreau ,4*posCarreau);
-    rectangle(6*posCarreau,4*posCarreau, 7*posCarreau ,5*posCarreau);
-
-    couleurCourante(240, 160, 0);
-    rectangle(3*posCarreau,14*posCarreau, 4*posCarreau ,17*posCarreau);
-    rectangle(4*posCarreau,16*posCarreau, 5*posCarreau ,17*posCarreau); 
-
-    couleurCourante(160, 0, 240);
-    rectangle(25*posCarreau,6*posCarreau, 28*posCarreau ,7*posCarreau);
-    rectangle(25*posCarreau,7*posCarreau, 26*posCarreau ,8*posCarreau); 
-
-    couleurCourante(0, 240, 0);
-    rectangle(30*posCarreau,16*posCarreau, 31*posCarreau ,19*posCarreau);
-    rectangle(29*posCarreau,17*posCarreau, 30*posCarreau ,18*posCarreau); 
 
     couleurCourante(0, 0, 0);
     epaisseurDeTrait(3);
 
-// recupération des données de largeur et hauteur fenêtre 
-    for (int i = 0; i < largeurFenetre(); i += posCarreau) {
+    // recupération des données de largeur et hauteur fenêtre 
+    for (int i = 0; i < largeurFenetre(); i += tailleCarreau) {
         ligne(i, 0, i, hauteurFenetre());
     }
     
     for (int j = 0; j < hauteurFenetre(); j += posCarreau ){
         ligne(0, j, largeurFenetre(), j);
     }
+}
 
+void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , DonneesImageRGBA *quitter, DonneesImageRGBA *titre, DonneesImageRGBA *gemme) {
     if (demarrer != NULL && mutlijoueur != NULL && quitter != NULL) {
         int max_x = largeurFenetre();
         int max_y = hauteurFenetre();
@@ -105,4 +85,85 @@ void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , Do
     couleurCourante(0, 0, 15);
     epaisseurDeTrait(3);
     afficheChaine("Projet etudiant 2025, tous droits reserves", hauteurFenetre()/50, largeurFenetre()-largeurFenetre()/3,  28);
+}
+void afficherCarreauMenu(int x, int y, char couleur) {
+    int taille_carreau = hauteurFenetre() / 25;
+
+    //on prend les coordonnées des carreaux a colorier
+    int posXD = x * taille_carreau;
+    int posYD = (25 - y) * taille_carreau;
+    int posXA = (x + 1) * taille_carreau;
+    int posYA = (25 - y - 1) * taille_carreau;
+
+    epaisseurDeTrait(3);
+    switch (couleur) {
+        case 1:
+            couleurCourante(240, 240, 0); //jaune
+            break;
+        case 2:
+            couleurCourante(160, 0, 240); //violet
+            break;
+        case 3:
+            couleurCourante(240, 160, 0); //orange
+            break;
+        case 4:
+            couleurCourante(0, 240, 240); //turquoise
+            break;
+        case 5:
+            couleurCourante(0, 0, 220); //bleu
+            break;
+        case 6:
+            couleurCourante(0, 220, 0); //vert
+            break;
+        case 7:
+            couleurCourante(220, 0, 0);//rouge
+            break;
+        case 8:
+            couleurCourante(150, 150, 150); //gris previsualisation
+            break;
+    }
+    rectangle(posXD + 1, posYD - 1, posXA - 1, posYA + 1);
+    switch (couleur) {
+        case 1:
+            couleurCourante(255, 255, 0); //jaune
+            break;
+        case 2:
+            couleurCourante(180, 0, 255); //violet
+            break;
+        case 3:
+            couleurCourante(255, 180, 0); //orange
+            break;
+        case 4:
+            couleurCourante(0, 255, 255); //turquoise
+            break;
+        case 5:
+            couleurCourante(0, 0, 255); //bleu
+            break;
+        case 6:
+            couleurCourante(0, 255, 0); //vert
+            break;
+        case 7:
+            couleurCourante(255, 0, 0);//rouge
+            break;
+        case 8:
+            couleurCourante(170, 170, 170); //gris previsualisation
+            break;
+    }
+    rectangle(posXD + 8, posYD - 8, posXA - 8, posYA + 8);
+}
+
+void afficherPiecesMenu() {
+    for(int n = 0; n < NB_PIECES_MENU; n++) {
+        Tétrominos *piece = &pieces_menu[n];
+        for(int i = 0; i < 4; i++) {
+            for(int j = 0; j < 4; j++) {
+                int x = piece->x + i;
+                int y = piece->y + j;
+                if(piece->grille[i][j] == 0) {
+                    continue;
+                }
+                afficherCarreauMenu(x, y, piece->grille[i][j]);
+            }
+        }
+    }
 }

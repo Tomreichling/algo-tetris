@@ -1,6 +1,4 @@
 #include "tetris.h"
-#include "stdlib.h"
-#include "stdio.h"
 
 #define SIZE 4 
 
@@ -139,12 +137,12 @@ void TournerTetrominos(Tétrominos* piece) {
     rafraichisFenetre();
 }
 
-// Créer un Tétrominos aléatoirement (tu utiliseras la fonction Creer Tetrominos)
+// Créer un Tétrominos aléatoirement
 Tétrominos NouveauTetrominos() {
     // 7 formes
     static int figures[7];
     if(jeu.nb_piece % 7 == 0) {
-        // Remplir le tableau avec des valeurs aléatoires distinctes entre 0 et 6
+        // Remplis le tableau avec des valeurs aléatoires distinctes entre 0 et 6
         int nb_figures = 0;
 
         for (int i = 0; i < 7; i++){
