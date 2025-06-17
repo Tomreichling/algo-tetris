@@ -31,6 +31,7 @@ void demarrer_jeu() {
 }
 
 void gameover() {
+    image_gameover = lisBMPRGBA("./assets/gameover.bmp");
     jeu.etat = FIN;
     rafraichisFenetre();
     // on arrête les tics

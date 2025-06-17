@@ -20,4 +20,5 @@ void lancer_animation_saut();
 void animer_saut();
 void lancer_scintillement();
 void scintillementPalier();
+void animer_gameover();
 #endif

@@ -26,5 +26,6 @@ void ligneSoundEffect();
 void levelUpSoundEffect();
 void recupGemmes();
 void enregistrerScores();
+void gameOverSoundEffect();
 
 #endif
