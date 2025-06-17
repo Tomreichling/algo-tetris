@@ -69,8 +69,8 @@ void initialiser_pieces_menu() {
     int largeur = largeurFenetre();
     for(int i = 0; i < NB_PIECES_MENU; i++) {
         pieces_menu[i] = CreerTetrominos(rand() % 7);
-        int x = rand() % (largeur / taille_carreau);
-        int y = rand() % 26;
+        int x = rand() % (largeur / taille_carreau - 4);
+        int y = rand() % 22;
 
         pieces_menu[i].x = x;
         pieces_menu[i].y = y;

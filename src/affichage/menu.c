@@ -88,7 +88,6 @@ void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , Do
     epaisseurDeTrait(3);
     afficheChaine("Projet etudiant 2025, tous droits reserves", hauteurFenetre()/50, largeurFenetre()-largeurFenetre()/3,  28);
 }
-
 void afficherCarreauMenu(int x, int y, char couleur) {
     int taille_carreau = hauteurFenetre() / 25;
 
@@ -152,7 +151,7 @@ void afficherCarreauMenu(int x, int y, char couleur) {
             couleurCourante(170, 170, 170); //gris previsualisation
             break;
     }
-    rectangle(posXD + 10, posYD - 10, posXA - 10, posYA + 10);
+    rectangle(posXD + 8, posYD - 8, posXA - 8, posYA + 8);
 }
 
 void afficherPiecesMenu() {
