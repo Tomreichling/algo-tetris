@@ -1,6 +1,4 @@
 #include "tetris.h"
-#include "stdlib.h"
-#include "stdio.h"
 
 #define SIZE 4 
 

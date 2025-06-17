@@ -35,8 +35,9 @@
 #include "../include/fin.h" // Fonctions affichage/tempo/entrees dans le mode "fin"
 #include "../include/menu.h" // Fonctions affichage/tempo/entrees dans le mode "menu"
 #include "../include/jeu.h" // Fonctions affichage/tempo/entrees dans le mode "jeu"
+#include "../include/identification.h" // Fonctions affichage/tempo/entrees dans le mode "identite"
 
-enum ETAT_JEU { MENU, JEU, FIN };
+enum ETAT_JEU { MENU, JEU, FIN, IDENTITE};
 
 typedef struct jeu{
     int score;
@@ -45,6 +46,8 @@ typedef struct jeu{
     char grille[COLONNES][LIGNES];
     int minutes;
     int secondes;
+    char nom[21];
+    int gemmes;
     // actuelle
     Tétrominos piece;
     // next
