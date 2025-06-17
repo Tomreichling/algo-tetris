@@ -10,7 +10,7 @@ void afficheGrilleMenu() {
     epaisseurDeTrait(3);
 
     // recupération des données de largeur et hauteur fenêtre 
-    for (int i = 0; i < largeurFenetre(); i += tailleCarreau) {
+    for (int i = 0; i < largeurFenetre(); i += posCarreau ) {
         ligne(i, 0, i, hauteurFenetre());
     }
     

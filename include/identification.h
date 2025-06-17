@@ -4,6 +4,6 @@
 
 void afficheIdent(DonneesImageRGBA *titre);
 
-void entreeNom(); 
+void entreeNom();
 
 #endif
