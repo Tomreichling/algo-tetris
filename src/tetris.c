@@ -64,6 +64,9 @@ void gestionEvenement(EvenementGfx evenement){
                     }
                     break;
                 }
+                case MULTI:
+                    descendre_piece();
+                    break;
                 default:
                     break;
             }
@@ -126,7 +129,83 @@ void gestionEvenement(EvenementGfx evenement){
                 case MULTI: //mode multijoueur
                     affichageJeu();
                     affichageEnnemi();
+                    // affichageSupp();
+                    afficherProchainePiece(jeu.prochaine_piece);
+
+                    animer_saut();
+                    
+                    //ici on fait la meme chose que pour jeu, on affiche dans la grille les pieces et le previsualisation de la premiere grille
+                    int y_previMulti, y_baseMulti = jeu.piece.y;
+                    while (descente_possible(&jeu.piece)) {   
+                        jeu.piece.y++;
+                    }    
+                    y_previMulti = jeu.piece.y;
+                    jeu.piece.y = y_baseMulti;
+
+                    for (int i = 0; i < 4; i++) {
+                        for (int j = 0; j < 4; j++) {
+                            if (jeu.piece.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherCarreau(jeu.piece.x + i, y_previMulti + j, 8);
+                        }
+                    }
+
+                    for(int i = 0; i < COLONNES; i++) {
+                        for(int j = 0; j < LIGNES; j++) {
+                            if(jeu.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherCarreau(i, j, jeu.grille[i][j]);
+                        }
+                    }
+
+                    for(int i = 0; i < 4; i++) {
+                        for(int j = 0; j < 4; j++) {
+                            if(jeu.piece.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherCarreau(jeu.piece.x + i, jeu.piece.y + j, jeu.piece.grille[i][j]);
+                        }
+                    }
                     break;
+                    //fin affichage dans la premiere grille
+                    //on fait la meme chose mais pour la grille ennemi
+                    int y_previEnnemi, y_baseEnnemi = jeu.piece.y;
+                    while (descente_possible(&jeu.piece)) {   
+                        jeu.piece.y++;
+                    }    
+                    y_previEnnemi = jeu.piece.y;
+                    jeu.piece.y = y_baseEnnemi;
+
+                    for (int i = 0; i < 4; i++) {
+                        for (int j = 0; j < 4; j++) {
+                            if (jeu.piece.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherCarreauEnnemi(jeu.piece.x + i, y_previEnnemi + j, 8);
+                        }
+                    }
+
+                    for(int i = 0; i < COLONNES; i++) {
+                        for(int j = 0; j < LIGNES; j++) {
+                            if(jeu.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherCarreauEnnemi(i, j, jeu.grille[i][j]);
+                        }
+                    }
+
+                    for(int i = 0; i < 4; i++) {
+                        for(int j = 0; j < 4; j++) {
+                            if(jeu.piece.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherCarreauEnnemi(jeu.piece.x + i, jeu.piece.y + j, jeu.piece.grille[i][j]);
+                        }
+                    }
+                    break;
+                    //fin de l'affichage dans la grille ennemi
             }
 			break;
 		case Clavier: {
@@ -218,6 +297,9 @@ void gestionEvenement(EvenementGfx evenement){
 							break;
 					}
                     break;
+                case MULTI:
+                    entrees_jeu();
+                    break;
             }
             break;
         }
@@ -227,6 +309,8 @@ void gestionEvenement(EvenementGfx evenement){
                 case JEU:
                     entrees_speciales_jeu();
                     break;
+                case MULTI:
+                    entrees_speciales_jeu();
                 default:
                     break;
             }

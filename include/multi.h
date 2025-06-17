@@ -6,8 +6,9 @@
 void affichageEnnemi();
 
 //affiche les choses supplémentaire a la grille
-void affichageSupp();
+// void affichageSupp();
 
-
+//affiche la grille ennemi
+void afficherCarreauEnnemi(int x, int y, char couleur);
 
 #endif
