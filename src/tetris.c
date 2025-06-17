@@ -154,6 +154,14 @@ void gestionEvenement(EvenementGfx evenement){
                     break;
                 case FIN:
                     ecranGameOver(quitter, multijoueur);
+                    for(int i = 0; i < COLONNES; i++) {
+                        for(int j = 0; j < LIGNES; j++) {
+                            if(jeu.grille[i][j] == 0) {
+                                continue;
+                            }
+                            afficherCarreau(i, j, jeu.grille[i][j]);
+                        }
+                    }
                     break;
             }
 			break;

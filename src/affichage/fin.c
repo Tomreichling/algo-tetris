@@ -18,7 +18,8 @@ void ecranGameOver(DonneesImageRGBA *quitter, DonneesImageRGBA *multijoueur) {
         (max_y / 2 - multijoueur->hauteurImage / 2), 
         multijoueur->largeurImage, multijoueur->hauteurImage, (int*) multijoueur->donneesRGBA
     );
-    afficherScore(); 
+    // afficherScore(); 
+    
     animer_gameover();
     gameOverSoundEffect();
     
