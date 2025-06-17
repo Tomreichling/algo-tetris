@@ -262,6 +262,7 @@ void gestionEvenement(EvenementGfx evenement){
                     }   
                     
                     break;
+                case MULTI:
                 case JEU:
                     entrees_jeu();
                     if (caractere == 27){
@@ -297,9 +298,6 @@ void gestionEvenement(EvenementGfx evenement){
 							break;
 					}
                     break;
-                case MULTI:
-                    entrees_jeu();
-                    break;
             }
             break;
         }
@@ -307,10 +305,9 @@ void gestionEvenement(EvenementGfx evenement){
             if(pause) break;
             switch(jeu.etat) {
                 case JEU:
-                    entrees_speciales_jeu();
-                    break;
                 case MULTI:
                     entrees_speciales_jeu();
+                    break;
                 default:
                     break;
             }
