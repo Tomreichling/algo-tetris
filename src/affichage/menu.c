@@ -36,7 +36,6 @@ void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , Do
         couleurCourante(255, 255, 255);
         epaisseurDeTrait(5);
 
-        printf("%d", jeu.gemmes);
         if (jeu.gemmes != 0) {
             char gemmes[15];
             sprintf(gemmes, "%d", jeu.gemmes);
