@@ -71,8 +71,7 @@ void animer_gameover() {
         // pixels[i] = 80;
         // pixels[i + 1] = 0;
         // pixels[i + 2] = 250;
-        pixels[i + 3] = (char) 255.0 * (1.0 + cos (0.1 * t) * 0.5); // devenu un char 
-
+        pixels[i + 3] = (char) 127.5 * (1.0 + cos(0.01 * t)); // devenu un char 
     }
     demandeRedessinDans_ms(100); 
 }

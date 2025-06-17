@@ -2,7 +2,7 @@
 #define FIN_H
 #include "../src/tetris.h"
 // affichage
-void ecranGameOver(DonneesImageRGBA *quitter, DonneesImageRGBA *multijoueur);
+void ecranGameOver();
 // temporisation
 
 // entrees
