@@ -50,9 +50,7 @@ void scintillementPalier() {
         // ligne(marge + (taille_carreau * COLONNES), marge, marge + (taille_carreau * COLONNES), marge + (taille_carreau * LIGNES));
         scintillement->etape--;
         demandeRedessinDans_ms(scintillement->interval);
-    
-    } 
-    else {
+    } else {
         scintillement = NULL;
     }
 }

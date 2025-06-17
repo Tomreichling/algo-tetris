@@ -28,4 +28,7 @@ void ecranGameOver(DonneesImageRGBA *quitter, DonneesImageRGBA *multijoueur) {
         max_y - padding - image_gameover->hauteurImage,
         image_gameover->largeurImage, image_gameover->hauteurImage, (int*) image_gameover->donneesRGBA   
     );
+    afficherScore(); 
+    animer_gameover();
+    gameOverSoundEffect();
 }

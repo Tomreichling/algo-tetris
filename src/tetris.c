@@ -16,24 +16,24 @@ int main(int argc, char **argv)
 // Variable globale accessible dans tous le programme.
 Jeu jeu = {0};
 DonneesImageRGBA *image_gameover;
+DonneesImageRGBA *image_demarrer;
+DonneesImageRGBA *image_multijoueur;
+DonneesImageRGBA *image_quitter;
+DonneesImageRGBA *image_titre;
+DonneesImageRGBA *image_gemme;
 
 void gestionEvenement(EvenementGfx evenement){
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
 	static bool pause = false;
-	static DonneesImageRGBA *demarrer = NULL;
-	static DonneesImageRGBA *multijoueur = NULL;
-	static DonneesImageRGBA *quitter = NULL;
-    static DonneesImageRGBA *titre = NULL;
-    static DonneesImageRGBA *gemme = NULL;
 
 	switch (evenement)
 	{
 		case Initialisation:
-            demarrer = lisBMPRGBA("./assets/demarrer.bmp");
-            multijoueur = lisBMPRGBA("./assets/multijoueur.bmp");
-            quitter = lisBMPRGBA("./assets/quitter.bmp");
-            titre = lisBMPRGBA("./assets/tetrisen.bmp");
-            gemme = lisBMPRGBA("./assets/gem.bmp");
+            image_demarrer = lisBMPRGBA("./assets/demarrer.bmp");
+            image_multijoueur = lisBMPRGBA("./assets/multijoueur.bmp");
+            image_quitter = lisBMPRGBA("./assets/quitter.bmp");
+            image_titre = lisBMPRGBA("./assets/tetrisen.bmp");
+            image_gemme = lisBMPRGBA("./assets/gem.bmp");
 			demandeTemporisation(-1);
 			jeu.etat = IDENTITE;
 
@@ -101,19 +101,18 @@ void gestionEvenement(EvenementGfx evenement){
             switch (jeu.etat)
             {
                 case IDENTITE:
-					afficheIdent(titre);
+					afficheIdent(image_titre);
                     break;
-
                 case MENU:
                     recupGemmes();
                     afficheGrilleMenu();
                     afficherPiecesMenu();
-					afficheMenu(demarrer, multijoueur, quitter, titre, gemme);
+					afficheMenu(image_demarrer, image_multijoueur, image_quitter, image_titre, image_gemme);
                     break;
                 case JEU:
 					affichageJeu();
                     scintillementPalier();
-					afficherTitre(16, 3, titre);
+					afficherTitre(16, 3, image_titre);
 					afficherProchainePiece(jeu.prochaine_piece);
 					afficherAides();
 					afficherScore();
@@ -155,7 +154,7 @@ void gestionEvenement(EvenementGfx evenement){
                     }
                     break;
                 case FIN:
-                    ecranGameOver(quitter, multijoueur);
+                    ecranGameOver(image_quitter, image_multijoueur);
                     for(int i = 0; i < COLONNES; i++) {
                         for(int j = 0; j < LIGNES; j++) {
                             if(jeu.grille[i][j] == 0) {
@@ -169,7 +168,7 @@ void gestionEvenement(EvenementGfx evenement){
                     affichageJeu();
                     affichageEnnemi();
                     // affichageSupp();
-                    affichageBarresScroll(gemme);
+                    affichageBarresScroll(image_gemme);
                     afficherProchainePiece(jeu.prochaine_piece);
 
                     animer_saut();
@@ -260,11 +259,11 @@ void gestionEvenement(EvenementGfx evenement){
                     switch (caractere){
 
                         case 27 :
-                            libereDonneesImageRGBA(&demarrer);
-                            libereDonneesImageRGBA(&multijoueur);
-                            libereDonneesImageRGBA(&quitter);
-                            libereDonneesImageRGBA(&titre);
-                            libereDonneesImageRGBA(&gemme);
+                            libereDonneesImageRGBA(&image_demarrer);
+                            libereDonneesImageRGBA(&image_multijoueur);
+                            libereDonneesImageRGBA(&image_quitter);
+                            libereDonneesImageRGBA(&image_titre);
+                            libereDonneesImageRGBA(&image_gemme);
                             termineBoucleEvenements();
                             break;
                         case 13:
@@ -275,43 +274,35 @@ void gestionEvenement(EvenementGfx evenement){
                     
                 case MENU:
                     switch (caractere){
-
                         case 27 : //echap
-                            libereDonneesImageRGBA(&demarrer);
-                            libereDonneesImageRGBA(&multijoueur);
-                            libereDonneesImageRGBA(&quitter);
-                            libereDonneesImageRGBA(&titre);
-                            libereDonneesImageRGBA(&gemme);
+                            libereDonneesImageRGBA(&image_demarrer);
+                            libereDonneesImageRGBA(&image_multijoueur);
+                            libereDonneesImageRGBA(&image_quitter);
+                            libereDonneesImageRGBA(&image_titre);
+                            libereDonneesImageRGBA(&image_gemme);
                             stopper_musique();
                             termineBoucleEvenements();
 					        
                             break;
 
                         case 32: //barre d'espace
-                            libereDonneesImageRGBA(&demarrer);
-                            // libereDonneesImageRGBA(&multijoueur);
-                            // libereDonneesImageRGBA(&quitter);
-                            libereDonneesImageRGBA(&gemme);
+                            libereDonneesImageRGBA(&image_demarrer);
+                            libereDonneesImageRGBA(&image_gemme);
+                            libereDonneesImageRGBA(&image_quitter);
 
                             stopper_musique();
                             demarrer_jeu();
                             demarrer_musique();
-                            libereDonneesImageRGBA(&demarrer);
-
-                            // libereDonneesImageRGBA(&multijoueur);
-                            // libereDonneesImageRGBA(&quitter);
-
 
                             break;
-                        
                         case 77: //touche M
                         case 109: //touche m 
                             stopper_musique();
                             demarrer_multi();
                             demarrer_musique();
-                            libereDonneesImageRGBA(&demarrer);
-                            libereDonneesImageRGBA(&multijoueur);
-                            libereDonneesImageRGBA(&quitter);
+                            libereDonneesImageRGBA(&image_demarrer);
+                            libereDonneesImageRGBA(&image_multijoueur);
+                            libereDonneesImageRGBA(&image_quitter);
                             break;
                     }   
                     
@@ -321,11 +312,11 @@ void gestionEvenement(EvenementGfx evenement){
                     entrees_jeu();
                         switch (caractere){
                             case 27 :
-                                libereDonneesImageRGBA(&demarrer);
-                                libereDonneesImageRGBA(&multijoueur);
-                                libereDonneesImageRGBA(&quitter);
-                                libereDonneesImageRGBA(&titre);
-                                libereDonneesImageRGBA(&gemme);
+                                libereDonneesImageRGBA(&image_demarrer);
+                                libereDonneesImageRGBA(&image_multijoueur);
+                                libereDonneesImageRGBA(&image_quitter);
+                                libereDonneesImageRGBA(&image_titre);
+                                libereDonneesImageRGBA(&image_gemme);
                                 stopper_musique();
 				                termineBoucleEvenements();
                             break;
@@ -335,26 +326,27 @@ void gestionEvenement(EvenementGfx evenement){
 				    switch (caractere) {
 				    	case 27 :
                             enregistrerScores();
-                            libereDonneesImageRGBA(&demarrer);
-                            libereDonneesImageRGBA(&multijoueur);
-                            libereDonneesImageRGBA(&quitter);
-                            libereDonneesImageRGBA(&titre);
-                            libereDonneesImageRGBA(&gemme);
+                            libereDonneesImageRGBA(&image_demarrer);
+                            libereDonneesImageRGBA(&image_multijoueur);
+                            libereDonneesImageRGBA(&image_quitter);
+                            libereDonneesImageRGBA(&image_titre);
+                            libereDonneesImageRGBA(&image_gemme);
                             libereDonneesImageRGBA(&image_gameover);
                             stopper_musique();
                             termineBoucleEvenements();
-				    
-						case 32:
-
+                            
+                        case 32:
+                            
                             enregistrerScores();
                             stopper_musique();
                             demarrer_jeu();
                             demarrer_musique();
-
-                            libereDonneesImageRGBA(&demarrer);
-                            libereDonneesImageRGBA(&multijoueur);
-                            libereDonneesImageRGBA(&quitter);
-                            libereDonneesImageRGBA(&gemme);
+                            
+                            libereDonneesImageRGBA(&image_gameover);
+                            libereDonneesImageRGBA(&image_demarrer);
+                            libereDonneesImageRGBA(&image_multijoueur);
+                            libereDonneesImageRGBA(&image_quitter);
+                            libereDonneesImageRGBA(&image_gemme);
 							break;
 					}
                     break;
@@ -372,6 +364,13 @@ void gestionEvenement(EvenementGfx evenement){
                     break;
             }
 			break;
+        case BoutonSouris:
+            switch(jeu.etat) {
+                case MENU:
+                    boutons_souris_menu();
+                    break;
+            }
+            break;
         default:
             break;
 	}
