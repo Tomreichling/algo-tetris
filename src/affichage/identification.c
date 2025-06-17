@@ -19,11 +19,12 @@ void afficheIdent(DonneesImageRGBA *titre) {
         );
 
     couleurCourante(0,0,10);
-    epaisseurDeTrait(5);
+    epaisseurDeTrait(7);
     afficheChaine( "entrez votre nom : ",70,largeurFenetre()/2 - (60 * strlen("entrez votre nom : ")/2)/2, y2 + hauteurFenetre()/30);
 
     couleurCourante(181,56,202);
     rectangle(x1, y1, x2, y2);
+    epaisseurDeTrait(8);
 
     if (strlen(jeu.nom)){
         couleurCourante(255,255,255),
