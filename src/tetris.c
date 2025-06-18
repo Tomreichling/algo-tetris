@@ -45,6 +45,9 @@ void gestionEvenement(EvenementGfx evenement){
             switch (jeu.etat)
             {
                 case MULTI:
+                    if(instance_socket == NULL) {
+                        break;
+                    }
                 case JEU: {
                     // On vérifie si on peut descendre la pièce
                     // on la descends ou la place sur grille
@@ -66,6 +69,15 @@ void gestionEvenement(EvenementGfx evenement){
                     // On supprime les lignes complètes en partant du haut de la grille
                     for(int i = 0; i < lignes; i++) {
                         retire_ligne(indices[i]);
+                    }
+                    if(instance_socket != NULL && jeu.etat == MULTI) {
+                        int *donnees = (int *) malloc(sizeof(int));
+                        if(donnees != NULL) {
+                            donnees[0] = jeu.score;
+                            envoyer_socket(0, donnees, instance_socket->socketfd, DESTINATAIRE, PORT);
+                            free(donnees);
+                        }
+                        envoyer_grille();
                     }
                     break;
                 }
@@ -209,6 +221,10 @@ void gestionEvenement(EvenementGfx evenement){
                             afficherCarreau(jeu.piece.x + i, jeu.piece.y + j, jeu.piece.grille[i][j]);
                         }
                     }
+
+                    if(instance_socket == NULL) {
+                        break;
+                    }
                     
                     //fin affichage dans la premiere grille
                     //on fait la meme chose mais pour la grille ennemi
@@ -219,16 +235,7 @@ void gestionEvenement(EvenementGfx evenement){
                             if(jeu.grille[i][j] == 0) {
                                 continue;
                             }
-                            afficherCarreauEnnemi(i, j, jeu.grille[i][j]);
-                        }
-                    }
-
-                    for(int i = 0; i < 4; i++) {
-                        for(int j = 0; j < 4; j++) {
-                            if(jeu.piece.grille[i][j] == 0) {
-                                continue;
-                            }
-                            afficherCarreauEnnemi(jeu.piece.x + i, jeu.piece.y + j, jeu.piece.grille[i][j]);
+                            afficherCarreauEnnemi(i, j, instance_socket->grille[i][j]);
                         }
                     }
                     break;
@@ -308,16 +315,16 @@ void gestionEvenement(EvenementGfx evenement){
                 case MULTI: 
                 case JEU:
                     entrees_jeu();
-                        switch (caractere){
-                            case 27: // echap
-                                libereDonneesImageRGBA(&image_demarrer);
-                                libereDonneesImageRGBA(&image_multijoueur);
-                                libereDonneesImageRGBA(&image_quitter);
-                                libereDonneesImageRGBA(&image_titre);
-                                libereDonneesImageRGBA(&image_gemme);
-                                stopper_musique();
-				                termineBoucleEvenements();
-                            break;
+                    switch (caractere){
+                        case 27: // echap
+                            libereDonneesImageRGBA(&image_demarrer);
+                            libereDonneesImageRGBA(&image_multijoueur);
+                            libereDonneesImageRGBA(&image_quitter);
+                            libereDonneesImageRGBA(&image_titre);
+                            libereDonneesImageRGBA(&image_gemme);
+                            stopper_musique();
+				            termineBoucleEvenements();
+                        break;
                     }
                     break;                   
                 case FIN:

@@ -36,6 +36,7 @@ void demarrer_multi() {
             jeu.grille[i][j] = 0;
         }
     }
+    initialiser_socket();
     jeu.nb_piece = 0;
     jeu.piece = NouveauTetrominos();
     jeu.prochaine_piece = NouveauTetrominos();

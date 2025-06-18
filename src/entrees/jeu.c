@@ -2,6 +2,7 @@
 
 // Entrées
 void entrees_jeu() {
+    bool mouvement = true;
     switch (caractereClavier()){
         case 'q': 
         case 'Q': 
@@ -22,10 +23,16 @@ void entrees_jeu() {
         case 32: // Barre espace
             sauter_piece();
             break;
+        default: 
+            mouvement = false;
+    }
+    if(mouvement && instance_socket != NULL && jeu.etat == MULTI) {
+        envoyer_grille();
     }
 }
 // gères toutes les entrées spéciales de l'utilisateur
 void entrees_speciales_jeu() {
+    bool mouvement = true;
     switch(toucheClavier()) {
         case 16: // fleche droite 
             bouger_piece_droite();
@@ -39,6 +46,11 @@ void entrees_speciales_jeu() {
         case 14:  // flèche du bas
             descendre_piece();
             break;
+        default:
+            mouvement = false;
+    }
+    if(mouvement && instance_socket != NULL && jeu.etat == MULTI) {
+        envoyer_grille();
     }
 }
 
