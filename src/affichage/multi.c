@@ -17,7 +17,6 @@ void affichageEnnemi() {
     }
 }
 
-
 // void affichageSupp() {
 //     //dans cette fonction on a tous les affichages supplémentaire a la grille
 //     //barre séparant les deux parties
@@ -95,7 +94,7 @@ void afficherCarreauEnnemi(int x, int y, char couleur) {
     rectangle(taille_droite + posXD + 10, marge + posYD - 10, taille_droite + posXA - 10, marge + posYA + 10);
 }
 
-void affichageBarresScroll(DonneesImageRGBA *gemme) {
+void affichageBarresScroll(DonneesImageRGBA *gemme, DonneesImageRGBA *gemmeRouge) {
     int marge = 40;
     int hauteur = hauteurFenetre() - 80;
     int taille_carreau = hauteur / LIGNES;
@@ -141,28 +140,39 @@ void affichageBarresScroll(DonneesImageRGBA *gemme) {
     
     //je met le if car sinon la barre se retrouve sur la grille
     if (largeurFenetre() != 1200 && hauteurFenetre() != 800) {
-        rectangle(tailleGrille, hauteur + 30, xbarre, hauteur - 10); //barre du haut (la notre)
-        rectangle(tailleGrille, marge, xbarre, 2 * marge); //barre du bas (ennemi)
+        rectangle(tailleGrille + 20, hauteur, xbarre, hauteur - 70); //barre du haut (la notre)
+        rectangle(tailleGrille + 20, 2 * marge, xbarre, 4 * marge); //barre du bas (ennemi)
 
-    
         //on affiche la barre de score qui se remplie en fonction de la proportion score/score_max
         couleurCourante(95, 0, 60); 
-        rectangle(tailleGrille, hauteur + 30, tailleGrille + ((xbarre - tailleGrille) * proportion_score), hauteur - 10); 
+        rectangle(tailleGrille + 20, hauteur, tailleGrille + ((xbarre - tailleGrille) * proportion_score), hauteur - 70); 
          
-        
-
         //il faut faire la meme chose pour la barre ennemi
+
+
+        //affichage des gemmes sur les barres de scores
+        //affichage de notre gemme
+        ecrisImageARVB(
+                tailleGrille - 30, 
+                ((2 * hauteur - 70) / 2) - (gemme->hauteurImage / 2), 
+                gemme->largeurImage, 
+                gemme->hauteurImage, 
+                (int*) gemme->donneesRGBA
+            );
+        
+        //affichage de la gemme ennemi (rouge)
+        ecrisImageARVB(
+                tailleGrille - 30, 
+                2.5 * marge + ((-gemmeRouge->hauteurImage + marge) / 2), 
+                gemmeRouge->largeurImage, 
+                gemmeRouge->hauteurImage, 
+                (int*) gemmeRouge->donneesRGBA
+            );
     }
-    
+
     //on affiche notre score de partie
     couleurCourante(255, 255, 255);
-    afficheChaine(score, 30, tailleGrille + 100, hauteur - 5);
-
-
-    //affichage des gemmes sur les barres de scores
-    //affichage de notre gemme
-    
-    //affichage de la gemme ennemi (rouge)
+    afficheChaine(score, 50, tailleGrille + 130, hauteur - 55);
 
     //on fait l'animation de scintillement
     if (palier != dernier && dernier != -1) {

@@ -26,6 +26,7 @@ DonneesImageRGBA *image_multijoueur;
 DonneesImageRGBA *image_quitter;
 DonneesImageRGBA *image_titre;
 DonneesImageRGBA *image_gemme;
+DonneesImageRGBA *image_gemmeRouge;
 
 void gestionEvenement(EvenementGfx evenement){
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
@@ -116,7 +117,7 @@ void gestionEvenement(EvenementGfx evenement){
 					afficherTitre(16, 3, image_titre);
 					afficherProchainePiece(jeu.prochaine_piece);
 					afficherAides();
-					afficherScore();
+					afficherScore(image_gemme);
                     afficherTimer(jeu.minutes, jeu.secondes);
 
                     animer_saut();
@@ -169,7 +170,7 @@ void gestionEvenement(EvenementGfx evenement){
                     affichageJeu();
                     affichageEnnemi();
                     // affichageSupp();
-                    affichageBarresScroll(image_gemme);
+                    affichageBarresScroll(image_gemme, image_gemmeRouge);
                     afficherProchainePiece(jeu.prochaine_piece);
 
                     animer_saut();
@@ -293,16 +294,18 @@ void gestionEvenement(EvenementGfx evenement){
                             break;
                         case 'M': //touche M
                         case 'm': //touche m 
+                            image_gemmeRouge = lisBMPRGBA("./assets/gem-rouge.bmp");
                             stopper_musique();
                             demarrer_multi();
                             demarrer_musique();
                             libereDonneesImageRGBA(&image_demarrer);
+                            libereDonneesImageRGBA(&image_titre);
                             libereDonneesImageRGBA(&image_multijoueur);
                             libereDonneesImageRGBA(&image_quitter);
                             break;
                     }   
                     break;
-                case MULTI:
+                case MULTI: 
                 case JEU:
                     entrees_jeu();
                         switch (caractere){
