@@ -1,9 +1,5 @@
 #include "../tetris.h"
 
-#define HauteurFenetre 600
-#define LargeurFenetre 800
-
-
 void afficheIdent(DonneesImageRGBA *titre) {
     effaceFenetre(255, 255, 255);
     int x1 = largeurFenetre()/2 - largeurFenetre()/3;
