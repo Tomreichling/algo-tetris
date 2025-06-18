@@ -9,7 +9,7 @@ int initialiser_socket() {
         return -1;
     }
 
-    int options = 2;
+    int options = 1;
     if (setsockopt(socketfd, SOL_SOCKET, SO_REUSEADDR, &options, sizeof(options)) != 0) {
         printf("Echec de paramètrage REUSEADDR\n");
         return -1;
@@ -18,16 +18,16 @@ int initialiser_socket() {
         printf("Echec de paramètrage SO_REUSEPORT\n");
         return -1;
     }
-
-    pthread_t pid;
-    SocketThreadPayload payload = {socketfd, DESTINATAIRE, PORT};
-    pthread_create(&pid, NULL, thread_socket, &payload);
-
     if(!attacher_socket(socketfd)) {
         return -1;
     }
     InstanceSocket instance = {0};
     instance.socketfd = socketfd;
+
+    pthread_t pid;
+    SocketThreadPayload payload = {socketfd, DESTINATAIRE, PORT};
+    pthread_create(&pid, NULL, thread_socket, &payload);
+
     for(int i = 0; i < COLONNES; i++) {
         for(int j = 0; j < LIGNES; j++) {
             instance.grille[i][j] = 0;
@@ -51,20 +51,21 @@ bool attacher_socket(int socketfd) {
         printf("Echec binding\n");
         return false;
     }
+    printf("[serveur] écoute à %s:%d\n", ORIGINE, PORT);
     return true;
 }
 
 void recevoir_socket(int socketfd) {
     char buffer[COLONNES * LIGNES + 1];
-    struct sockaddr_in adresse;
-
-    adresse.sin_family = AF_INET;
-    adresse.sin_port = htons(PORT);
-    inet_pton(AF_INET, DESTINATAIRE, &adresse.sin_addr);
+    struct sockaddr_in addresse;
     socklen_t addrlen = sizeof(struct sockaddr_in);
 
-    int n = recvfrom(socketfd, buffer, COLONNES * LIGNES + 1, 0, (struct sockaddr *) &adresse, &addrlen);
-    if(n > 1) {
+    int n = recvfrom(socketfd, buffer, COLONNES * LIGNES + 1, 0, (struct sockaddr *) &addresse, &addrlen);
+    char ip_expediteur[INET_ADDRSTRLEN];
+    inet_ntop(AF_INET, &addresse.sin_addr, ip_expediteur, INET_ADDRSTRLEN);
+
+    if(n > 1 && strcmp(ip_expediteur, DESTINATAIRE) != 0) {
+        printf("[serveur] récéption de données\n");
         switch(buffer[0]) {
             case 0:
                 instance_socket->score = (int) buffer[1];
@@ -81,7 +82,6 @@ void recevoir_socket(int socketfd) {
                 }
                 break;
         }
-        printf("data received\n");
         rafraichisFenetre();
     }
 }
@@ -92,11 +92,13 @@ void envoyer_socket(int type, char *donnees, int socketfd) {
     buffer[0] = type;
     switch (type) {
         case 0: {
+            printf("[serveur] envoie le score\n");
             buffer[1] = (int) donnees[0];
             size = 2;
             break;
         }
         case 1: {
+            printf("[serveur] envoie le nom\n");
             int i = 0;
             while(donnees[i] != '\0' && i < COLONNES * LIGNES) {
                 buffer[1 + i] = donnees[i];
@@ -106,6 +108,7 @@ void envoyer_socket(int type, char *donnees, int socketfd) {
             break;
         }
         case 2: {
+            printf("[serveur] envoie la grille\n");
             memcpy(&buffer[1], donnees, COLONNES * LIGNES);
             size = COLONNES * LIGNES + 1;
             break;
@@ -151,6 +154,7 @@ void fermer_socket() {
 
 void* thread_socket(void *payload) {
     SocketThreadPayload *socket_payload = payload; 
+    printf("[serveur-thread] reçoie les messages\n");
     while(1) {
         if(instance_socket == NULL) {
             printf("[thread-1] Socket indisponible\n");
