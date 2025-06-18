@@ -70,7 +70,7 @@ void gestionEvenement(EvenementGfx evenement){
                     for(int i = 0; i < lignes; i++) {
                         retire_ligne(indices[i]);
                     }
-                    if(instance_socket != NULL && jeu.etat == MULTI) {
+                    if(jeu.etat == MULTI) {
                         int *donnees = (int *) malloc(sizeof(int));
                         if(donnees != NULL) {
                             donnees[0] = jeu.score;

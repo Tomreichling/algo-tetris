@@ -8,7 +8,12 @@ int initialiser_socket() {
         printf("Le socket n'a pas pu être initialisé\n");
         return -1;
     }
+    // On paramètre le socket
 
+    // les appels à recvfrom ne bloque pas le programme
+    int flags = fcntl(socketfd, F_GETFL, 0);
+    fcntl(socketfd, F_SETFL, flags | O_NONBLOCK);
+    
     int options = 1;
     if (setsockopt(socketfd, SOL_SOCKET, SO_REUSEADDR, &options, sizeof(options)) != 0) {
         printf("Echec de paramètrage REUSEADDR\n");
@@ -64,7 +69,7 @@ void recevoir_socket(int socketfd) {
     char ip_expediteur[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &addresse.sin_addr, ip_expediteur, INET_ADDRSTRLEN);
 
-    if(n > 1 && strcmp(ip_expediteur, DESTINATAIRE) != 0) {
+    if(n > 1 && strcmp(ip_expediteur, ORIGINE) != 0) {
         printf("[serveur] récéption de données\n");
         switch(buffer[0]) {
             case 0:
@@ -154,13 +159,14 @@ void fermer_socket() {
 
 void* thread_socket(void *payload) {
     SocketThreadPayload *socket_payload = payload; 
-    printf("[serveur-thread] reçoie les messages\n");
+    printf("[serveur-thread] reçois les messages\n");
     while(1) {
         if(instance_socket == NULL) {
-            printf("[thread-1] Socket indisponible\n");
-            sleep(100);
+            printf("[thread] socket indisponible\n");
+            sleep(1);
         } else {
             recevoir_socket(socket_payload->socketfd);
+            usleep(10000); // 20ms
         }
     }
     return NULL;

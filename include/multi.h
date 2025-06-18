@@ -22,6 +22,7 @@ void affichageBarresScroll(DonneesImageRGBA *gemme, DonneesImageRGBA *gemmeRouge
 #include <unistd.h> // defs
 #include <pthread.h> // threads pour récupérer données en arrière_plan
 #include <arpa/inet.h> // defs
+#include <fcntl.h> // defs F_GETFL, F_SETFL, O_NONBLOCK
 
 typedef struct {
     int socketfd;
