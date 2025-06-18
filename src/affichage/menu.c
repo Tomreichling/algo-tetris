@@ -39,10 +39,10 @@ void afficheMenu(DonneesImageRGBA *demarrer,  DonneesImageRGBA *mutlijoueur , Do
         if (jeu.gemmes != 0) {
             char gemmes[15];
             sprintf(gemmes, "%d", jeu.gemmes);
-            afficheChaine(gemmes, hauteurFenetre()/20, ((max_x/6) - (gemme->largeurImage/2))/5,(max_y-max_y/8) - gemme->hauteurImage*0.7);
+            afficheChaine(gemmes, hauteurFenetre()/20, ((max_x/6) - (gemme->largeurImage/2))/6,(max_y-max_y/8) - gemme->hauteurImage*0.7);
         }
         else {
-            afficheChaine(" 0", hauteurFenetre()/20, ((max_x/6) - (gemme->largeurImage/2))/5,(max_y-max_y/8) - gemme->hauteurImage*0.7);
+            afficheChaine(" 0", hauteurFenetre()/20, ((max_x/6) - (gemme->largeurImage/2))/6,(max_y-max_y/8) - gemme->hauteurImage*0.7);
 
         }
         

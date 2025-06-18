@@ -323,7 +323,6 @@ void gestionEvenement(EvenementGfx evenement){
                 case FIN:
 				    switch (caractere) {
 				    	case 27: // echap
-                            enregistrerScores();
                             libereDonneesImageRGBA(&image_demarrer);
                             libereDonneesImageRGBA(&image_multijoueur);
                             libereDonneesImageRGBA(&image_quitter);
@@ -334,7 +333,6 @@ void gestionEvenement(EvenementGfx evenement){
                             termineBoucleEvenements();
                             break;
                         case 32:
-                            enregistrerScores();
                             stopper_musique();
                             demarrer_jeu();
                             demarrer_musique();

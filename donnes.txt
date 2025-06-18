@@ -11,3 +11,7 @@ Nom : Tom	Gemmes : 480
 Nom : Gwenn	Gemmes : 999
 Nom : Robin	Gemmes : 6220
 Nom : livio	Gemmes : 11400
+Nom : ff	Gemmes : 0
+Nom : anais	Gemmes : 40
+Nom : tom	Gemmes : 180
+Nom : cloclo	Gemmes : 2960
