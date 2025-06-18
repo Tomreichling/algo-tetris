@@ -323,8 +323,6 @@ void afficherScore(DonneesImageRGBA *gemme) {
     }
 }
 
-
-
 //on affiche le timer par incrementation au fur et a mesure de la partie.
 //on fait l'incrementation dans la partie temporisation dans tetris.c
 void afficherTimer (int minute, int seconde) {
