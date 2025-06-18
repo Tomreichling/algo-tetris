@@ -36,15 +36,15 @@ extern InstanceSocket *instance_socket;
 int initialiser_socket();
 
 // bind() (on écoute sur un port)
-bool attacher_socket(int socketfd, int port);
+bool attacher_socket(int socketfd);
 
 // reçois les données et agis en conséquence
 // on distingue 3 types de données avec la première valeur du buffer
 // 0 -> score
 // 1 -> nom
 // 2 -> grille
-void recevoir_socket(int socketfd, char ip[], int port);
-void envoyer_socket(int type, char *donnees, int socketfd, char ip[], int port);
+void recevoir_socket(int socketfd);
+void envoyer_socket(int type, char *donnees, int socketfd);
 void envoyer_grille();
 void fermer_socket();
 

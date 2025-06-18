@@ -74,7 +74,7 @@ void gestionEvenement(EvenementGfx evenement){
                         int *donnees = (int *) malloc(sizeof(int));
                         if(donnees != NULL) {
                             donnees[0] = jeu.score;
-                            envoyer_socket(0, donnees, instance_socket->socketfd, DESTINATAIRE, PORT);
+                            envoyer_socket(0, (char *)donnees, instance_socket->socketfd);
                             free(donnees);
                         }
                         envoyer_grille();
@@ -232,7 +232,7 @@ void gestionEvenement(EvenementGfx evenement){
 
                     for(int i = 0; i < COLONNES; i++) {
                         for(int j = 0; j < LIGNES; j++) {
-                            if(jeu.grille[i][j] == 0) {
+                            if(instance_socket->grille[i][j] == 0) {
                                 continue;
                             }
                             afficherCarreauEnnemi(i, j, instance_socket->grille[i][j]);

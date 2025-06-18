@@ -4,8 +4,8 @@
 // #define PRODUCTION; // Mettre en commentaire pour WSL & Mac
 
 // MULTI
-#define DESTINATAIRE "127.0.0.1"
-#define ORIGINE "127.0.0.1"
+#define DESTINATAIRE "192.168.64.6"
+#define ORIGINE "192.168.64.1"
 #define PORT 3000
 
 // ecran

@@ -23,7 +23,7 @@ int initialiser_socket() {
     SocketThreadPayload payload = {socketfd, DESTINATAIRE, PORT};
     pthread_create(&pid, NULL, thread_socket, &payload);
 
-    if(!attacher_socket(socketfd, PORT)) {
+    if(!attacher_socket(socketfd)) {
         return -1;
     }
     InstanceSocket instance = {0};
@@ -34,20 +34,18 @@ int initialiser_socket() {
         }
     }
 
-    envoyer_socket(1, jeu.nom, socketfd, DESTINATAIRE, PORT);
+    envoyer_socket(1, jeu.nom, socketfd);
 
     instance_socket = &instance;
     return socketfd;
 }
 
-bool attacher_socket(int socketfd, int port) {
+bool attacher_socket(int socketfd) {
     struct sockaddr_in adresse;
 
     adresse.sin_family = AF_INET;
-    // Ecoute sur toutes les adresses (INADDR_ANY <=> 0.0.0.0)
-    adresse.sin_addr.s_addr = INADDR_ANY;
-    // Conversion du port en valeur réseaux (Host TO Network Short)
-    adresse.sin_port = htons(port);
+    inet_pton(AF_INET, ORIGINE, &adresse.sin_addr);
+    adresse.sin_port = htons(PORT);
 
     if (bind(socketfd, (struct sockaddr *) &adresse, sizeof(adresse)) != 0) {
         printf("Echec binding\n");
@@ -56,14 +54,13 @@ bool attacher_socket(int socketfd, int port) {
     return true;
 }
 
-void recevoir_socket(int socketfd, char ip[], int port) {
-    
+void recevoir_socket(int socketfd) {
     char buffer[COLONNES * LIGNES + 1];
     struct sockaddr_in adresse;
 
     adresse.sin_family = AF_INET;
-    adresse.sin_port = htons(port);
-    inet_pton(AF_INET, ip, &adresse.sin_addr);
+    adresse.sin_port = htons(PORT);
+    inet_pton(AF_INET, DESTINATAIRE, &adresse.sin_addr);
     socklen_t addrlen = sizeof(struct sockaddr_in);
 
     int n = recvfrom(socketfd, buffer, COLONNES * LIGNES + 1, 0, (struct sockaddr *) &adresse, &addrlen);
@@ -84,11 +81,12 @@ void recevoir_socket(int socketfd, char ip[], int port) {
                 }
                 break;
         }
+        printf("data received\n");
         rafraichisFenetre();
     }
 }
 
-void envoyer_socket(int type, char *donnees, int socketfd, char ip[], int port) {
+void envoyer_socket(int type, char *donnees, int socketfd) {
     char buffer[COLONNES * LIGNES + 1];
     int size;
     buffer[0] = type;
@@ -119,8 +117,8 @@ void envoyer_socket(int type, char *donnees, int socketfd, char ip[], int port) 
     struct sockaddr_in adresse;
 
     adresse.sin_family = AF_INET;
-    adresse.sin_port = htons(port);
-    inet_pton(AF_INET, ip, &adresse.sin_addr);
+    adresse.sin_port = htons(PORT);
+    inet_pton(AF_INET, DESTINATAIRE, &adresse.sin_addr);
     sendto(socketfd, buffer, size, MSG_DONTWAIT, (struct sockaddr *) &adresse, sizeof(struct sockaddr_in));
     // traiter erreurs
 }
@@ -140,7 +138,7 @@ void envoyer_grille() {
         }
     }
 
-    envoyer_socket(2, (char *) grille, instance_socket->socketfd, DESTINATAIRE, PORT);
+    envoyer_socket(2, (char *) grille, instance_socket->socketfd);
 }
 
 void fermer_socket() {
@@ -158,7 +156,7 @@ void* thread_socket(void *payload) {
             printf("[thread-1] Socket indisponible\n");
             sleep(100);
         } else {
-            recevoir_socket(socket_payload->socketfd, socket_payload->ip, socket_payload->port);
+            recevoir_socket(socket_payload->socketfd);
         }
     }
     return NULL;
