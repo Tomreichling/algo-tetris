@@ -15,5 +15,5 @@ Nom : ff	Gemmes : 0
 Nom : anais	Gemmes : 40
 Nom : tom	Gemmes : 180
 Nom : cloclo	Gemmes : 2960
-Nom : maxime	Gemmes : 9140
+Nom : maxime	Gemmes : 15940
 Nom : elsa	Gemmes : 2620
