@@ -3,6 +3,7 @@
 #include "../src/tetris.h"
 // affichage
 void ecranGameOver();
+void leaderboardRecup();
 // temporisation
 
 // entrees

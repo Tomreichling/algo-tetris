@@ -6,10 +6,12 @@ Nom : NightWolf	Gemmes : 600
 Nom : CyberNinja	Gemmes : 400
 Nom : Flo	Gemmes : 440
 Nom : NeonPhoenix	Gemmes : 520
-Nom : Livio	Gemmes : 3260
-Nom : Tom	Gemmes : 480
+Nom : Livio	Gemmes : 720
+Nom : Tom	Gemmes : 11480
 Nom : Gwenn	Gemmes : 999
 Nom : Robin	Gemmes : 6220
-Nom : alla	Gemmes : 40
-Nom : Alla	Gemmes : 1600
-Nom : juliette	Gemmes : 440
+Nom : livio	Gemmes : 11400
+Nom : anais	Gemmes : 40
+Nom : cloclo	Gemmes : 2960
+Nom : maxime	Gemmes : 15940
+Nom : elsa	Gemmes : 2620

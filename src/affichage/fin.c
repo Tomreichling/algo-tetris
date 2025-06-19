@@ -49,5 +49,20 @@ void ecranGameOver() {
         image_gameover->largeurImage, image_gameover->hauteurImage, (int*) image_gameover->donneesRGBA   
     );
 
+
     
+
+    //rectangle du leaderboard
+    couleurCourante(181, 98, 245);
+    rectangle(largeurFenetre()/3,hauteurFenetre()/10,largeurFenetre()/(1.6), hauteurFenetre()/(2.5));
+    couleurCourante(0,0,10);
+    epaisseurDeTrait(3);
+    afficheChaine( "Top 3 Joueurs LeaderBoard ",largeurFenetre()/55,largeurFenetre()/3 + 4,hauteurFenetre()/(2.8));
+    epaisseurDeTrait(3);
+    ligne(largeurFenetre()/3 + 4,hauteurFenetre()/(3),largeurFenetre()/(1.6)-4,hauteurFenetre()/(3));
+    leaderboardRecup();
+
+
+    // afficherScore(); 
+    animer_gameover();
 }

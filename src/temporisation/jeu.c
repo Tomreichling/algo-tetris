@@ -29,6 +29,7 @@ void descendre_piece() {
     } else if(jeu.piece.y == 0) {
         // Si le déplacement n'est pas possible 
         // et que l'on est tout en haut, on perds!
+        enregistrerScores();
         gameover();
     } else {
         copier_tableau44(jeu.piece.grille, jeu.grille, jeu.piece.x, jeu.piece.y);
