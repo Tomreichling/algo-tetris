@@ -101,11 +101,11 @@ void affichageBarresScroll(DonneesImageRGBA *gemme, DonneesImageRGBA *gemmeRouge
     int tailleGrille = (2 * marge) + (taille_carreau * COLONNES);
     couleurCourante(150, 150, 150);
 
-    char score[100], scoreEnnemi[100];
+    char score[100], score_ennemi[100];
     int static dernier = -1;
-    float palier;
+    float palier, palier_ennemi;
     float xbarre = (3.2 * marge) + tailleGrille + (taille_carreau * COLONNES);
-    float proportion_score;
+    float proportion_score, proportion_score_ennemi;
     
     //on met les memes plaiers que pour le jeu
     //et en meme temps on fait notre score
@@ -133,10 +133,35 @@ void affichageBarresScroll(DonneesImageRGBA *gemme, DonneesImageRGBA *gemmeRouge
         sprintf(score, "%d / 10000", jeu.score);
         demandeTemporisation(300); 
     }
+    if(instance_socket != NULL) {
+        if (instance_socket->score < 500) {
+            palier_ennemi = 500;
+            proportion_score_ennemi = instance_socket->score / palier_ennemi;
+            sprintf(score_ennemi, "%d / 500", instance_socket->score);  
+            demandeTemporisation(1300);
+        } 
+        else if (instance_socket->score < 2000) {
+            palier_ennemi = 2000;
+            proportion_score_ennemi = instance_socket->score / palier_ennemi;
+            sprintf(score_ennemi, "%d / 2000", instance_socket->score);
+            demandeTemporisation(1000); 
+        } 
+        else if (instance_socket->score < 5000) {
+            palier_ennemi = 5000;
+            proportion_score_ennemi = instance_socket->score / palier_ennemi;
+            sprintf(score_ennemi, "%d / 5000", instance_socket->score);
+            demandeTemporisation(700); 
+        } 
+        else {
+            palier_ennemi = 10000;
+            proportion_score_ennemi = instance_socket->score/ palier_ennemi;
+            sprintf(score_ennemi, "%d / 10000", instance_socket->score);
+            demandeTemporisation(300); 
+        }
+    }
 
-    if (proportion_score > 1) {
-    proportion_score = 1;
-    }   
+    if (proportion_score > 1) proportion_score = 1;
+    if (proportion_score_ennemi > 1) proportion_score_ennemi = 1;
     
     //je met le if car sinon la barre se retrouve sur la grille
     if (largeurFenetre() != 1200 && hauteurFenetre() != 800) {
@@ -160,7 +185,7 @@ void affichageBarresScroll(DonneesImageRGBA *gemme, DonneesImageRGBA *gemmeRouge
                 gemme->hauteurImage, 
                 (int*) gemme->donneesRGBA
             );
-        
+
         //affichage de la gemme ennemi (rouge)
         ecrisImageARVB(
                 tailleGrille - 30, 

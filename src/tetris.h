@@ -6,8 +6,8 @@
 // MULTI
 #define DESTINATAIRE "127.0.0.1"
 #define ORIGINE "127.0.0.1"
-#define PORT_SORTANT 3001
-#define PORT_ENTRANT 3000
+#define PORT_SORTANT 3000
+#define PORT_ENTRANT 3001
 
 // ecran
 #define LARGEUR 1200

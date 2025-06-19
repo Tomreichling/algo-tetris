@@ -56,6 +56,10 @@ void gameover() {
     image_quitter = lisBMPRGBA("./assets/quitter.bmp");
     image_demarrer = lisBMPRGBA("./assets/demarrer.bmp");
     jeu.etat = FIN;
+
+    if(instance_socket != NULL) {
+        fermer_socket();
+    }
     rafraichisFenetre();
     // on arrête les tics
     demandeTemporisation(-1);
