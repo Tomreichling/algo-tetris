@@ -11,10 +11,5 @@ Nom : Tom	Gemmes : 480
 Nom : Gwenn	Gemmes : 999
 Nom : Robin	Gemmes : 6220
 Nom : alla	Gemmes : 40
-Nom : Alla	Gemmes : 660
+Nom : Alla	Gemmes : 1600
 Nom : juliette	Gemmes : 440
-Nom : A	Gemmes : 0
-Nom : a	Gemmes : 260
-Nom : a	Gemmes : 0
-Nom : a	Gemmes : 0
-Nom : a*	Gemmes : 0

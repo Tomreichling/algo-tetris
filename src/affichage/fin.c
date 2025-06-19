@@ -10,15 +10,15 @@ void ecranGameOver() {
     affichageJeu();
     
      ecrisImageARVB(
-        (max_x - padding - restart->largeurImage),
+        (max_x - padding - image_restart->largeurImage),
         (max_y - padding*7), 
-        restart->largeurImage, restart->hauteurImage, (int*) restart->donneesRGBA
+         image_restart->largeurImage, image_restart->hauteurImage, (int*) image_restart->donneesRGBA
     );
 
        ecrisImageARVB(
-        (max_x - padding - multijoueur->largeurImage ),
-        (max_y / 2 - multijoueur->hauteurImage), 
-        multijoueur->largeurImage, multijoueur->hauteurImage, (int*) multijoueur->donneesRGBA   
+        (max_x - padding - image_multijoueur->largeurImage ),
+        (max_y / 2 - image_multijoueur->hauteurImage), 
+        image_multijoueur->largeurImage, image_multijoueur->hauteurImage, (int*) image_multijoueur->donneesRGBA   
     );
     
     ecrisImageARVB(
@@ -29,9 +29,9 @@ void ecranGameOver() {
  
 
      ecrisImageARVB(
-        (max_x - padding * 10 - multijoueur->largeurImage),
-        (max_y - padding * 4 - the_score->hauteurImage),
-        the_score->largeurImage, the_score->hauteurImage, (int*) the_score->donneesRGBA
+        (max_x - padding * 10 - image_multijoueur->largeurImage),
+        (max_y - padding * 4 - image_the_score->hauteurImage),
+        image_the_score->largeurImage, image_the_score->hauteurImage, (int*) image_the_score->donneesRGBA
     );
     char score[100];
     sprintf(score, "%d" , jeu.score); // tab de chaine , ce qu'il contient , reference du %d
