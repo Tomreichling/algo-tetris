@@ -1,7 +1,7 @@
 #ifndef TETRIS_H
 #define TETRIS_H
 
-// #define PRODUCTION; // Mettre en commentaire pour WSL & Mac
+#define PRODUCTION // Mettre en commentaire pour WSL & Mac
 
 // ecran
 #define LARGEUR 1200

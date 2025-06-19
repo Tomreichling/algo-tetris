@@ -41,7 +41,6 @@ void ecranGameOver() {
     afficheChaine(score, 100.0, 700 , 600);
     
     animer_gameover();
-    gameOverSoundEffect();
     
     ecrisImageARVB(
         max_x - padding - image_gameover->largeurImage,
