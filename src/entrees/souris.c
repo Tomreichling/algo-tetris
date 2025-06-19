@@ -31,11 +31,29 @@ void boutons_souris_menu() {
             int nouveauY_Quitter = quitterY + image_quitter->hauteurImage;
 
             if ((sourisX >= demarrerX) && (sourisX <= nouveauX) && (sourisY >= demarrerY) && (sourisY <= nouveauY)) {
-                printf("Clic dans la zone du bouton DÉMARRER\n");
+                libereDonneesImageRGBA(&image_demarrer);
+                libereDonneesImageRGBA(&image_multijoueur);
+                libereDonneesImageRGBA(&image_quitter);
+                stopper_musique();
+                demarrer_jeu();
+                demarrer_musique();
             } else if((sourisX >= multiX) && (sourisX <= nouveauX_Multi) && (sourisY >= multiY) && (sourisY <= nouveauY_Multi)) {
-                printf("Clic dans la zone du bouton MULTIJOUEUR\n");
+                image_gemRouge = lisBMPRGBA("./assets/gem-rouge.bmp");
+                stopper_musique();
+                demarrer_multi();
+                demarrer_musique();
+                libereDonneesImageRGBA(&image_demarrer);
+                libereDonneesImageRGBA(&image_titre);
+                libereDonneesImageRGBA(&image_multijoueur);
+                libereDonneesImageRGBA(&image_quitter);
             } else if ((sourisX >= quitterX) && (sourisX <= nouveauX_Quitter) && (sourisY >= quitterY) && (sourisY <= nouveauY_Quitter)) {
-                printf("Clic dans la zone du bouton QUITTER\n");
+                libereDonneesImageRGBA(&image_demarrer);
+                libereDonneesImageRGBA(&image_multijoueur);
+                libereDonneesImageRGBA(&image_quitter);
+                libereDonneesImageRGBA(&image_titre);
+                libereDonneesImageRGBA(&image_gemme);
+                stopper_musique();
+                termineBoucleEvenements();
             }
         default:
             break;

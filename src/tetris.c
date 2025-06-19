@@ -26,7 +26,7 @@ DonneesImageRGBA *image_multijoueur;
 DonneesImageRGBA *image_quitter;
 DonneesImageRGBA *image_titre;
 DonneesImageRGBA *image_gemme;
-DonneesImageRGBA *image_gemmeRouge;
+DonneesImageRGBA *image_gemRouge;
 DonneesImageRGBA *image_the_score; 
 DonneesImageRGBA *image_restart;
 
@@ -172,7 +172,7 @@ void gestionEvenement(EvenementGfx evenement){
                     affichageJeu();
                     affichageEnnemi();
                     // affichageSupp();
-                    affichageBarresScroll(image_gemme, image_gemmeRouge);
+                    affichageBarresScroll(image_gemme, image_gemRouge);
                     afficherProchainePiece(jeu.prochaine_piece);
 
                     animer_saut();
@@ -296,7 +296,7 @@ void gestionEvenement(EvenementGfx evenement){
                             break;
                         case 'M': //touche M
                         case 'm': //touche m 
-                            image_gemmeRouge = lisBMPRGBA("./assets/gem-rouge.bmp");
+                            image_gemRouge = lisBMPRGBA("./assets/gem-rouge.bmp");
                             stopper_musique();
                             demarrer_multi();
                             demarrer_musique();
@@ -366,6 +366,7 @@ void gestionEvenement(EvenementGfx evenement){
             switch(jeu.etat) {
                 case MENU:
                     boutons_souris_menu();
+                
                     break;
             }
             break;

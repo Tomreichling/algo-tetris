@@ -13,3 +13,6 @@ Nom : Robin	Gemmes : 6220
 Nom : alla	Gemmes : 40
 Nom : Alla	Gemmes : 1600
 Nom : juliette	Gemmes : 440
+Nom : j	Gemmes : 0
+Nom : k	Gemmes : 0
+Nom : l	Gemmes : 240
