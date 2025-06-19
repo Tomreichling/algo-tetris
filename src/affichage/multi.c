@@ -174,6 +174,10 @@ void affichageBarresScroll(DonneesImageRGBA *gemme, DonneesImageRGBA *gemmeRouge
     //on affiche notre score de partie
     couleurCourante(255, 255, 255);
     afficheChaine(score, 50, tailleGrille + 130, hauteur - 55);
+    
+    //on affiche notre score ennemi
+    couleurCourante(255, 255, 255);
+    afficheChaine(score, 50, tailleGrille + 130, 2.5 * marge);
 
     //on fait l'animation de scintillement
     if (palier != dernier && dernier != -1) {
