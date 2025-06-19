@@ -30,8 +30,30 @@ void demarrer_jeu() {
     jeu.etat = JEU;
 }
 
+void demarrer_multi() {
+    for(int i = 0; i < COLONNES; i++) {
+        for(int j = 0; j < LIGNES; j++) {
+            jeu.grille[i][j] = 0;
+        }
+    }
+    jeu.nb_piece = 0;
+    jeu.piece = NouveauTetrominos();
+    jeu.prochaine_piece = NouveauTetrominos();
+    jeu.score = 0;
+    jeu.minutes = 0;
+    jeu.secondes = 0;
+    
+    printf("Lancement du jeu\n");
+    demandeTemporisation(1000);
+    rafraichisFenetre();
+    jeu.etat = MULTI;
+}
+
 void gameover() {
     image_gameover = lisBMPRGBA("./assets/gameover.bmp");
+    image_multijoueur = lisBMPRGBA("./assets/multijoueur.bmp");
+    image_quitter = lisBMPRGBA("./assets/quitter.bmp");
+    image_demarrer = lisBMPRGBA("./assets/demarrer.bmp");
     jeu.etat = FIN;
     rafraichisFenetre();
     // on arrête les tics

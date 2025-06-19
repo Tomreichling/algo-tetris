@@ -1,11 +1,11 @@
 #include "../tetris.h"
 
 
-void ecranGameOver(DonneesImageRGBA *quitter, DonneesImageRGBA *multijoueur, DonneesImageRGBA *the_score, DonneesImageRGBA *restart ) {
+void ecranGameOver() {
     int max_x = largeurFenetre();
     int max_y = hauteurFenetre();
     int padding = 64;
-
+    
     effaceFenetre(255, 255, 255);
     affichageJeu();
     
@@ -22,9 +22,9 @@ void ecranGameOver(DonneesImageRGBA *quitter, DonneesImageRGBA *multijoueur, Don
     );
     
     ecrisImageARVB(
-        (max_x - padding - quitter->largeurImage),
+        (max_x - padding - image_quitter->largeurImage),
         (padding), 
-        quitter->largeurImage, quitter->hauteurImage, (int*) quitter->donneesRGBA
+        image_quitter->largeurImage, image_quitter->hauteurImage, (int*) image_quitter->donneesRGBA
     );
  
 

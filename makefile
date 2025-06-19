@@ -5,23 +5,24 @@ SRC := ./src
 
 # Les fichiers sources
 SRCFILES := tetris.c tetrominos.c outils.c animations.c \
-	affichage/jeu.c affichage/identification.c affichage/menu.c affichage/fin.c \
-	temporisation/jeu.c temporisation/menu.c temporisation/fin.c \
-	entrees/jeu.c entrees/menu.c entrees/fin.c entrees/identification.c
+	affichage/jeu.c affichage/identification.c affichage/menu.c affichage/fin.c affichage/multi.c \
+	temporisation/jeu.c temporisation/menu.c temporisation/fin.c temporisation/multi.c \
+	entrees/jeu.c entrees/menu.c entrees/fin.c entrees/identification.c entrees/souris.c
 
 # On trouve les fichiers objets à partir des fichiers sources
+
 OBJFILES := $(patsubst %.c, $(BUILDDIR)/%.o, $(SRCFILES))
 
 # Toutes les règles à suivre lors d'un make
 all: $(BUILDDIR) $(BUILDDIR)/affichage $(BUILDDIR)/entrees $(BUILDDIR)/temporisation \
-	gfx/libisentlib.a tetris -lpthread
+	gfx/libisentlib.a tetris
 
 # Commande pour faire le jeu
 tetris: $(OBJFILES) gfx/libisentlib.a 
 ifeq ($(UNAME), Darwin) # Version macos
-	gcc -Wall -o $@ $^ -lm -framework OpenGL -framework GLUT -lpthread
+	gcc -Wall -o $@ $^ -lm -framework OpenGL -framework GLUT
 else # Version linux
-	gcc -Wall -o $@ $^ -lm -lglut -lGL -lX11 -lpthread
+	gcc -Wall -o $@ $^ -lm -lglut -lGL -lX11
 endif
 
 # Création des dossiers (ils ne se créent pas tout seuls)

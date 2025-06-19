@@ -36,8 +36,10 @@
 #include "../include/menu.h" // Fonctions affichage/tempo/entrees dans le mode "menu"
 #include "../include/jeu.h" // Fonctions affichage/tempo/entrees dans le mode "jeu"
 #include "../include/identification.h" // Fonctions affichage/tempo/entrees dans le mode "identite"
+#include "../include/multi.h" //Fonctions affichage/tempo/entrees dans le mode "multi"
+#include "../include/souris.h"
 
-enum ETAT_JEU { MENU, JEU, FIN, IDENTITE};
+enum ETAT_JEU { MENU, JEU, FIN, MULTI, IDENTITE };
 
 typedef struct jeu{
     int score;
@@ -55,6 +57,13 @@ typedef struct jeu{
 } Jeu;
 
 extern Jeu jeu;
-extern DonneesImageRGBA *image_gameover;
 
+// Images
+extern DonneesImageRGBA *image_gameover;
+extern DonneesImageRGBA *image_demarrer;
+extern DonneesImageRGBA *image_multijoueur;
+extern DonneesImageRGBA *image_quitter;
+extern DonneesImageRGBA *image_titre;
+extern DonneesImageRGBA *image_gemme;
+extern DonneesImageRGBA *image_gemRouge;
 #endif

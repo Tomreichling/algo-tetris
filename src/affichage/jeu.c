@@ -19,7 +19,6 @@ void affichageJeu() {
     }
 }
 
-
 void afficherCarreau(int x, int y, char couleur) {
     int marge = 40;
     int hauteur = hauteurFenetre() - 80;
@@ -88,7 +87,6 @@ void afficherCarreau(int x, int y, char couleur) {
     rectangle(marge + posXD + 10, marge + posYD - 10, marge + posXA - 10, marge + posYA + 10);
 }
 
-
 void afficherTitre(int y, int x, DonneesImageRGBA *titre) {
     //on obtient les coordonnées de la partie de droite (a droite de la grille tetris)
     int hauteur = hauteurFenetre();
@@ -116,7 +114,7 @@ void afficherProchainePiece(Tétrominos piece) {
     int taille_carreau = hauteur / LIGNES;
     int taille_droite = largeurFenetre() - (taille_carreau * COLONNES);
     int Dcarreau_droite = largeurFenetre() - taille_droite; 
-    int posXD, posYD, posXA, posYA, x = 0, y = 0;
+    int posXD, posYD, posXA, posYA;
     static char couleur = 0;
 
     couleurCourante(0, 0, 0);
@@ -135,13 +133,12 @@ void afficherProchainePiece(Tétrominos piece) {
     for (int ki = 0; ki < 4; ki++) {
         for (int kj = 0; kj < 4; kj++) {
             if (piece.grille[ki][kj] != 0) {
-                x = ki;
-                y = kj;
+
                 //coordonnées des carreaux
-                posXD = Dcarreau_droite + (taille_droite / 5) + x * taille_carreau;
-                posYD = (hauteur / 2.5) + (3 - y) * taille_carreau;
-                posXA = Dcarreau_droite + (taille_droite / 5) + (x + 1) * taille_carreau;
-                posYA = (hauteur / 2.5) + (4 - y) * taille_carreau;
+                posXD = Dcarreau_droite + (taille_droite / 5) + (ki * taille_carreau);
+                posYD = (hauteur / 2.5) + (3 - kj) * taille_carreau;
+                posXA = Dcarreau_droite + (taille_droite / 5) + ((ki + 1) * taille_carreau);
+                posYA = (hauteur / 2.5) + (4 - kj) * taille_carreau;
 
                 //on prend la couleur de la piece pour ensuite l'afficher de la même couleur
                 couleur = piece.grille[ki][kj];
@@ -235,7 +232,7 @@ void afficherAides() {
 }
 
 // affiche le score
-void afficherScore() {
+void afficherScore(DonneesImageRGBA *gemme) {
     int static dernier = -1;
     int palier;
     int hauteur = hauteurFenetre();
@@ -250,25 +247,25 @@ void afficherScore() {
     if (jeu.score < 500) {
         palier = 500;
         proportion_score = jeu.score / 500.0;
-        sprintf(score, "Score : %d / 500", jeu.score);  
+        sprintf(score, "%d / 500", jeu.score);  
         demandeTemporisation(1300);
     } 
     else if (jeu.score < 2000) {
         palier = 2000;
         proportion_score = jeu.score / 2000.0;
-        sprintf(score, "Score : %d / 2000", jeu.score);
+        sprintf(score, "%d / 2000", jeu.score);
         demandeTemporisation(1000); 
     } 
     else if (jeu.score < 5000) {
         palier = 5000;
         proportion_score = jeu.score / 5000.0;
-        sprintf(score, "Score : %d / 5000", jeu.score);
+        sprintf(score, "%d / 5000", jeu.score);
         demandeTemporisation(700); 
     } 
     else {
         palier = 10000;
         proportion_score = jeu.score / 10000.0;
-        sprintf(score, "Score : %d / 10000", jeu.score);
+        sprintf(score, "%d / 10000", jeu.score);
         demandeTemporisation(300); 
     }
 
@@ -286,14 +283,10 @@ void afficherScore() {
         levelUpSoundEffect();
         passage++;
     }
-   
-    //on affiche le score de la partie
-    couleurCourante(0, 0, 0);
-    afficheChaine(score, 30, Dcarreau_droite + (taille_droite / 10), hauteur / 7); 
 
     //on affiche la barre de score a vide
     couleurCourante(150, 150, 150);
-    rectangle(Dcarreau_droite + (taille_droite / 10), hauteur / 8, xbarre, hauteur / 12); 
+    rectangle(Dcarreau_droite + (taille_droite / 10), hauteur / 7, xbarre, hauteur / 12); 
 
     if (proportion_score > 1) {
         proportion_score = 1;
@@ -301,7 +294,33 @@ void afficherScore() {
     
     //on affiche la barre de score qui se remplie en fonction de la proportion score/score_max
     couleurCourante(95, 0, 60); 
-    rectangle(Dcarreau_droite + (taille_droite / 10) + 2, hauteur / 8 - 2, (Dcarreau_droite + (taille_droite / 10)+2)-(((Dcarreau_droite + (taille_droite / 10)+2)-xbarre) * proportion_score), (hauteur / 12)+2);
+    rectangle(Dcarreau_droite + (taille_droite / 10) + 2, hauteur / 7 - 2, (Dcarreau_droite + (taille_droite / 10)+2)-(((Dcarreau_droite + (taille_droite / 10)+2)-xbarre) * proportion_score), (hauteur / 12)+2);
+
+    //on affiche la gemme du score
+    if (largeurFenetre() == 1200 && hauteurFenetre() == 800) {
+        ecrisImageARVB(
+                    Dcarreau_droite + (taille_droite / 5) - gemme->largeurImage - 5, 
+                    (hauteur / 12 + hauteur / 7) / 2 - (gemme->hauteurImage / 2), 
+                    gemme->largeurImage, 
+                    gemme->hauteurImage, 
+                    (int*) gemme->donneesRGBA
+                );
+        //on affiche le score de la partie
+        couleurCourante(255, 255, 255);
+        afficheChaine(score, 30, Dcarreau_droite + (taille_droite / 4), hauteur / 10); 
+    }
+    else {
+        ecrisImageARVB(
+                        Dcarreau_droite + (taille_droite / 7) - gemme->largeurImage - 5, 
+                        (hauteur / 12 + hauteur / 7) / 2 - (gemme->hauteurImage / 2), 
+                        gemme->largeurImage, 
+                        gemme->hauteurImage, 
+                        (int*) gemme->donneesRGBA
+                    );
+        //on affiche le score de la partie
+        couleurCourante(255, 255, 255);
+        afficheChaine(score, 50, Dcarreau_droite + (taille_droite / 5), hauteur / 11); 
+    }
 }
 
 //on affiche le timer par incrementation au fur et a mesure de la partie.
@@ -315,5 +334,5 @@ void afficherTimer (int minute, int seconde) {
     
     sprintf(timer, "%d : %d", minute, seconde);
     couleurCourante(0, 0, 0);
-    afficheChaine(timer, 30, Dcarreau_droite + taille_droite - (taille_droite / 4), hauteur / 7); //j'ai mis le temps de jeu dans le score
+    afficheChaine(timer, 30, Dcarreau_droite + taille_droite - (taille_droite / 4), hauteur / 6);
 }

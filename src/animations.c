@@ -14,7 +14,7 @@ void lancer_animation_saut() {
 void animer_saut() {
     if(animation_saut != NULL 
         && numero_piece_sautant == jeu.nb_piece 
-        && jeu.etat == JEU) {
+        && (jeu.etat == JEU || jeu.etat == MULTI)) {
         descendre_piece();
         demandeRedessinDans_ms(animation_saut->interval);
     } else if(animation_saut != NULL && 
@@ -50,9 +50,7 @@ void scintillementPalier() {
         // ligne(marge + (taille_carreau * COLONNES), marge, marge + (taille_carreau * COLONNES), marge + (taille_carreau * LIGNES));
         scintillement->etape--;
         demandeRedessinDans_ms(scintillement->interval);
-    
-    } 
-    else {
+    } else {
         scintillement = NULL;
     }
 }
@@ -73,8 +71,7 @@ void animer_gameover() {
         // pixels[i] = 80;
         // pixels[i + 1] = 0;
         // pixels[i + 2] = 250;
-        pixels[i + 3] = (char) 255.0 * (1.0 + cos (0.1 * t) * 0.5); // devenu un char 
-
+        pixels[i + 3] = (char) 127.5 * (1.0 + cos(0.01 * t)); // devenu un char 
     }
     demandeRedessinDans_ms(100); 
 }

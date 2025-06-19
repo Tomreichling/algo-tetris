@@ -18,7 +18,7 @@ void afficherProchainePiece(Tétrominos piece);
 // affiche une aide pour les touches
 void afficherAides();
 // affiche le score du joueur, le temps écoulé (utiliser)
-void afficherScore();
+void afficherScore(DonneesImageRGBA *gemme);
 
 //on affiche le timer depuis le début de la partie
 void afficherTimer (int minute, int seconde);
