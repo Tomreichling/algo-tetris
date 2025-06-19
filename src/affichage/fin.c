@@ -38,7 +38,7 @@ void ecranGameOver() {
     // void afficheChaine(const char *chaine, float taille, float x, float y)
     couleurCourante(206, 54, 116);
     epaisseurDeTrait(3);
-    afficheChaine(score, 100.0, 700 , 600);
+    afficheChaine(score, 100.0, max_x- (padding * 9)- image_the_score->largeurImage , max_y - padding - image_the_score->largeurImage);
     
     animer_gameover();
     gameOverSoundEffect();
