@@ -75,10 +75,11 @@ void recevoir_socket(int socketfd) {
 
     ssize_t n = recvfrom(socketfd, buffer, COLONNES * LIGNES + 1, 0, (struct sockaddr *) &addresse, &addrlen);
     if(n > 1) {
-        printf("[serveur] récéption de données\n");
+        // printf("[serveur] récéption de données\n");
         switch(buffer[0]) {
             case 0:
-                instance_socket->score = buffer[1];
+                jeu.score -= buffer[1] / 2;
+                instance_socket->score += buffer[1];
                 break;
             case 1: {
                 memcpy(instance_socket->nom, &buffer[1], n - 1);
@@ -92,9 +93,11 @@ void recevoir_socket(int socketfd) {
                 }
                 break;
         }
-        rafraichisFenetre();
     }
     free(buffer);
+    if(n > 0) {
+        rafraichisFenetre();
+    }
 }
 
 void envoyer_socket(int type, char *donnees, int socketfd) {
@@ -103,19 +106,19 @@ void envoyer_socket(int type, char *donnees, int socketfd) {
     buffer[0] = type;
     switch (type) {
         case 0: {
-            printf("[serveur] envoie le score\n");
+            // printf("[serveur] envoie le score\n");
             buffer[1] = (char) donnees[0];
             size = 2;
             break;
         }
         case 1: {
-            printf("[serveur] envoie le nom\n");
+            // printf("[serveur] envoie le nom\n");
             memcpy(&buffer[1], donnees, strlen(donnees));
             size = 1 + strlen(donnees);
             break;
         }
         case 2: {
-            printf("[serveur] envoie la grille\n");
+            // printf("[serveur] envoie la grille\n");
             memcpy(&buffer[1], donnees, COLONNES * LIGNES);
             size = COLONNES * LIGNES + 1;
             break;

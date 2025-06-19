@@ -63,6 +63,8 @@ int trouver_indices_lignes_completes(char grille[COLONNES][LIGNES], int indices[
 } 
 
 void assigner_score(int nb_indices) {
+    int score_initial = jeu.score;
+    bool changement = true;
     switch (nb_indices) {
         case 1:
             ligneSoundEffect();
@@ -81,7 +83,18 @@ void assigner_score(int nb_indices) {
             jeu.score += 1200;
             break;
         default:
+            changement = false;
             break;
+    }
+
+    // Envoie du score à l'ennemi
+    if(changement && jeu.etat == MULTI && instance_socket != NULL) {
+        char *donnees = (char *) malloc(sizeof(char));
+        if(donnees != NULL) {
+            donnees[0] = (char) jeu.score - score_initial;
+            envoyer_socket(0, donnees, instance_socket->socketfd);
+            free(donnees);
+        }
     }
 }
 

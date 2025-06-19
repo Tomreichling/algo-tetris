@@ -71,12 +71,6 @@ void gestionEvenement(EvenementGfx evenement){
                         retire_ligne(indices[i]);
                     }
                     if(jeu.etat == MULTI) {
-                        int *donnees = (int *) malloc(sizeof(int));
-                        if(donnees != NULL) {
-                            donnees[0] = jeu.score;
-                            envoyer_socket(0, (char *)donnees, instance_socket->socketfd);
-                            free(donnees);
-                        }
                         envoyer_grille();
                     }
                     break;
