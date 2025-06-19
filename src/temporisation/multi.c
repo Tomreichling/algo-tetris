@@ -74,7 +74,7 @@ void recevoir_socket(int socketfd) {
     }
 
     ssize_t n = recvfrom(socketfd, buffer, COLONNES * LIGNES + 1, 0, (struct sockaddr *) &addresse, &addrlen);
-    if(n > 1) {
+    if(n > 1 && addresse.sin_port == htons(PORT_ENTRANT)) {
         // printf("[serveur] récéption de données\n");
         switch(buffer[0]) {
             case 0:
