@@ -6,11 +6,10 @@ SRC := ./src
 # Les fichiers sources
 SRCFILES := tetris.c tetrominos.c outils.c animations.c \
 	affichage/jeu.c affichage/identification.c affichage/menu.c affichage/fin.c affichage/multi.c \
-	temporisation/jeu.c temporisation/menu.c temporisation/fin.c temporisation/multi.c \
-	entrees/jeu.c entrees/menu.c entrees/fin.c entrees/identification.c entrees/souris.c
+	temporisation/jeu.c temporisation/menu.c temporisation/multi.c \
+	entrees/jeu.c entrees/identification.c entrees/souris.c
 
 # On trouve les fichiers objets à partir des fichiers sources
-
 OBJFILES := $(patsubst %.c, $(BUILDDIR)/%.o, $(SRCFILES))
 
 # Toutes les règles à suivre lors d'un make

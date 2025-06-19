@@ -6,7 +6,7 @@
 // MULTI
 #define DESTINATAIRE "172.20.10.3"
 #define ORIGINE "172.20.10.2"
-#define PORT_SORTANT 3000
+#define PORT_SORTANT 3001
 #define PORT_ENTRANT 3000
 
 // ecran
