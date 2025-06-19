@@ -53,14 +53,14 @@ bool attacher_socket(int socketfd) {
     struct sockaddr_in adresse;
 
     adresse.sin_family = AF_INET;
-    inet_pton(AF_INET, ORIGINE, &adresse.sin_addr);
+    adresse.sin_addr.s_addr = INADDR_ANY;
     adresse.sin_port = htons(PORT_SORTANT);
 
     if (bind(socketfd, (struct sockaddr *) &adresse, sizeof(adresse)) != 0) {
         printf("Echec binding\n");
         return false;
     }
-    printf("[serveur] écoute à %s:%d\n", ORIGINE, PORT_SORTANT);
+    printf("[serveur] écoute à %s:%d\n", INADDR_ANY, PORT_SORTANT);
     return true;
 }
 
