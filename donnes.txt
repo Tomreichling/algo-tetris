@@ -15,8 +15,7 @@ Nom : anais	Gemmes : 40
 Nom : cloclo	Gemmes : 2960
 Nom : maxime	Gemmes : 15940
 Nom : elsa	Gemmes : 2620
-Nom : tom	Gemmes : 0
-Nom : l	Gemmes : 0
-Nom : livi	Gemmes : 1560
-Nom : lio	Gemmes : 0
-Nom : liv	Gemmes : 0
+Nom : Alla	Gemmes : 3220
+Nom : aLLA	Gemmes : 0
+Nom : Alla	Gemmes : 0
+Nom : A	Gemmes : 0
