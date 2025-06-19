@@ -25,6 +25,8 @@ void gestionEvenement(EvenementGfx evenement){
 	static DonneesImageRGBA *quitter = NULL;
     static DonneesImageRGBA *titre = NULL;
     static DonneesImageRGBA *gemme = NULL;
+    static DonneesImageRGBA *the_score = NULL; 
+    static DonneesImageRGBA *restart = NULL;
 
 	switch (evenement)
 	{
@@ -34,6 +36,8 @@ void gestionEvenement(EvenementGfx evenement){
             quitter = lisBMPRGBA("./assets/quitter.bmp");
             titre = lisBMPRGBA("./assets/tetrisen.bmp");
             gemme = lisBMPRGBA("./assets/gem.bmp");
+            the_score= lisBMPRGBA ("./assets/the_score.bmp");
+            restart = lisBMPRGBA ("./assets/redemarrer.bmp");
 			demandeTemporisation(-1);
 			jeu.etat = IDENTITE;
 
@@ -153,7 +157,7 @@ void gestionEvenement(EvenementGfx evenement){
                     }
                     break;
                 case FIN:
-                    ecranGameOver(quitter, multijoueur);
+                    ecranGameOver(quitter, multijoueur, the_score, restart);
                     for(int i = 0; i < COLONNES; i++) {
                         for(int j = 0; j < LIGNES; j++) {
                             if(jeu.grille[i][j] == 0) {
@@ -196,6 +200,8 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&quitter);
                             libereDonneesImageRGBA(&titre);
                             libereDonneesImageRGBA(&gemme);
+                            libereDonneesImageRGBA(&restart);
+                            libereDonneesImageRGBA(&the_score);
                             termineBoucleEvenements();
                             break;
                         case 13:
@@ -212,6 +218,8 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&quitter);
                             libereDonneesImageRGBA(&titre);
                             libereDonneesImageRGBA(&gemme);
+                            libereDonneesImageRGBA(&restart);
+                            libereDonneesImageRGBA(&the_score);
                             stopper_musique();
                             termineBoucleEvenements();
 					        
@@ -223,7 +231,6 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&gemme);
                             stopper_musique();
                             demarrer_jeu();
-                            demarrer_musique();
                             libereDonneesImageRGBA(&demarrer);
                             // libereDonneesImageRGBA(&multijoueur);
                             // libereDonneesImageRGBA(&quitter);
@@ -236,6 +243,8 @@ void gestionEvenement(EvenementGfx evenement){
                         switch (caractere){
                             case 27 :
                                 libereDonneesImageRGBA(&demarrer);
+                                libereDonneesImageRGBA(&restart);
+                                libereDonneesImageRGBA(&the_score);
                                 libereDonneesImageRGBA(&multijoueur);
                                 libereDonneesImageRGBA(&quitter);
                                 libereDonneesImageRGBA(&titre);
@@ -255,6 +264,8 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&titre);
                             libereDonneesImageRGBA(&gemme);
                             libereDonneesImageRGBA(&image_gameover);
+                            libereDonneesImageRGBA(&the_score);
+                            libereDonneesImageRGBA (&restart);
                             stopper_musique();
                             termineBoucleEvenements();
 				    
@@ -266,8 +277,6 @@ void gestionEvenement(EvenementGfx evenement){
                             demarrer_musique();
 
                             libereDonneesImageRGBA(&demarrer);
-                            libereDonneesImageRGBA(&multijoueur);
-                            libereDonneesImageRGBA(&quitter);
                             libereDonneesImageRGBA(&gemme);
 							break;
 					}
