@@ -53,6 +53,7 @@ void gameover() {
     image_gameover = lisBMPRGBA("./assets/gameover.bmp");
     image_multijoueur = lisBMPRGBA("./assets/multijoueur.bmp");
     image_quitter = lisBMPRGBA("./assets/quitter.bmp");
+    gameOverSoundEffect();
     image_restart= lisBMPRGBA ("./assets/redemarrer.bmp");
     image_the_score= lisBMPRGBA ("./assets/the_score.bmp");
     jeu.etat = FIN;
@@ -149,12 +150,7 @@ void recupGemmes() {
     }
 
     fclose(f);
-
-
-
 }
-
-
 
 
 
@@ -230,8 +226,7 @@ void enregistrerScores() {
     strcpy(nomsJoueurs[nbJoueurs], jeu.nom);
     scoresJoueurs[nbJoueurs] = jeu.score;
     nbJoueurs++;
-}
-
+    }
 
 
     //on peut mtn écrire les données des tableau sans souci
@@ -242,15 +237,12 @@ void enregistrerScores() {
         exit (1);
     }
 
-
     for (int i = 0; i < nbJoueurs; i++) {
         fprintf(f, "Nom : %s\tGemmes : %d\n", nomsJoueurs[i], scoresJoueurs[i]);
     }
     fclose(f);
-    
 
-
-    // Libération mémoire !
+   // Libération mémoire !
     for (int i = 0; i < nbJoueurs; i++) {
         free(nomsJoueurs[i]);
     }
@@ -259,3 +251,67 @@ void enregistrerScores() {
 }
 
 
+
+void leaderboardRecup(){
+    FILE * f;
+    char **nomsJoueurs = NULL;
+    int *scoresJoueurs = NULL;
+    int nbJoueurs = 0;
+    char nomLu[21];
+    int scoreLu;
+
+    //maintenant on prepare le leaderboard
+    f = fopen("donnes.txt", "r");
+ 
+    if(f == NULL){
+        printf("Erreur lors de la lecture du fichier");
+        exit(1);
+    }
+
+    // on vérifie pour chaque ligne où on a un nom et un score
+    while (fscanf(f, "Nom : %s\tGemmes : %d\n", nomLu, &scoreLu) == 2) {
+        
+        nomsJoueurs = realloc(nomsJoueurs, (nbJoueurs + 1) * sizeof(char*));
+        scoresJoueurs = realloc(scoresJoueurs, (nbJoueurs + 1) * sizeof(int));
+
+        if (nomsJoueurs == NULL || scoresJoueurs == NULL) {
+            printf("Erreur d'allocation mémoire\n");
+            fclose(f);
+            exit(1);
+        }
+        
+        nomsJoueurs[nbJoueurs] = malloc(strlen(nomLu) + 1);
+        strcpy(nomsJoueurs[nbJoueurs], nomLu);
+        scoresJoueurs[nbJoueurs] = scoreLu;
+        nbJoueurs ++;
+    }
+    
+
+    //on utilise un "tri par selection"
+    int i,j,c;
+    char d[21];
+        for(i = 0; i < nbJoueurs-1 ;i++) {
+            for(j = i+1; j < nbJoueurs ;j++){
+                if ( scoresJoueurs[i] < scoresJoueurs[j] ) {
+                    strcpy(d, nomsJoueurs[j]);
+                    c = scoresJoueurs[j];
+                    scoresJoueurs[j] = scoresJoueurs[i];
+                    strcpy(nomsJoueurs[j], nomsJoueurs[i]);
+                    scoresJoueurs[i] = c;
+                    strcpy(nomsJoueurs[i], d);
+                }
+            }
+        }
+
+    char gemmesl[15];
+    sprintf(gemmesl, "%d", scoresJoueurs[0]);
+    afficheChaine(nomsJoueurs[0],largeurFenetre()/50,largeurFenetre()/3 + 10,hauteurFenetre()/(3.5));
+    afficheChaine(gemmesl,largeurFenetre()/50,largeurFenetre()/2 ,hauteurFenetre()/(3.5));
+    sprintf(gemmesl, "%d", scoresJoueurs[1]);
+    afficheChaine(nomsJoueurs[1],largeurFenetre()/50,largeurFenetre()/3 + 10,hauteurFenetre()/(3.5)-80);
+    afficheChaine(gemmesl,largeurFenetre()/50,largeurFenetre()/2 ,hauteurFenetre()/(3.5)-80);
+    sprintf(gemmesl, "%d", scoresJoueurs[2]);
+    afficheChaine(nomsJoueurs[2],largeurFenetre()/50,largeurFenetre()/3 + 10,hauteurFenetre()/(3.5)-160);
+    afficheChaine(gemmesl,largeurFenetre()/50,largeurFenetre()/2 ,hauteurFenetre()/(3.5)-160);    
+
+}

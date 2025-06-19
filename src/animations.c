@@ -2,7 +2,8 @@
 
 static int numero_piece_sautant;
 static Animation *animation_saut;
-static Animation *scintillement;
+static Animation *scintillement = NULL;
+static Animation anim_scintillement;
 
 void lancer_animation_saut() {
     numero_piece_sautant = jeu.nb_piece;
@@ -24,8 +25,9 @@ void animer_saut() {
 }
 
 void lancer_scintillement() {
-    Animation animation = {1000, 3};
-    scintillement = &animation;
+    anim_scintillement.interval = 1000;
+    anim_scintillement.etape = 3;
+    scintillement = &anim_scintillement;
     demandeRedessinDans_ms(scintillement->interval);
 }
 
