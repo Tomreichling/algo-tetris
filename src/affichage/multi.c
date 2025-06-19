@@ -101,7 +101,7 @@ void affichageBarresScroll(DonneesImageRGBA *gemme, DonneesImageRGBA *gemmeRouge
     int tailleGrille = (2 * marge) + (taille_carreau * COLONNES);
     couleurCourante(150, 150, 150);
 
-    char score[100], scoreEnnemi[100];
+    char score[100];
     int static dernier = -1;
     float palier;
     float xbarre = (3.2 * marge) + tailleGrille + (taille_carreau * COLONNES);

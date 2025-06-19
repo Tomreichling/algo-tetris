@@ -325,7 +325,6 @@ void gestionEvenement(EvenementGfx evenement){
                 case FIN:
 				    switch (caractere) {
 				    	case 27: // echap
-                            libereDonneesImageRGBA(&image_demarrer);
                             libereDonneesImageRGBA(&image_multijoueur);
                             libereDonneesImageRGBA(&image_quitter);
                             libereDonneesImageRGBA(&image_gameover);
@@ -343,7 +342,6 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&image_multijoueur);
                             libereDonneesImageRGBA(&image_quitter);
                             libereDonneesImageRGBA(&image_the_score);
-
 							break;
 					}
                     break;
