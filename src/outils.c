@@ -53,9 +53,10 @@ void gameover() {
     image_gameover = lisBMPRGBA("./assets/gameover.bmp");
     image_multijoueur = lisBMPRGBA("./assets/multijoueur.bmp");
     image_quitter = lisBMPRGBA("./assets/quitter.bmp");
-    image_demarrer = lisBMPRGBA("./assets/demarrer.bmp");
     gameOverSoundEffect();
-    jeu.etat =FIN;
+    image_restart= lisBMPRGBA ("./assets/redemarrer.bmp");
+    image_the_score= lisBMPRGBA ("./assets/the_score.bmp");
+    jeu.etat = FIN;
     rafraichisFenetre();
     // on arrête les tics
     demandeTemporisation(-1);

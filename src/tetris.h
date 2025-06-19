@@ -66,4 +66,7 @@ extern DonneesImageRGBA *image_quitter;
 extern DonneesImageRGBA *image_titre;
 extern DonneesImageRGBA *image_gemme;
 extern DonneesImageRGBA *image_gemRouge;
+extern DonneesImageRGBA *image_restart;
+extern DonneesImageRGBA *image_the_score;
+
 #endif

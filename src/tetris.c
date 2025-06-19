@@ -27,6 +27,8 @@ DonneesImageRGBA *image_quitter;
 DonneesImageRGBA *image_titre;
 DonneesImageRGBA *image_gemme;
 DonneesImageRGBA *image_gemmeRouge;
+DonneesImageRGBA *image_the_score; 
+DonneesImageRGBA *image_restart;
 
 void gestionEvenement(EvenementGfx evenement){
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
@@ -326,9 +328,9 @@ void gestionEvenement(EvenementGfx evenement){
                             libereDonneesImageRGBA(&image_demarrer);
                             libereDonneesImageRGBA(&image_multijoueur);
                             libereDonneesImageRGBA(&image_quitter);
-                            libereDonneesImageRGBA(&image_titre);
-                            libereDonneesImageRGBA(&image_gemme);
                             libereDonneesImageRGBA(&image_gameover);
+                            libereDonneesImageRGBA(&image_restart);
+                            libereDonneesImageRGBA(&image_the_score);
                             stopper_musique();
                             termineBoucleEvenements();
                             break;
@@ -336,11 +338,12 @@ void gestionEvenement(EvenementGfx evenement){
                             stopper_musique();
                             demarrer_jeu();
                             demarrer_musique();
-                            
                             libereDonneesImageRGBA(&image_gameover);
-                            libereDonneesImageRGBA(&image_demarrer);
+                            libereDonneesImageRGBA(&image_restart);
                             libereDonneesImageRGBA(&image_multijoueur);
                             libereDonneesImageRGBA(&image_quitter);
+                            libereDonneesImageRGBA(&image_the_score);
+
 							break;
 					}
                     break;
