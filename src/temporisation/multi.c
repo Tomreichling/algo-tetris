@@ -26,22 +26,26 @@ int initialiser_socket() {
     if(!attacher_socket(socketfd)) {
         return -1;
     }
-    InstanceSocket instance = {0};
-    instance.socketfd = socketfd;
+    InstanceSocket *instance = malloc(sizeof(InstanceSocket));
+    memset(instance, 0, sizeof(InstanceSocket));
+    instance->socketfd = socketfd;
 
     pthread_t pid;
-    SocketThreadPayload payload = {socketfd, DESTINATAIRE, PORT};
-    pthread_create(&pid, NULL, thread_socket, &payload);
+    SocketThreadPayload *payload = malloc(sizeof(SocketThreadPayload));
+    payload->ip = DESTINATAIRE;
+    payload->socketfd = socketfd;
+    payload->port = PORT_ENTRANT;
+    pthread_create(&pid, NULL, thread_socket, payload);
 
     for(int i = 0; i < COLONNES; i++) {
         for(int j = 0; j < LIGNES; j++) {
-            instance.grille[i][j] = 0;
+            instance->grille[i][j] = 0;
         }
     }
 
     envoyer_socket(1, jeu.nom, socketfd);
 
-    instance_socket = &instance;
+    instance_socket = instance;
     return socketfd;
 }
 
@@ -50,45 +54,47 @@ bool attacher_socket(int socketfd) {
 
     adresse.sin_family = AF_INET;
     inet_pton(AF_INET, ORIGINE, &adresse.sin_addr);
-    adresse.sin_port = htons(PORT);
+    adresse.sin_port = htons(PORT_SORTANT);
 
     if (bind(socketfd, (struct sockaddr *) &adresse, sizeof(adresse)) != 0) {
         printf("Echec binding\n");
         return false;
     }
-    printf("[serveur] écoute à %s:%d\n", ORIGINE, PORT);
+    printf("[serveur] écoute à %s:%d\n", ORIGINE, PORT_SORTANT);
     return true;
 }
 
 void recevoir_socket(int socketfd) {
-    char buffer[COLONNES * LIGNES + 1];
+    unsigned char *buffer = malloc(COLONNES * LIGNES + 1);
     struct sockaddr_in addresse;
     socklen_t addrlen = sizeof(struct sockaddr_in);
+    if(buffer == NULL) {
+        printf("[serveur] erreur malloc récéption\n");
+        return;
+    }
 
-    int n = recvfrom(socketfd, buffer, COLONNES * LIGNES + 1, 0, (struct sockaddr *) &addresse, &addrlen);
-    char ip_expediteur[INET_ADDRSTRLEN];
-    inet_ntop(AF_INET, &addresse.sin_addr, ip_expediteur, INET_ADDRSTRLEN);
-
-    if(n > 1 && strcmp(ip_expediteur, ORIGINE) != 0) {
+    ssize_t n = recvfrom(socketfd, buffer, COLONNES * LIGNES + 1, 0, (struct sockaddr *) &addresse, &addrlen);
+    if(n > 1) {
         printf("[serveur] récéption de données\n");
         switch(buffer[0]) {
             case 0:
-                instance_socket->score = (int) buffer[1];
+                instance_socket->score = buffer[1];
                 break;
-            case 1:
-                buffer[n] = '\0';
-                strcpy(instance_socket->nom, buffer);
+            case 1: {
+                memcpy(instance_socket->nom, &buffer[1], n - 1);
                 break;
+            }
             case 2:
                 for(int i = 0; i < COLONNES; i++) {
                     for(int j = 0; j < LIGNES; j++) {
-                        instance_socket->grille[i][j] = buffer[i * COLONNES + j];
+                        instance_socket->grille[i][j] = buffer[1 + i * LIGNES + j];
                     }
                 }
                 break;
         }
         rafraichisFenetre();
     }
+    free(buffer);
 }
 
 void envoyer_socket(int type, char *donnees, int socketfd) {
@@ -98,18 +104,14 @@ void envoyer_socket(int type, char *donnees, int socketfd) {
     switch (type) {
         case 0: {
             printf("[serveur] envoie le score\n");
-            buffer[1] = (int) donnees[0];
+            buffer[1] = (char) donnees[0];
             size = 2;
             break;
         }
         case 1: {
             printf("[serveur] envoie le nom\n");
-            int i = 0;
-            while(donnees[i] != '\0' && i < COLONNES * LIGNES) {
-                buffer[1 + i] = donnees[i];
-                i++;
-            }
-            size = 1 + i;
+            memcpy(&buffer[1], donnees, strlen(donnees));
+            size = 1 + strlen(donnees);
             break;
         }
         case 2: {
@@ -125,7 +127,7 @@ void envoyer_socket(int type, char *donnees, int socketfd) {
     struct sockaddr_in adresse;
 
     adresse.sin_family = AF_INET;
-    adresse.sin_port = htons(PORT);
+    adresse.sin_port = htons(PORT_ENTRANT);
     inet_pton(AF_INET, DESTINATAIRE, &adresse.sin_addr);
     sendto(socketfd, buffer, size, MSG_DONTWAIT, (struct sockaddr *) &adresse, sizeof(struct sockaddr_in));
     // traiter erreurs
@@ -134,7 +136,6 @@ void envoyer_socket(int type, char *donnees, int socketfd) {
 void envoyer_grille() {
     char grille[COLONNES][LIGNES];
     memcpy(grille, jeu.grille, COLONNES * LIGNES);
-    
 
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
@@ -162,7 +163,7 @@ void* thread_socket(void *payload) {
     printf("[serveur-thread] reçois les messages\n");
     while(1) {
         if(instance_socket == NULL) {
-            printf("[thread] socket indisponible\n");
+            printf("[serveur-thread] socket indisponible\n");
             sleep(1);
         } else {
             recevoir_socket(socket_payload->socketfd);

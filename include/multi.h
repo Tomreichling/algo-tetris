@@ -26,7 +26,7 @@ void affichageBarresScroll(DonneesImageRGBA *gemme, DonneesImageRGBA *gemmeRouge
 
 typedef struct {
     int socketfd;
-    char *nom;
+    char nom[21];
     int score;
     char grille[COLONNES][LIGNES];
 } InstanceSocket;
